@@ -1,14 +1,13 @@
 const products=[
-{id:1,name:"The Rose Edit",desc:"A polished everyday look",category:"clothes",type:"other",tag:"EVERYDAY",image:"https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=85"},
-{id:2,name:"Moonlight Dress",desc:"An occasion-ready favourite",category:"clothes",type:"dresses",tag:"OCCASION",image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=700&q=85"},
-{id:3,name:"Soft Form",desc:"Effortless, modern essentials",category:"accessories",type:"essentials",tag:"ESSENTIALS",image:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=700&q=85"},
-{id:4,name:"The Muse Look",desc:"A little statement, every day",category:"clothes",type:"other",tag:"THE EDIT",image:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=85"}];
+{id:1,name:"The Rose Edit",desc:"A polished everyday look",category:"clothing",tag:"EVERYDAY",image:"https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=85"},
+{id:2,name:"Moonlight Dress",desc:"An occasion-ready favourite",category:"clothing",tag:"OCCASION",image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=700&q=85"},
+{id:3,name:"Soft Form",desc:"Effortless, modern essentials",category:"accessories",tag:"ESSENTIALS",image:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=700&q=85"},
+{id:4,name:"The Muse Look",desc:"A little statement, every day",category:"clothing",tag:"THE EDIT",image:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=85"}];
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const grid=$("#productGrid"),filters=$("#shopFilters"),typeChips=$("#clothingTypes");let activeFilter="all",activeType="all",cart=[];
-function renderProducts(){const shown=products.filter(p=>(activeFilter==="all"||p.category===activeFilter)&&(activeType==="all"||p.type===activeType));grid.innerHTML=shown.length?shown.map(p=>`<article class="product-card"><div class="product-image"><img src="${p.image}" alt="${p.name}" loading="lazy"><span class="product-tag">${p.tag}</span></div><div class="product-info"><h3>${p.name}</h3><p>${p.desc}</p><div class="product-bottom"><span class="price-request">Price on request</span><button class="add-button" data-id="${p.id}">Add to bag <span>+</span></button></div></div></article>`).join(""):`<div class="no-products"><strong>More styles are on the way.</strong><span>Try another clothing type to explore available pieces.</span></div>`}
-function setFilter(filter){activeFilter=filter;activeType="all";$(".filter-chip").forEach(b=>b.classList.toggle("active",b.dataset.filter===filter));if(typeChips){typeChips.hidden=filter!=="clothes";typeChips.querySelectorAll(".type-chip").forEach(b=>b.classList.toggle("active",b.dataset.type==="all"))}renderProducts()}
-function setType(type){activeType=type;if(typeChips)typeChips.querySelectorAll(".type-chip").forEach(b=>b.classList.toggle("active",b.dataset.type===type));renderProducts()}
-function showView(view){$$(".view-panel").forEach(p=>p.classList.toggle("active",p.dataset.panel===view));$$(".nav-tab").forEach(btn=>btn.classList.toggle("active",btn.dataset.view===view));if(view==="shop")requestAnimationFrame(()=>{grid.querySelectorAll(".product-card").forEach((card,i)=>{card.style.animationDelay=(i*65)+"ms"})})}
+const grid=$("#productGrid"),categoryGrid=$("#categoryGrid");let activeCategory="all",cart=[];
+function renderProducts(){const shown=products.filter(p=>activeCategory==="all"||(activeCategory==="new-arrivals"&&p.collection==="new-arrivals")||(activeCategory==="best-sellers"&&p.collection==="best-sellers")||p.category===activeCategory);grid.innerHTML=shown.length?shown.map(p=>`<article class="product-card"><div class="product-image"><img src="${p.image}" alt="${p.name}" loading="lazy"><span class="product-tag">${p.tag}</span></div><div class="product-info"><h3>${p.name}</h3><p>${p.desc}</p><div class="product-bottom"><span class="price-request">Price on request</span><button class="add-button" data-id="${p.id}">Add to bag <span>+</span></button></div></div></article>`).join(""):`<div class="no-products"><strong>More styles are on the way.</strong><span>Try another clothing type to explore available pieces.</span></div>`}
+function setCategory(category){activeCategory=category;categoryGrid.querySelectorAll("[data-category]").forEach(b=>b.classList.toggle("active",b.dataset.category===category));renderProducts();const shop=$("#shop");shop.scrollIntoView({behavior:"smooth",block:"start"});}
+function showView(view){$$(".view-panel").forEach(p=>p.classList.toggle("active",p.dataset.panel===view));$$(".nav-tab").forEach(btn=>btn.classList.toggle("active",btn.dataset.view===view));if(view==="collections")requestAnimationFrame(()=>{grid.querySelectorAll(".product-card").forEach((card,i)=>{card.style.animationDelay=(i*65)+"ms"})})}
 renderProducts();
 const openingScreen=$("#openingScreen");
 function dismissOpeningScreen(){if(!openingScreen||openingScreen.dataset.dismissed==="true")return;openingScreen.dataset.dismissed="true";openingScreen.classList.add("is-leaving");window.setTimeout(()=>openingScreen.remove(),750)}
@@ -30,8 +29,7 @@ const toast=$("#actionToast");let toastTimer;
 function showToast(message){$("#toastMessage").textContent=message;toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),1900)}
 $$(".nav-tab").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
 $$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.openView)));
-filters.addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(b)setFilter(b.dataset.filter)});
-if(typeChips)typeChips.addEventListener("click",e=>{const b=e.target.closest("[data-type]");if(b)setType(b.dataset.type)});
+categoryGrid.addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(b)setCategory(b.dataset.category)});
 
 const drawer=$("#cartDrawer"),overlay=$("#cartOverlay");
 function openCart(){drawer.classList.add("open");overlay.classList.add("open");drawer.setAttribute("aria-hidden","false")}

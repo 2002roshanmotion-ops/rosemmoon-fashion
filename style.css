@@ -616,3 +616,40 @@ html,body{height:100%;overflow:hidden}body{height:100dvh;display:flex;flex-direc
  .collections #shop .section-heading h2{font-size:27px!important}
  .collections #shop .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
+
+
+/* Loading indicator: JS controls the real visible fill and percentage */
+.opening-screen .opening-progress{
+  display:block!important;
+  position:relative!important;
+  width:190px!important;
+  max-width:58vw!important;
+  height:6px!important;
+  min-height:6px!important;
+  margin:0 auto!important;
+  overflow:hidden!important;
+  border-radius:999px!important;
+  background:#ead9dc!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+.opening-screen .opening-progress span#loadingBarFill{
+  display:block!important;
+  position:absolute!important;
+  inset:0 auto 0 0!important;
+  width:0!important;
+  height:100%!important;
+  border-radius:999px!important;
+  background:linear-gradient(90deg,#b76b83 0%,#98465f 58%,#c49a78 100%)!important;
+  transform:none!important;
+  animation:none!important;
+  transition:width .08s linear!important;
+}
+.opening-screen #loadingStatus{
+  display:block!important;
+  margin-top:15px!important;
+  text-align:center!important;
+  color:#80616c!important;
+  font:600 9px "DM Sans",sans-serif!important;
+  letter-spacing:.18em!important;
+}

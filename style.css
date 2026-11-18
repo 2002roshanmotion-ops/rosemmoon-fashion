@@ -297,3 +297,29 @@ html,body{height:100%;overflow:hidden}body{height:100dvh;display:flex;flex-direc
  .site-header>#openCart{font-size:7px!important;padding:4px 5px!important}
  .site-header>#openCart span{width:17px!important;height:17px!important;margin-left:2px!important}
 }
+
+
+/* Five-second loading progress: fill smoothly from empty to complete */
+.opening-screen .opening-progress{
+  width:min(190px,58vw)!important;
+  height:4px!important;
+  border-radius:999px!important;
+  background:#ead9dc!important;
+  overflow:hidden!important;
+  box-shadow:inset 0 1px 2px rgba(92,48,65,.08);
+}
+.opening-screen .opening-progress span{
+  display:block!important;
+  width:0!important;
+  height:100%!important;
+  border-radius:999px!important;
+  background:linear-gradient(90deg,#b76b83,#98465f,#c49a78)!important;
+  animation:rosemmoonFiveSecondFill 5s linear forwards!important;
+}
+@keyframes rosemmoonFiveSecondFill{
+  from{width:0}
+  to{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  .opening-screen .opening-progress span{animation:none!important;width:100%!important}
+}

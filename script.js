@@ -24,7 +24,12 @@ try{
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const grid=$("#productGrid"),categoryGrid=$("#categoryGrid");let activeCategory="dresses",cart=[];
 function renderProducts(){const shown=products.filter(p=>p.category===activeCategory);grid.innerHTML=shown.length?shown.map(p=>`<article class="product-card"><div class="product-image"><img src="${p.image}" alt="${p.name}" loading="lazy"></div><div class="product-info"><h3>${p.name}</h3><p>${p.desc}</p><div class="product-bottom"><span class="price-request">Rs. ${p.price.toLocaleString("en-IN")}</span><button class="add-button" data-id="${p.id}">Add to bag <span>+</span></button></div></div></article>`).join(""):`<div class="no-products"><strong>More styles are on the way.</strong><span>Check back soon for new arrivals.</span></div>`}
-function setCategory(category){activeCategory=category;categoryGrid.querySelectorAll("[data-category]").forEach(b=>{b.classList.toggle("active",b.dataset.category===category);b.classList.toggle("is-selected",b.dataset.category===category)});renderProducts();const heading=$("#selectedCategoryTitle");if(heading)heading.textContent=category.charAt(0).toUpperCase()+category.slice(1);}
+function setCategory(category){activeCategory=category;categoryGrid.querySelectorAll("[data-category]").forEach(b=>{b.classList.toggle("active",b.dataset.category===category);b.classList.toggle("is-selected",b.dataset.category===category)});renderProducts();
+
+const SUPABASE_URL="https://fcttopureilkquwwzjgo.supabase.co",SUPABASE_KEY="sb_publishable_1RbPjaFyq1CgeV9OGOisMQ_R1TiVa6f";
+const cloudDB=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+async function loadCloudCatalog(){try{const {data,error}=await cloudDB.from("rosemmoon_products").select("*").order("id");if(error)throw error;if(Array.isArray(data)&&data.length){products.splice(0,products.length,...data.map(row=>({id:row.id,name:row.name,desc:row.description||"",category:row.category,price:Number(row.price),image:row.image_url||""})));renderProducts()}}catch(err){console.warn("Using built-in RoseMoon catalogue",err)}}
+loadCloudCatalog();const heading=$("#selectedCategoryTitle");if(heading)heading.textContent=category.charAt(0).toUpperCase()+category.slice(1);}
 function showView(view){$$(".view-panel").forEach(p=>p.classList.toggle("active",p.dataset.panel===view));$$(".nav-tab").forEach(btn=>btn.classList.toggle("active",btn.dataset.view===view));if(view==="collections")requestAnimationFrame(()=>{grid.querySelectorAll(".product-card").forEach((card,i)=>{card.style.animationDelay=(i*65)+"ms"})})}
 renderProducts();
 const openingScreen=$("#openingScreen");

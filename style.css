@@ -1272,3 +1272,9 @@ footer:before{left:8%;top:30px}footer:after{right:9%;top:72px;animation-delay:1.
 
 /* Slightly widen the homepage hero photograph. */
 .hero{grid-template-columns:.86fr 1.14fr;gap:4.5%}
+
+
+/* Show the complete homepage photo without cropping any part of it. */
+.hero-image{background:#f7eeef;overflow:hidden}
+.hero-image>img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center center!important;transform:none!important}
+.hero-image:hover>img{transform:none!important}

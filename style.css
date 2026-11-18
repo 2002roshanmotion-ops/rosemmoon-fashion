@@ -171,3 +171,65 @@ html,body{height:100%;overflow:hidden}body{height:100dvh;display:flex;flex-direc
 .opening-screen>small{display:block;text-align:center;margin-top:14px;line-height:1.5}
 @media(max-width:480px){.opening-screen{padding:20px 14px}.opening-logo-frame{width:min(72vw,225px);height:min(24vh,145px);min-height:95px;margin-bottom:20px}.opening-screen .opening-progress{width:132px}}
 @media(prefers-reduced-motion:reduce){.opening-logo{animation:none!important}}
+
+
+/* Navigation: keep Home, Categories, Shop and Our Story in one clean horizontal row */
+.site-header{
+  display:grid!important;
+  grid-template-columns:58px minmax(0,1fr) auto!important;
+  align-items:center!important;
+  column-gap:clamp(10px,2vw,24px)!important;
+}
+.site-header nav{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:clamp(12px,2.4vw,30px)!important;
+  white-space:nowrap!important;
+  min-width:0!important;
+}
+.site-header nav .nav-tab{
+  flex:0 0 auto!important;
+  white-space:nowrap!important;
+  font-size:10px!important;
+  letter-spacing:.10em!important;
+}
+.site-header .bag-button{white-space:nowrap!important}
+@media(max-width:760px){
+  .site-header{
+    grid-template-columns:42px minmax(0,1fr) auto!important;
+    column-gap:6px!important;
+    padding:0 8px!important;
+  }
+  .site-header .brand,
+  .site-header .brand-logo{
+    width:42px!important;
+    min-width:42px!important;
+    max-width:42px!important;
+    height:42px!important;
+    flex-basis:42px!important;
+  }
+  .site-header nav{
+    display:flex!important;
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    justify-content:center!important;
+    gap:clamp(7px,2vw,13px)!important;
+    overflow:visible!important;
+  }
+  .site-header nav .nav-tab{
+    font-size:clamp(7px,2vw,8.5px)!important;
+    letter-spacing:0!important;
+    padding:8px 0!important;
+  }
+  .site-header .bag-button{font-size:8px!important;padding:6px 7px!important}
+}
+@media(max-width:360px){
+  .site-header{grid-template-columns:36px minmax(0,1fr) auto!important;column-gap:4px!important;padding:0 6px!important}
+  .site-header .brand,.site-header .brand-logo{width:36px!important;min-width:36px!important;max-width:36px!important;height:36px!important;flex-basis:36px!important}
+  .site-header nav{gap:6px!important}
+  .site-header nav .nav-tab{font-size:6.8px!important}
+  .site-header .bag-button{font-size:7px!important;padding:5px 6px!important}
+}

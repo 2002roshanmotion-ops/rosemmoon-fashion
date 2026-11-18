@@ -253,3 +253,47 @@ html,body{height:100%;overflow:hidden}body{height:100dvh;display:flex;flex-direc
  .site-header nav .nav-tab{font-size:6.5px!important;letter-spacing:0!important}
  .site-header .bag-button{font-size:6.5px!important;padding:4px!important}
 }
+
+
+/* Header navigation placement: keep all four links inside the header bar */
+.site-header{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:clamp(8px,2vw,24px)!important;
+  overflow:visible!important;
+}
+.site-header>.brand{flex:0 0 58px!important;margin:0!important}
+.site-header>#mainNav{
+  position:static!important;
+  display:flex!important;
+  flex:1 1 auto!important;
+  width:auto!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:clamp(8px,2vw,24px)!important;
+  background:transparent!important;
+  border:0!important;
+}
+.site-header>#mainNav .nav-tab{
+  display:inline-flex!important;
+  flex:0 0 auto!important;
+  width:auto!important;
+  white-space:nowrap!important;
+}
+.site-header>#openCart{flex:0 0 auto!important;margin:0!important}
+@media(max-width:760px){
+ .site-header{height:62px!important;min-height:62px!important;padding:0 7px!important;gap:5px!important}
+ .site-header>.brand{flex-basis:34px!important;width:34px!important;min-width:34px!important;max-width:34px!important}
+ .site-header>.brand .brand-logo{width:34px!important;height:34px!important;max-width:34px!important;max-height:34px!important}
+ .site-header>#mainNav{position:static!important;display:flex!important;flex:1 1 auto!important;min-width:0!important;gap:clamp(3px,1.3vw,8px)!important;justify-content:space-evenly!important}
+ .site-header>#mainNav .nav-tab{font-size:clamp(6.5px,1.8vw,8px)!important;letter-spacing:0!important;padding:7px 0!important}
+ .site-header>#openCart{font-size:7px!important;padding:4px 5px!important}
+ .site-header>#openCart span{width:17px!important;height:17px!important;margin-left:2px!important}
+}

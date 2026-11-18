@@ -1457,3 +1457,88 @@ footer:before{left:8%;top:30px}footer:after{right:9%;top:72px;animation-delay:1.
   .newsletter h2 { letter-spacing: -1.4px; }
   footer { padding-top: 54px; }
 }
+
+
+/* RoseMoon compact editorial homepage refresh — desktop only.
+   Reduce oversized gaps and give the landing page a closer, boutique-style rhythm. */
+@media (min-width: 761px) {
+  .hero.view-panel.active {
+    min-height: 0 !important;
+    height: auto !important;
+    padding: clamp(24px, 3.2vh, 38px) clamp(30px, 6vw, 88px) !important;
+    gap: clamp(24px, 3.4vw, 52px) !important;
+    grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr) !important;
+  }
+  .hero.view-panel.active .hero-copy {
+    padding: 8px 0 !important;
+    max-width: 470px !important;
+  }
+  .hero.view-panel.active .hero-copy .eyebrow {
+    margin-bottom: 12px !important;
+    font-size: 9px;
+  }
+  .hero.view-panel.active .hero-copy h1 {
+    margin: 8px 0 14px !important;
+    font-size: clamp(46px, 4.7vw, 66px) !important;
+    line-height: 1.02 !important;
+  }
+  .hero.view-panel.active .hero-text {
+    margin-bottom: 20px !important;
+    line-height: 1.7 !important;
+  }
+  .hero.view-panel.active .hero-note {
+    margin-top: 22px !important;
+    font-size: 8px;
+  }
+  .hero.view-panel.active .hero-image {
+    height: clamp(390px, 59vh, 535px) !important;
+    max-height: 535px !important;
+    border-radius: 3px 3px 54px 3px;
+    box-shadow: 0 18px 44px rgba(67,39,47,.10) !important;
+  }
+  .hero.view-panel.active .image-stamp {
+    left: 15px !important;
+    bottom: 15px !important;
+    padding: 10px 14px !important;
+  }
+  .intro-strip {
+    height: 48px !important;
+    gap: clamp(20px, 3vw, 42px) !important;
+    font-size: 8px !important;
+    border-bottom-color: #f0e5e2;
+  }
+  .collections.section {
+    padding-top: 58px !important;
+    padding-bottom: 70px !important;
+  }
+  .collections .section-heading {
+    margin-bottom: 22px !important;
+  }
+  .collections .category-products-heading {
+    margin-bottom: 16px !important;
+    padding-bottom: 12px !important;
+  }
+  .newsletter.section {
+    padding: 58px 24px 62px !important;
+  }
+  .newsletter h2 {
+    margin: 10px 0 12px !important;
+    font-size: clamp(36px, 3.4vw, 44px) !important;
+  }
+  .newsletter > p:not(.eyebrow) {
+    margin: 8px 0 !important;
+  }
+  .newsletter form {
+    margin: 18px auto 8px !important;
+  }
+  footer {
+    padding-top: 34px !important;
+  }
+  footer .footer-brand .brand-logo {
+    width: 76px !important;
+    height: 76px !important;
+  }
+  footer > p {
+    margin: 10px 0 28px !important;
+  }
+}

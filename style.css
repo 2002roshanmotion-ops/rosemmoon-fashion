@@ -1723,3 +1723,22 @@ footer .footer-brand .brand-logo { animation: brandFloat 5.5s ease-in-out infini
 
 /* Editable quantities inside the shopping bag */
 .cart-item-details{min-width:0}.cart-item-details>strong{display:block;line-height:1.3}.quantity-control{display:inline-flex;align-items:center;gap:0;margin-top:10px;border:1px solid #edcbd8;border-radius:30px;background:#fff4f8;overflow:hidden}.quantity-control button{width:30px;height:28px;border:0;background:transparent;color:#a52e5b;font:600 17px/1 "DM Sans",sans-serif;cursor:pointer;transition:background .18s}.quantity-control button:hover{background:#f9dce8}.quantity-control span{min-width:25px;text-align:center;font-size:11px;font-weight:700;color:#55283b}.cart-row{grid-template-columns:65px minmax(0,1fr) auto}.remove-item{font-size:10px;white-space:nowrap}
+
+
+/* RoseMoon refined icon system */
+.nav-tab{display:inline-flex;align-items:center;gap:8px;border:0;background:transparent;color:var(--ink);cursor:pointer;padding:10px 2px;font:500 11px "DM Sans";letter-spacing:.12em;text-transform:uppercase}
+.nav-tab svg,.bag-button>svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s,color .25s}
+.nav-tab:hover svg,.nav-tab.active svg{color:var(--rose);transform:translateY(-2px)}
+.nav-tab.active{color:var(--rose)}
+.bag-button{display:inline-flex;align-items:center;gap:8px}
+.bag-button>svg{width:19px;height:19px}
+.bag-button:hover>svg{color:var(--rose);transform:translateY(-2px) rotate(-5deg)}
+.hero-note{display:flex;align-items:center;gap:9px}
+.hero-note>svg{width:14px;height:14px;margin-left:4px;fill:none;stroke:var(--gold);stroke-width:1.35;animation:iconTwinkle 3s ease-in-out infinite}
+.intro-strip span{display:inline-flex;align-items:center;gap:9px}
+.intro-strip svg{width:16px;height:16px;fill:none;stroke:var(--gold);stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
+.category-card .category-icon{position:absolute;z-index:2;left:24px;top:22px;bottom:auto;width:38px;height:38px;border:1px solid #ffffff9c;border-radius:50%;display:grid;place-items:center;background:#ffffff24;color:#fff;backdrop-filter:blur(8px);transition:background .25s,transform .25s}
+.category-card .category-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round}
+.category-card:hover .category-icon{background:#ffffff42;transform:translateY(-3px) rotate(-5deg)}
+@keyframes iconTwinkle{0%,100%{opacity:.65;transform:scale(.92) rotate(0)}50%{opacity:1;transform:scale(1.12) rotate(12deg)}}
+@media(prefers-reduced-motion:reduce){.hero-note>svg{animation:none}}

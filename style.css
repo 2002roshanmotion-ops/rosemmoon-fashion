@@ -161,3 +161,13 @@ html,body{height:100%;overflow:hidden}body{height:100dvh;display:flex;flex-direc
 @media(max-width:480px){
   .opening-logo{width:min(78vw,290px);height:min(38vh,250px);margin-bottom:22px}
 }
+
+
+/* Final loading-screen logo sizing: centered, contained, and responsive */
+.opening-screen{box-sizing:border-box;padding:24px 18px;gap:0}
+.opening-logo-frame{width:min(76vw,270px);height:min(28vh,190px);min-height:110px;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;flex:0 0 auto}
+.opening-logo{display:block;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center!important;margin:0!important;padding:0!important;transform-origin:center;filter:drop-shadow(0 5px 14px rgba(92,48,65,.09));}
+.opening-screen .opening-progress{width:148px;max-width:48vw;margin:0 auto}
+.opening-screen>small{display:block;text-align:center;margin-top:14px;line-height:1.5}
+@media(max-width:480px){.opening-screen{padding:20px 14px}.opening-logo-frame{width:min(72vw,225px);height:min(24vh,145px);min-height:95px;margin-bottom:20px}.opening-screen .opening-progress{width:132px}}
+@media(prefers-reduced-motion:reduce){.opening-logo{animation:none!important}}

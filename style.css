@@ -807,3 +807,11 @@ footer>p{color:#f5c4d7!important}
   .site-header .brand{width:68px!important;min-width:68px!important;max-width:68px!important;flex-basis:68px!important}
   .site-header .brand-logo{width:60px!important;height:60px!important;max-width:60px!important;max-height:60px!important}
 }
+
+
+/* Easy clothing-type filters shown only after Clothing is selected */
+.clothing-types{display:flex;flex-wrap:wrap;gap:7px;margin:-8px 0 18px;padding:10px 0 2px;}
+.clothing-types[hidden]{display:none!important;}
+.clothing-types .type-chip{border:1px solid #efc2d2;background:#fffafd;color:#851b45;border-radius:999px;padding:8px 13px;font:600 9px "DM Sans",sans-serif;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
+.clothing-types .type-chip.active{background:linear-gradient(105deg,#9c1749,#e83f79);border-color:#9c1749;color:#fff;}
+@media(max-width:760px){.clothing-types{gap:6px;margin:-5px 0 13px}.clothing-types .type-chip{padding:7px 10px;font-size:8px}}

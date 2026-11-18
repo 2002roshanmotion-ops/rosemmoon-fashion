@@ -1128,3 +1128,25 @@ footer:before{left:8%;top:30px}footer:after{right:9%;top:72px;animation-delay:1.
  *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
  .reveal-ready .reveal-on-scroll{opacity:1;transform:none}
 }
+
+
+/* ROSEMOON SIGNATURE DETAILS: petals, editorial shimmer and refined transitions */
+.hero{overflow:hidden}
+.hero-petals{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.hero-petal{position:absolute;top:-12%;left:var(--left);width:var(--size);height:calc(var(--size)*1.25);border-radius:85% 0 85% 0;background:linear-gradient(145deg,#f8c8d9cc,#d8759c88);filter:drop-shadow(0 4px 5px #9d536722);opacity:0;animation:petalDrift var(--duration) linear var(--delay) infinite}
+.hero-petal:nth-child(3n){background:linear-gradient(145deg,#fff0f5dd,#e9a5bf99);transform:rotate(35deg)}
+.hero h1 .word-reveal{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}
+.hero h1 .word-reveal>span{display:inline-block;animation:wordRise .9s cubic-bezier(.2,.75,.2,1) both}
+.hero h1 .word-reveal:nth-child(2)>span{animation-delay:.18s}
+.product-image:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 28%,#fff8 48%,transparent 68%);transform:translateX(-140%);transition:none}
+.product-card:hover .product-image:after{transform:translateX(140%);transition:transform .85s ease}
+.product-grid.category-changing{animation:categorySwap .48s cubic-bezier(.2,.7,.2,1) both}
+.product-card{will-change:transform}
+.bag-button.is-bouncing span{animation:bagBounce .55s cubic-bezier(.2,.8,.2,1)}
+.fly-to-bag{position:fixed;z-index:1000;pointer-events:none;object-fit:cover;border-radius:12px;box-shadow:0 12px 30px #57263b40}
+@keyframes petalDrift{0%{opacity:0;transform:translate3d(0,-5vh,0) rotate(0deg)}12%{opacity:.8}78%{opacity:.65}100%{opacity:0;transform:translate3d(var(--sway),115vh,0) rotate(560deg)}}
+@keyframes wordRise{from{opacity:0;transform:translateY(110%);filter:blur(5px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes categorySwap{0%{opacity:.25;transform:translateY(12px) scale(.99);filter:blur(3px)}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+@keyframes bagBounce{0%,100%{transform:scale(1)}35%{transform:scale(1.35) rotate(-9deg)}65%{transform:scale(.92) rotate(5deg)}}
+@media(max-width:760px){.hero-petal{opacity:.7}.hero-petal:nth-child(n+5){display:none}}
+@media(prefers-reduced-motion:reduce){.hero-petal{display:none!important}.hero h1 .word-reveal>span{animation:none!important}.product-image:after{display:none}}

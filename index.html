@@ -12,6 +12,11 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="opening-screen" id="openingScreen" aria-label="Loading RoseMmoon Fashion">
+    <div class="opening-orbit"><span class="opening-moon">☾</span><span class="opening-star">✦</span></div>
+    <p class="opening-brand">RoseMmoon</p><p class="opening-sub">F A S H I O N</p>
+    <div class="opening-progress"><span></span></div><small>LET YOUR BEAUTY SPEAK</small>
+  </div>
   <div class="announcement">A little confidence looks beautiful on you · Welcome to RoseMmoon</div>
   <header class="site-header">
     <a class="brand" href="#" aria-label="RoseMmoon Fashion home">
@@ -28,7 +33,7 @@
         <p class="eyebrow">THE NEW ERA OF EVERYDAY STYLE</p>
         <h1>Let your beauty<br><em>speak.</em></h1>
         <p class="hero-text">A fresh perspective on feminine style. Discover pieces that feel like you, look like you, and move with you.</p>
-        <button class="button button-dark" type="button" data-open-view="collections">Explore Categories <span>↗</span></button>
+        <button class="button button-dark" type="button" data-open-view="shop">Start Shopping <span>↗</span></button>
         <div class="hero-note"><span class="moon-mark">☾</span> YOUR STYLE. YOUR GLOW. YOUR STORY.</div>
       </div>
       <div class="hero-image">
@@ -78,6 +83,7 @@
     <div class="order-method-list"><button type="button" class="order-method" data-channel="WhatsApp"><span class="method-icon whatsapp">◉</span><span><strong>WhatsApp</strong><small>Chat with us on WhatsApp</small></span><span class="method-arrow">↗</span></button><button type="button" class="order-method" data-channel="Instagram DM"><span class="method-icon instagram">◎</span><span><strong>Instagram DM</strong><small>Send us a message on Instagram</small></span><span class="method-arrow">↗</span></button><button type="button" class="order-method" data-channel="TikTok DM"><span class="method-icon tiktok">♪</span><span><strong>TikTok DM</strong><small>Find us on TikTok</small></span><span class="method-arrow">↗</span></button></div>
     <p id="orderMethodMessage" class="checkout-modal-message">Your selected items will stay in your bag.</p>
   </section>
+  <div class="action-toast" id="actionToast" role="status" aria-live="polite"><span class="toast-check">✓</span><span id="toastMessage">Added to your bag</span></div>
   <script src="script.js"></script>
 </body>
 </html>

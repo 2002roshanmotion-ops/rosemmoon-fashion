@@ -1152,14 +1152,14 @@ footer:before{left:8%;top:30px}footer:after{right:9%;top:72px;animation-delay:1.
 @media(prefers-reduced-motion:reduce){.hero-petal{display:none!important}.hero h1 .word-reveal>span{animation:none!important}.product-image:after{display:none}}
 
 
-/* Larger full-length fashion product photography */
+/* Full-length fashion product photography: 2:3 portrait ratio */
 .collections .category-products{min-width:0}
 .collections .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
 .collections .product-card{min-width:0;overflow:hidden}
 .collections .product-image{
   width:100%;
-  height:clamp(390px,46vw,560px);
-  aspect-ratio:3/4;
+  height:auto;
+  aspect-ratio:2/3;
   background:linear-gradient(160deg,#fff8fb,#f7e8ee);
   display:flex;
   align-items:center;
@@ -1176,8 +1176,5 @@ footer:before{left:8%;top:30px}footer:after{right:9%;top:72px;animation-delay:1.
 }
 @media(max-width:760px){
   .collections .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-  .collections .product-image{height:clamp(260px,92vw,430px);aspect-ratio:3/4}
-}
-@media(max-width:380px){
-  .collections .product-image{height:300px}
+  .collections .product-image{height:auto;aspect-ratio:2/3}
 }

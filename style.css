@@ -1803,3 +1803,32 @@ button,.button{ -webkit-tap-highlight-color:transparent}
  .bag-button.is-bouncing,.view-panel.active{animation:none!important}
  .nav-tab::after{transition:none!important}
 }
+
+
+/* ROSEMOON — brighter champagne sparkle and twinkle */
+.hero-image,.category-card,.product-image,.image-stamp,.brand-logo{position:relative}
+.hero-image::after{
+ content:"✦";position:absolute;z-index:3;top:12%;right:12%;font-size:30px;color:#fff8e9;
+ text-shadow:0 0 5px #fff,0 0 13px #fff0bd,0 0 27px #e9b9d0;
+ animation:rmStarFlash 2.1s ease-in-out infinite;pointer-events:none
+}
+.hero-note>svg,.modal-flourish{filter:drop-shadow(0 0 5px #e8b8cd) drop-shadow(0 0 10px #f5dba8)}
+.category-card::after{z-index:1}
+.category-card .category-icon{box-shadow:0 0 14px #fff6,0 0 24px #f2c8d866}
+.category-card .category-icon::after{
+ content:"✧";position:absolute;right:-5px;top:-8px;color:#fff;font-size:17px;
+ text-shadow:0 0 7px #fff,0 0 13px #f7d6e4;animation:rmStarFlash 2.7s ease-in-out infinite .4s
+}
+.product-image::after{
+ content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+ background:radial-gradient(ellipse at 22% 18%,#fff 0 1px,transparent 3px),radial-gradient(ellipse at 76% 28%,#fff9 0 1px,transparent 3px),radial-gradient(ellipse at 64% 76%,#fff 0 1px,transparent 3px),linear-gradient(115deg,transparent 38%,#fff8 49%,transparent 60%);
+ background-size:100% 100%;mix-blend-mode:screen
+}
+.product-card:hover .product-image::after{opacity:.95;animation:rmShineSweep 1.8s ease-in-out both}
+.button-dark{position:relative;overflow:hidden;box-shadow:0 4px 18px #9d53672b}
+.button-dark::after{content:"";position:absolute;top:-80%;bottom:-80%;left:-45%;width:28%;transform:rotate(24deg);background:linear-gradient(90deg,transparent,#fff9,transparent);animation:rmButtonShine 4.8s ease-in-out infinite}
+.bag-button:hover #cartCount{box-shadow:0 0 0 4px #f3d5e1,0 0 18px #d88eae}
+@keyframes rmStarFlash{0%,100%{opacity:.3;transform:scale(.65) rotate(0)}45%{opacity:1;transform:scale(1.3) rotate(35deg)}65%{opacity:.75;transform:scale(.9) rotate(55deg)}}
+@keyframes rmShineSweep{0%{background-position:-120% 0;opacity:0}25%{opacity:1}100%{background-position:140% 0;opacity:.85}}
+@keyframes rmButtonShine{0%,58%{left:-45%;opacity:0}66%{opacity:1}86%,100%{left:140%;opacity:0}}
+@media(prefers-reduced-motion:reduce){.hero-image::after,.category-card .category-icon::after,.button-dark::after{animation:none!important}.product-card:hover .product-image::after{animation:none!important}}

@@ -141,3 +141,23 @@ html,body{height:100%;overflow:hidden}body{height:100dvh;display:flex;flex-direc
 @keyframes productReveal{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes choicePop{50%{transform:scale(1.015)}}
 @media(prefers-reduced-motion:reduce){.opening-orbit,.opening-star,.opening-progress span,.opening-brand,.view-panel.active,.product-card{animation:none!important}.opening-screen,.action-toast{transition:none}}
+
+
+/* Center the real brand logo on the opening screen */
+.opening-logo{
+  display:block;
+  width:min(66vw,330px);
+  height:min(42vh,300px);
+  object-fit:contain;
+  margin:0 auto 24px;
+  filter:drop-shadow(0 8px 20px rgba(92,48,65,.10));
+  animation:logoArrive .8s cubic-bezier(.2,.75,.25,1) both;
+}
+@keyframes logoArrive{
+  from{opacity:0;transform:translateY(10px) scale(.97)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.opening-screen .opening-progress{margin-top:0}
+@media(max-width:480px){
+  .opening-logo{width:min(78vw,290px);height:min(38vh,250px);margin-bottom:22px}
+}

@@ -5,16 +5,16 @@ const products=[
 {id:4,name:"Classic Chic Top",desc:"Simple, polished and easy to style",category:"tops",tag:"EVERYDAY",price:1290,image:"https://images.unsplash.com/photo-1564257577-1a9b3fda6b5d?auto=format&fit=crop&w=700&q=85"},
 {id:5,name:"Tailored Wide-Leg Pants",desc:"A flattering fit with effortless elegance",category:"pants",tag:"THE EDIT",price:2290,image:"https://images.unsplash.com/photo-1506629905607-d9a9d4e9a6f4?auto=format&fit=crop&w=700&q=85"},
 {id:6,name:"Everyday Straight Pants",desc:"Your new go-to wardrobe essential",category:"pants",tag:"ESSENTIAL",price:1990,image:"https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=85"},
-{id:7,name:"Flowing Mini Skirt",desc:"A playful shape with a soft finish",category:"skirts",tag:"FEMININE",price:1590,image:"https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=700&q=85"},
-{id:8,name:"Satin Midi Skirt",desc:"An elegant touch for day or evening",category:"skirts",tag:"THE EDIT",price:1890,image:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=85"},
-{id:9,name:"The Matching Set",desc:"A coordinated look made beautifully easy",category:"sets",tag:"TWO-PIECE",price:3290,image:"https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=85"},
-{id:10,name:"Relaxed Co-ord Set",desc:"A comfortable set with a polished feel",category:"sets",tag:"EVERYDAY",price:2990,image:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=85"},
-{id:11,name:"The Modern Jacket",desc:"The finishing layer for your favourite looks",category:"jackets",tag:"LAYER UP",price:3590,image:"https://images.unsplash.com/photo-1548624149-f9b0c9a6b5a8?auto=format&fit=crop&w=700&q=85"},
-{id:12,name:"Chic Cropped Jacket",desc:"A statement layer for everyday style",category:"jackets",tag:"THE EDIT",price:3290,image:"https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=700&q=85"},
-{id:13,name:"Cloud-Soft Sweater",desc:"Cosy comfort with a feminine finish",category:"sweaters",tag:"SOFT & COSY",price:2190,image:"https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=700&q=85"},
-{id:14,name:"Everyday Knit",desc:"An easy layer for cooler days",category:"sweaters",tag:"ESSENTIAL",price:1990,image:"https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=700&q=85"},
-{id:15,name:"Summer Ease Shorts",desc:"A relaxed fit for sunny days",category:"shorts",tag:"WEEKEND",price:1390,image:"https://images.unsplash.com/photo-1591195853828-11db59a44f6b?auto=format&fit=crop&w=700&q=85"},
-{id:16,name:"Tailored Everyday Shorts",desc:"A neat, versatile summer staple",category:"shorts",tag:"THE EDIT",price:1590,image:"https://images.unsplash.com/photo-1509551388413-e18d0ac5d495?auto=format&fit=crop&w=700&q=85"}
+{id:7,name:"Flowing Mini Skirt",desc:"A playful shape with a soft finish",category:"skirts",tag:"FEMININE",price:1590,image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=700&q=85"},
+{id:8,name:"Satin Midi Skirt",desc:"An elegant touch for day or evening",category:"skirts",tag:"THE EDIT",price:1890,image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=700&q=85"},
+{id:9,name:"The Matching Set",desc:"A coordinated look made beautifully easy",category:"sets",tag:"TWO-PIECE",price:3290,image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=700&q=85"},
+{id:10,name:"Relaxed Co-ord Set",desc:"A comfortable set with a polished feel",category:"sets",tag:"EVERYDAY",price:2990,image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=700&q=85"},
+{id:11,name:"The Modern Jacket",desc:"The finishing layer for your favourite looks",category:"jackets",tag:"LAYER UP",price:3590,image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=700&q=85"},
+{id:12,name:"Chic Cropped Jacket",desc:"A statement layer for everyday style",category:"jackets",tag:"THE EDIT",price:3290,image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=700&q=85"},
+{id:13,name:"Cloud-Soft Sweater",desc:"Cosy comfort with a feminine finish",category:"sweaters",tag:"SOFT & COSY",price:2190,image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=700&q=85"},
+{id:14,name:"Everyday Knit",desc:"An easy layer for cooler days",category:"sweaters",tag:"ESSENTIAL",price:1990,image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=700&q=85"},
+{id:15,name:"Summer Ease Shorts",desc:"A relaxed fit for sunny days",category:"shorts",tag:"WEEKEND",price:1390,image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=700&q=85"},
+{id:16,name:"Tailored Everyday Shorts",desc:"A neat, versatile summer staple",category:"shorts",tag:"THE EDIT",price:1590,image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=700&q=85"}
 ];
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const grid=$("#productGrid"),categoryGrid=$("#categoryGrid");let activeCategory="dresses",cart=[];

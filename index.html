@@ -28,7 +28,7 @@
         <p class="eyebrow">THE NEW ERA OF EVERYDAY STYLE</p>
         <h1>Let your beauty<br><em>speak.</em></h1>
         <p class="hero-text">A fresh perspective on feminine style. Discover pieces that feel like you, look like you, and move with you.</p>
-        <a class="button button-dark" href="#collections">Explore the collection <span>↗</span></a>
+        <button class="button button-dark" type="button" data-open-view="collections">Explore Categories <span>↗</span></button>
         <div class="hero-note"><span class="moon-mark">☾</span> YOUR STYLE. YOUR GLOW. YOUR STORY.</div>
       </div>
       <div class="hero-image">
@@ -42,14 +42,15 @@
     <section class="collections section view-panel" id="collections" data-panel="collections">
       <div class="section-heading"><div><p class="eyebrow">FIND YOUR FEEL</p><h2>Style starts <em>here.</em></h2></div><p>Curated looks for every version of you.</p></div>
       <div class="category-grid">
-        <a class="category-card category-one" href="#shop"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=85" alt="Contemporary women's fashion"><span>01 / EVERYDAY</span><strong>Everyday Edit</strong><b>Discover ↗</b></a>
-        <a class="category-card category-two" href="#shop"><img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=900&q=85" alt="Elegant evening fashion"><span>02 / OCCASION</span><strong>After Hours</strong><b>Discover ↗</b></a>
-        <a class="category-card category-three" href="#shop"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=900&q=85" alt="Chic fashion accessories and outfit"><span>03 / ESSENTIALS</span><strong>Style Essentials</strong><b>Discover ↗</b></a>
+        <a class="category-card category-one" href="#shop" data-category="everyday"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=85" alt="Contemporary women's fashion"><span>01 / EVERYDAY</span><strong>Everyday Edit</strong><b>Discover ↗</b></a>
+        <a class="category-card category-two" href="#shop" data-category="occasion"><img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=900&q=85" alt="Elegant evening fashion"><span>02 / OCCASION</span><strong>After Hours</strong><b>Discover ↗</b></a>
+        <a class="category-card category-three" href="#shop" data-category="essentials"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=900&q=85" alt="Chic fashion accessories and outfit"><span>03 / ESSENTIALS</span><strong>Style Essentials</strong><b>Discover ↗</b></a>
       </div>
     </section>
 
     <section class="shop section view-panel" id="shop" data-panel="shop">
-      <div class="section-heading"><div><p class="eyebrow">THE ROSEMmoon SELECTION</p><h2>Pieces to <em>love.</em></h2></div><p>Our featured edit — more styles coming soon.</p></div>
+      <div class="section-heading"><div><p class="eyebrow">THE ROSEMmoon SELECTION</p><h2>Pieces to <em>love.</em></h2></div><p>Find a piece that feels like you.</p></div>
+      <div class="shop-filters" id="shopFilters" aria-label="Filter products"><button class="filter-chip active" data-filter="all">All pieces</button><button class="filter-chip" data-filter="everyday">Everyday</button><button class="filter-chip" data-filter="occasion">Occasion</button><button class="filter-chip" data-filter="essentials">Essentials</button></div>
       <div class="product-grid" id="productGrid"></div>
     </section>
 

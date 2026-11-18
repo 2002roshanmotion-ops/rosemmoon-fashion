@@ -1208,3 +1208,32 @@ footer:before{left:8%;top:30px}footer:after{right:9%;top:72px;animation-delay:1.
     aspect-ratio:9/16!important;
   }
 }
+
+
+/* Tight product layout: remove empty card padding and unnecessary spacing */
+.collections .category-products .product-grid,
+.collections .product-grid {
+  column-gap: 8px !important;
+  row-gap: 10px !important;
+}
+.collections .category-products .product-card,
+.collections .product-grid .product-card {
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+.collections .category-products .product-image,
+.collections .product-grid .product-image {
+  margin: 0 !important;
+  border-radius: 11px 11px 0 0 !important;
+}
+.collections .category-products .product-info,
+.collections .product-grid .product-info {
+  margin: 0 !important;
+  padding: 9px 9px 10px !important;
+}
+.collections .category-products .product-info h3,
+.collections .product-grid .product-info h3 {
+  margin-top: 0 !important;
+}

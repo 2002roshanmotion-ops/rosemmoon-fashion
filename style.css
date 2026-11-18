@@ -1268,3 +1268,7 @@ footer:before{left:8%;top:30px}footer:after{right:9%;top:72px;animation-delay:1.
 /* Larger editorial homepage photograph. */
 .hero{grid-template-columns:.9fr 1.1fr;gap:5%}
 .hero-image{height:680px;min-height:680px}
+
+
+/* Slightly widen the homepage hero photograph. */
+.hero{grid-template-columns:.86fr 1.14fr;gap:4.5%}

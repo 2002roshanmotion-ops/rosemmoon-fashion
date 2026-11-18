@@ -732,3 +732,67 @@ html,body{height:100%;overflow:hidden}body{height:100dvh;display:flex;flex-direc
 .collections #shop .section-heading{margin-bottom:16px!important}
 .type-browser,.category-grid{display:none!important}
 @media(max-width:760px){.collections.view-panel.active{padding:20px 12px 28px!important}.collections #shop .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}.collections #shop .shop-filters{margin-bottom:14px!important}.collections #shop .filter-chip{padding:9px 15px;font-size:9px}}
+
+
+/* RoseMmoon Fashion — colours sampled from the brand logo */
+:root{
+  --ink:#64152f;
+  --muted:#916274;
+  --rose:#e83f79;
+  --pink:#f8c4d8;
+  --blush:#fff0f5;
+  --gold:#c99a3d;
+  --line:#f0cbd8;
+  --white:#fffafd;
+}
+body{background:var(--white)!important;color:var(--ink)!important}
+.announcement{background:#741633!important;color:#fff0f5!important}
+.site-header{background:#fffafd!important;border-color:var(--line)!important}
+.brand-name{color:#b51f58!important}
+.brand-sub{color:#bd8730!important}
+nav a:hover,.site-header nav .nav-tab.active,.site-header nav .nav-tab:hover{color:var(--rose)!important}
+.bag-button{color:var(--ink)!important}
+.bag-button span{background:#f9d4e2!important;color:#741633!important}
+.hero,.collections.view-panel.active{background:linear-gradient(135deg,#fff4f7 0%,#fce2ec 58%,#f8d3e2 100%)!important}
+.hero h1 em,.section h2 em,.story h2 em,.newsletter h2 em{color:#d92f70!important}
+.eyebrow{color:#b52b5f!important}
+.hero-text,.product-info p,.story-copy>p:not(.eyebrow),.section-heading>p{color:#916274!important}
+.button-dark{background:linear-gradient(105deg,#9c1749,#e83f79)!important;color:#fff!important;box-shadow:0 8px 20px rgba(174,31,83,.18)}
+.button-dark:hover{background:#741633!important}
+.moon-mark,.image-stamp small,.signature span{color:#bd8730!important}
+.image-stamp{background:rgba(255,245,249,.94)!important;color:#741633!important}
+.intro-strip{border-color:var(--line)!important;color:#916274!important}
+.intro-strip i{color:#c99a3d!important}
+.shop.view-panel.active{background:linear-gradient(135deg,#fffafd,#fff0f5)!important}
+.product-image{background:#f9dce7!important}
+.product-card{border-color:#f0cbd8!important;background:#fffafd!important}
+.add-button{border-color:#e9b8ca!important;color:#851b45!important;background:#fff8fb!important}
+.add-button:hover{background:#9c1749!important;color:#fff!important}
+.story{background:#fce7ef!important}
+.signature{color:#c02762!important}
+.newsletter{background:#fffafd!important}
+.newsletter form{border-color:#c99a3d!important}
+footer{background:#64152f!important;color:#fff0f5!important}
+.footer-brand .brand-name{color:#fff0f5!important}
+.footer-brand .brand-sub{color:#e6bd72!important}
+footer>p{color:#f5c4d7!important}
+.footer-bottom{color:#f0cfda!important}
+.cart-overlay{background:rgba(75,13,39,.62)!important}
+.cart-drawer{background:#fffafd!important}
+.cart-head,.cart-row,.cart-foot{border-color:var(--line)!important}
+.remove-item{color:#d92f70!important}
+.checkout-modal{background:linear-gradient(145deg,#fffafd,#fce5ee)!important;border-color:#edbfd0!important}
+.checkout-modal h2 em{color:#d92f70!important}
+.order-method{background:#fffafd!important;border-color:#f0cbd8!important;color:#64152f!important}
+.order-method:hover,.order-method.selected{border-color:#e83f79!important;background:#ffeaf2!important}
+.method-icon{background:#ffe5ef!important;color:#c02762!important}
+.method-arrow{color:#c02762!important}
+.opening-screen .opening-progress{background:#f3cbd9!important}
+.opening-screen .opening-progress span#loadingBarFill{background:linear-gradient(90deg,#ff75a6 0%,#e83f79 58%,#c99a3d 100%)!important}
+.opening-screen #loadingStatus{color:#8b3153!important}
+.view-all-button{border-color:#e6aabd!important;background:#fffafd!important;color:#9c1749!important}
+.view-all-button:active{background:#9c1749!important;color:#fff!important}
+.filter-chip{border-color:#e9b8ca!important;background:#fffafd!important;color:#851b45!important}
+.filter-chip.active{background:linear-gradient(105deg,#9c1749,#e83f79)!important;border-color:#9c1749!important;color:#fff!important}
+.category-card.is-selected,.type-picture-card.active{outline-color:#e83f79!important}
+.no-products{border-color:#e6aabd!important;background:#fff8fb!important;color:#851b45!important}

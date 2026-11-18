@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/95729fb3-baa3-42f2-949b-92068a051553.png">
-  <link rel="stylesheet" href="style.css?v=20261118-progressfix">
+  <link rel="stylesheet" href="style.css?v=20261118-categoryshop">
 </head>
 <body>
   <div class="opening-screen" id="openingScreen" aria-label="Loading RoseMmoon Fashion">
@@ -23,7 +23,7 @@
       <img class="brand-logo" style="width:58px;height:58px;max-width:58px;max-height:58px;object-fit:contain;display:block" src="https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/95729fb3-baa3-42f2-949b-92068a051553.png" alt="RoseMmoon Fashion — Let Your Beauty Speak">
     </a>
     
-    <nav id="mainNav" aria-label="Main navigation"><button class="nav-tab active" data-view="home">Home</button><button class="nav-tab" data-view="collections">Categories</button><button class="nav-tab" data-view="shop">Shop</button><button class="nav-tab" data-view="story">Our Story</button></nav>
+    <nav id="mainNav" aria-label="Main navigation"><button class="nav-tab active" data-view="home">Home</button><button class="nav-tab" data-view="collections">Categories</button><button class="nav-tab" data-view="story">Our Story</button></nav>
     <button class="bag-button" id="openCart" aria-label="Open shopping bag">Bag <span id="cartCount">0</span></button>
   </header>
 
@@ -51,13 +51,14 @@
         <a class="category-card category-two" href="#shop" data-category="occasion"><img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=900&q=85" alt="Elegant evening fashion"><span>02 / OCCASION</span><strong>After Hours</strong><b>Discover ↗</b></a>
         <a class="category-card category-three" href="#shop" data-category="essentials"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=900&q=85" alt="Chic fashion accessories and outfit"><span>03 / ESSENTIALS</span><strong>Style Essentials</strong><b>Discover ↗</b></a>
       </div>
-    </section>
-
-    <section class="shop section view-panel" id="shop" data-panel="shop">
+      <div class="shop section" id="shop">
       <div class="section-heading"><div><p class="eyebrow">THE ROSEMmoon SELECTION</p><h2>Pieces to <em>love.</em></h2></div><p>Find a piece that feels like you.</p></div>
       <div class="shop-filters" id="shopFilters" aria-label="Filter products"><button class="filter-chip active" data-filter="all">All pieces</button><button class="filter-chip" data-filter="everyday">Everyday</button><button class="filter-chip" data-filter="occasion">Occasion</button><button class="filter-chip" data-filter="essentials">Essentials</button></div>
       <div class="product-grid" id="productGrid"></div>
+      </div>
     </section>
+
+
 
     <section class="story view-panel" id="story" data-panel="story">
       <div class="story-image"><img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1100&q=85" alt="Fashion editorial portrait"></div>
@@ -84,6 +85,6 @@
     <p id="orderMethodMessage" class="checkout-modal-message">Your selected items will stay in your bag.</p>
   </section>
   <div class="action-toast" id="actionToast" role="status" aria-live="polite"><span class="toast-check">✓</span><span id="toastMessage">Added to your bag</span></div>
-  <script src="script.js?v=20261118-1942"></script>
+  <script src="script.js?v=20261118-categoryshop"></script>
 </body>
 </html>

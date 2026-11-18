@@ -58,7 +58,7 @@ function closeCheckout(){modal.classList.remove("open");backdrop.classList.remov
 $("#checkoutButton").addEventListener("click",openCheckout);$("#closeCheckoutModal").addEventListener("click",closeCheckout);backdrop.addEventListener("click",closeCheckout);
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCheckout();closeCart()}});
 $$(".order-method").forEach(b=>b.addEventListener("click",()=>{$$(".order-method").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");$("#orderMethodMessage").textContent=b.dataset.channel+" selected. Your bag is ready to share with us.";showToast(b.dataset.channel+" selected")}));
-$("#newsletterForm").addEventListener("submit",e=>{e.preventDefault();$("#newsletterMessage").textContent="Thank you for your interest in RoseMmoon.";e.target.reset()});
+$("#newsletterForm").addEventListener("submit",e=>{e.preventDefault();$("#newsletterMessage").textContent="Thank you for your interest in RoseMoon.";e.target.reset()});
 
 
 /* Gentle scroll reveals and staggered entrance motion */

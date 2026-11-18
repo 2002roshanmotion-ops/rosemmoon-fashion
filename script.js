@@ -16,6 +16,11 @@ const products=[
 {id:15,name:"Summer Ease Shorts",desc:"A relaxed fit for sunny days",category:"shorts",tag:"WEEKEND",price:1390,image:"https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/52a35cd0-f30f-40e5-9f27-68d12fd0c090.png"},
 {id:16,name:"Tailored Everyday Shorts",desc:"A neat, versatile summer staple",category:"shorts",tag:"THE EDIT",price:1590,image:"https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/52a35cd0-f30f-40e5-9f27-68d12fd0c090.png"}
 ];
+// Apply product edits saved by the RoseMoon admin on this browser.
+try{
+ const saved=JSON.parse(localStorage.getItem("rosemmoonFashionProductsV1"));
+ if(Array.isArray(saved)) saved.forEach(item=>{const current=products.find(p=>p.id===item.id);if(current)Object.assign(current,item)});
+}catch(error){console.warn("RoseMoon saved products could not be loaded",error)}
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const grid=$("#productGrid"),categoryGrid=$("#categoryGrid");let activeCategory="dresses",cart=[];
 function renderProducts(){const shown=products.filter(p=>p.category===activeCategory);grid.innerHTML=shown.length?shown.map(p=>`<article class="product-card"><div class="product-image"><img src="${p.image}" alt="${p.name}" loading="lazy"></div><div class="product-info"><h3>${p.name}</h3><p>${p.desc}</p><div class="product-bottom"><span class="price-request">Rs. ${p.price.toLocaleString("en-IN")}</span><button class="add-button" data-id="${p.id}">Add to bag <span>+</span></button></div></div></article>`).join(""):`<div class="no-products"><strong>More styles are on the way.</strong><span>Check back soon for new arrivals.</span></div>`}

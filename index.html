@@ -18,14 +18,12 @@
       <img class="brand-logo" style="width:58px;height:58px;max-width:58px;max-height:58px;object-fit:contain;display:block" src="https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/95729fb3-baa3-42f2-949b-92068a051553.png" alt="RoseMmoon Fashion — Let Your Beauty Speak">
     </a>
     <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
-    <nav id="mainNav">
-      <a href="#home">Home</a><a href="#collections">Collections</a><a href="#story">Our Story</a>
-    </nav>
+    <nav id="mainNav" aria-label="Main navigation"><button class="nav-tab active" data-view="home">Home</button><button class="nav-tab" data-view="collections">Collections</button><button class="nav-tab" data-view="shop">Shop</button><button class="nav-tab" data-view="story">Our Story</button></nav>
     <button class="bag-button" id="openCart" aria-label="Open shopping bag">Bag <span id="cartCount">0</span></button>
   </header>
 
   <main>
-    <section class="hero" id="home">
+    <section class="hero view-panel active" id="home" data-panel="home">
       <div class="hero-copy">
         <p class="eyebrow">THE NEW ERA OF EVERYDAY STYLE</p>
         <h1>Let your beauty<br><em>speak.</em></h1>
@@ -39,9 +37,9 @@
       </div>
     </section>
 
-    <section class="intro-strip"><span>MODERN FEMININITY</span><i>✳</i><span>EFFORTLESS ELEGANCE</span><i>✳</i><span>MADE TO BE YOU</span></section>
+    <section class="intro-strip" aria-hidden="true"><span>MODERN FEMININITY</span><i>✳</i><span>EFFORTLESS ELEGANCE</span><i>✳</i><span>MADE TO BE YOU</span></section>
 
-    <section class="collections section" id="collections">
+    <section class="collections section view-panel" id="collections" data-panel="collections">
       <div class="section-heading"><div><p class="eyebrow">FIND YOUR FEEL</p><h2>Style starts <em>here.</em></h2></div><p>Curated looks for every version of you.</p></div>
       <div class="category-grid">
         <a class="category-card category-one" href="#shop"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=85" alt="Contemporary women's fashion"><span>01 / EVERYDAY</span><strong>Everyday Edit</strong><b>Discover ↗</b></a>
@@ -50,12 +48,12 @@
       </div>
     </section>
 
-    <section class="shop section" id="shop">
+    <section class="shop section view-panel" id="shop" data-panel="shop">
       <div class="section-heading"><div><p class="eyebrow">THE ROSEMmoon SELECTION</p><h2>Pieces to <em>love.</em></h2></div><p>Our featured edit — more styles coming soon.</p></div>
       <div class="product-grid" id="productGrid"></div>
     </section>
 
-    <section class="story" id="story">
+    <section class="story view-panel" id="story" data-panel="story">
       <div class="story-image"><img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1100&q=85" alt="Fashion editorial portrait"></div>
       <div class="story-copy"><p class="eyebrow">A LITTLE ABOUT US</p><h2>Be your own<br><em>kind of beautiful.</em></h2><p>RoseMmoon Fashion is a space for self-expression, confidence and modern femininity. We believe the best look is the one that feels unmistakably yours.</p><div class="signature">Let Your Beauty Speak<span>ROSEMmoon FASHION</span></div></div>
     </section>

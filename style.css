@@ -913,3 +913,13 @@ footer>p{color:#f5c4d7!important}
  .collections .category-card{gap:7px!important;padding:7px 5px!important}
  .collections .category-card strong{flex:1 1 auto!important;font-size:10px!important;line-height:1.2!important;white-space:normal!important;word-break:normal!important;overflow-wrap:normal!important}
 }
+
+/* Fix: Shorts is the final category; remove legacy last-child tile sizing. */
+.collections .category-grid > .category-card:last-child{
+  height:auto!important;
+  min-height:0!important;
+  grid-column:auto!important;
+  grid-row:auto!important;
+  align-self:stretch!important;
+  transform:none;
+}

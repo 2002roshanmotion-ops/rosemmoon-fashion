@@ -31,6 +31,7 @@ $$(".nav-tab").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view
 $$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.openView)));
 $$(".category-card").forEach(card=>card.addEventListener("click",e=>{e.preventDefault();setFilter(card.dataset.category||"all");$("#shop").scrollIntoView({behavior:"smooth",block:"start"})}));
 filters.addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(b)setFilter(b.dataset.filter)});
+const viewAllButton=$("#viewAllProducts");if(viewAllButton)viewAllButton.addEventListener("click",()=>{setFilter("all");$("#shop").scrollIntoView({behavior:"smooth",block:"start"})});
 const drawer=$("#cartDrawer"),overlay=$("#cartOverlay");
 function openCart(){drawer.classList.add("open");overlay.classList.add("open");drawer.setAttribute("aria-hidden","false")}
 function closeCart(){drawer.classList.remove("open");overlay.classList.remove("open");drawer.setAttribute("aria-hidden","true")}

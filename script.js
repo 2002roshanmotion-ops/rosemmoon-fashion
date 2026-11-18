@@ -7,9 +7,13 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const grid=$("#productGrid"),filters=$("#shopFilters");let activeFilter="all",cart=[];
 function renderProducts(){const shown=products.filter(p=>activeFilter==="all"||p.category===activeFilter);grid.innerHTML=shown.map(p=>`<article class="product-card"><div class="product-image"><img src="${p.image}" alt="${p.name}" loading="lazy"><span class="product-tag">${p.tag}</span></div><div class="product-info"><h3>${p.name}</h3><p>${p.desc}</p><div class="product-bottom"><span class="price-request">Price on request</span><button class="add-button" data-id="${p.id}">Add to bag <span>+</span></button></div></div></article>`).join("")}
 function setFilter(filter){activeFilter=filter;$$(".filter-chip").forEach(b=>b.classList.toggle("active",b.dataset.filter===filter));renderProducts()}
-function showView(view){$$(".view-panel").forEach(p=>p.classList.toggle("active",p.dataset.panel===view));$$(".nav-tab").forEach(b=>b.classList.toggle("active",b.dataset.view===view))}
+function showView(view){$(".view-panel").forEach(p=>p.classList.toggle("active",p.dataset.panel===view));$(".nav-tab").forEach(b=>b.classList.toggle("active",b.dataset.view===view));if(view==="shop")requestAnimationFrame(()=>{grid.querySelectorAll(".product-card").forEach((card,i)=>{card.style.animationDelay=(i*65)+"ms"})})}
 renderProducts();
-$$(".nav-tab").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
+const openingScreen=$("#openingScreen");
+window.addEventListener("load",()=>{setTimeout(()=>openingScreen?.classList.add("is-leaving"),1050);setTimeout(()=>openingScreen?.remove(),1800)},{once:true});
+const toast=$("#actionToast");let toastTimer;
+function showToast(message){$("#toastMessage").textContent=message;toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),1900)}
+$(".nav-tab").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
 $$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.openView)));
 $$(".category-card").forEach(card=>card.addEventListener("click",e=>{e.preventDefault();setFilter(card.dataset.category||"all");showView("shop")}));
 filters.addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(b)setFilter(b.dataset.filter)});
@@ -17,7 +21,7 @@ const drawer=$("#cartDrawer"),overlay=$("#cartOverlay");
 function openCart(){drawer.classList.add("open");overlay.classList.add("open");drawer.setAttribute("aria-hidden","false")}
 function closeCart(){drawer.classList.remove("open");overlay.classList.remove("open");drawer.setAttribute("aria-hidden","true")}
 $("#openCart").addEventListener("click",openCart);$("#closeCart").addEventListener("click",closeCart);overlay.addEventListener("click",closeCart);
-grid.addEventListener("click",e=>{const b=e.target.closest("[data-id]");if(!b)return;const p=products.find(x=>x.id===Number(b.dataset.id)),found=cart.find(x=>x.id===p.id);if(found)found.qty++;else cart.push({...p,qty:1});renderCart();openCart()});
+grid.addEventListener("click",e=>{const b=e.target.closest("[data-id]");if(!b)return;const p=products.find(x=>x.id===Number(b.dataset.id)),found=cart.find(x=>x.id===p.id);if(found)found.qty++;else cart.push({...p,qty:1});renderCart();showToast(p.name+" added to your bag");openCart()});
 function renderCart(){$("#cartCount").textContent=cart.reduce((n,p)=>n+p.qty,0);$("#cartTotal").textContent="Price confirmed with store";$("#cartItems").innerHTML=cart.length?cart.map(p=>`<div class="cart-row"><img src="${p.image}" alt=""><div><strong>${p.name}</strong><small>Quantity: ${p.qty} · Price on request</small></div><button class="remove-item" data-remove="${p.id}" aria-label="Remove ${p.name}">Remove</button></div>`).join(""):'<p class="empty-cart">Your bag is waiting for something lovely.</p>'}
 $("#cartItems").addEventListener("click",e=>{const b=e.target.closest("[data-remove]");if(!b)return;cart=cart.filter(p=>p.id!==Number(b.dataset.remove));renderCart()});
 const modal=$("#checkoutModal"),backdrop=$("#checkoutModalBackdrop");
@@ -25,5 +29,5 @@ function openCheckout(){if(!cart.length){$("#orderMethodMessage").textContent="A
 function closeCheckout(){modal.classList.remove("open");backdrop.classList.remove("open");modal.setAttribute("aria-hidden","true");backdrop.setAttribute("aria-hidden","true")}
 $("#checkoutButton").addEventListener("click",openCheckout);$("#closeCheckoutModal").addEventListener("click",closeCheckout);backdrop.addEventListener("click",closeCheckout);
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCheckout();closeCart()}});
-$$(".order-method").forEach(b=>b.addEventListener("click",()=>{$$(".order-method").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");$("#orderMethodMessage").textContent=b.dataset.channel+" selected. Direct ordering links will be connected before launch."}));
+$$(".order-method").forEach(b=>b.addEventListener("click",()=>{$$(".order-method").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");$("#orderMethodMessage").textContent=b.dataset.channel+" selected. Your bag is ready to share with us.";showToast(b.dataset.channel+" selected")}));
 $("#newsletterForm").addEventListener("submit",e=>{e.preventDefault();$("#newsletterMessage").textContent="Thank you for your interest in RoseMmoon.";e.target.reset()});

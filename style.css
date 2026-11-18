@@ -914,53 +914,115 @@ footer>p{color:#f5c4d7!important}
  .collections .category-card strong{flex:1 1 auto!important;font-size:10px!important;line-height:1.2!important;white-space:normal!important;word-break:normal!important;overflow-wrap:normal!important}
 }
 
-/* Fix: Shorts is the final category; remove legacy last-child tile sizing. */
-.collections .category-grid > .category-card:last-child{
+
+/* FINAL CATEGORY MENU NORMALIZATION — all eight category rows are identical. */
+.collections .category-layout .category-sidebar #categoryGrid{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  gap:7px!important;
+  width:100%!important;
   height:auto!important;
-  min-height:0!important;
+}
+.collections .category-layout .category-sidebar #categoryGrid > button.category-card,
+.collections .category-layout .category-sidebar #categoryGrid > button.category-card:last-child{
+  display:flex!important;
+  position:relative!important;
+  box-sizing:border-box!important;
+  flex:0 0 62px!important;
+  width:100%!important;
+  height:62px!important;
+  min-height:62px!important;
+  max-height:62px!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:9px 11px!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:11px!important;
+  overflow:hidden!important;
   grid-column:auto!important;
   grid-row:auto!important;
-  align-self:stretch!important;
-  transform:none;
+  transform:none!important;
+  border:1px solid #f0cbd8!important;
+  border-radius:11px!important;
+  background:#fff8fb!important;
+  box-shadow:0 3px 10px rgba(100,21,47,.05)!important;
 }
-
-/* Category sidebar: enforce identical row sizing for every category, including Shorts. */
-.collections .category-layout .category-sidebar .category-grid > .category-card{
+.collections .category-layout .category-sidebar #categoryGrid > button.category-card:after{
+  display:none!important;
+  content:none!important;
+}
+.collections .category-layout .category-sidebar #categoryGrid > button.category-card .category-icon{
+  display:grid!important;
+  place-items:center!important;
+  position:static!important;
   box-sizing:border-box!important;
-  width:100%!important;
-  height:66px!important;
-  min-height:66px!important;
-  max-height:66px!important;
-  flex:0 0 66px!important;
-  align-items:center!important;
-  overflow:hidden!important;
+  flex:0 0 40px!important;
+  width:40px!important;
+  height:40px!important;
+  min-width:40px!important;
+  min-height:40px!important;
+  margin:0!important;
+  border-radius:10px!important;
 }
-.collections .category-layout .category-sidebar .category-grid > .category-card .category-icon{
-  width:42px!important;
-  height:42px!important;
-  min-width:42px!important;
-  min-height:42px!important;
-  flex:0 0 42px!important;
-}
-.collections .category-layout .category-sidebar .category-grid > .category-card strong{
+.collections .category-layout .category-sidebar #categoryGrid > button.category-card .category-icon svg{
   display:block!important;
+  width:22px!important;
+  height:22px!important;
+}
+.collections .category-layout .category-sidebar #categoryGrid > button.category-card strong{
+  display:block!important;
+  position:static!important;
+  flex:1 1 auto!important;
   min-width:0!important;
-  line-height:1.2!important;
+  margin:0!important;
+  color:#64152f!important;
+  font:600 13px/1.2 "DM Sans",sans-serif!important;
   white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.collections .category-layout .category-sidebar #categoryGrid > button.category-card.active{
+  background:#fde8f0!important;
+  border-color:#efb6cc!important;
 }
 @media(max-width:620px){
-  .collections .category-layout .category-sidebar .category-grid > .category-card{
-    height:42px!important;
-    min-height:42px!important;
-    max-height:42px!important;
-    flex:0 0 42px!important;
-    padding:5px!important;
+  .collections .category-layout{
+    grid-template-columns:112px minmax(0,1fr)!important;
+    gap:10px!important;
   }
-  .collections .category-layout .category-sidebar .category-grid > .category-card .category-icon{
+  .collections .category-layout .category-sidebar{
+    min-width:0!important;
+    padding:9px 6px!important;
+  }
+  .collections .category-layout .category-sidebar #categoryGrid{
+    gap:5px!important;
+  }
+  .collections .category-layout .category-sidebar #categoryGrid > button.category-card,
+  .collections .category-layout .category-sidebar #categoryGrid > button.category-card:last-child{
+    flex:0 0 40px!important;
+    height:40px!important;
+    min-height:40px!important;
+    max-height:40px!important;
+    padding:5px!important;
+    gap:6px!important;
+    border-radius:8px!important;
+  }
+  .collections .category-layout .category-sidebar #categoryGrid > button.category-card .category-icon{
+    flex:0 0 27px!important;
     width:27px!important;
     height:27px!important;
     min-width:27px!important;
     min-height:27px!important;
-    flex:0 0 27px!important;
+    border-radius:7px!important;
+  }
+  .collections .category-layout .category-sidebar #categoryGrid > button.category-card .category-icon svg{
+    width:16px!important;
+    height:16px!important;
+  }
+  .collections .category-layout .category-sidebar #categoryGrid > button.category-card strong{
+    font-size:9px!important;
+    line-height:1.1!important;
   }
 }

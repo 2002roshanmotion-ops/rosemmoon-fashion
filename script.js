@@ -15,7 +15,7 @@ function dismissOpeningScreen(){if(!openingScreen||openingScreen.dataset.dismiss
 window.setTimeout(dismissOpeningScreen,5000);
 const toast=$("#actionToast");let toastTimer;
 function showToast(message){$("#toastMessage").textContent=message;toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),1900)}
-$(".nav-tab").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
+$$(".nav-tab").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
 $$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.openView)));
 $$(".category-card").forEach(card=>card.addEventListener("click",e=>{e.preventDefault();setFilter(card.dataset.category||"all");showView("shop")}));
 filters.addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(b)setFilter(b.dataset.filter)});

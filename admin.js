@@ -13,7 +13,7 @@ const defaults=[
 [11,"The Modern Jacket","The finishing layer for your favourite looks","jackets",3590,"https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/52a35cd0-f30f-40e5-9f27-68d12fd0c090.png"],
 [12,"Chic Cropped Jacket","A statement layer for everyday style","jackets",3290,"https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/52a35cd0-f30f-40e5-9f27-68d12fd0c090.png"],
 [13,"Cloud-Soft Sweater","Cosy comfort with a feminine finish","sweaters",2190,"https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/52a35cd0-f30f-40e5-9f27-68d12fd0c090.png"],
-[14,"Everyday Knit","An easy layer for cooler days","sweaters",1990,"https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/52a35cd0f30f-40e5-9f27-68d12fd0c090.png"],
+[14,"Everyday Knit","An easy layer for cooler days","sweaters",1990,"https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/52a35cd0-f30f-40e5-9f27-68d12fd0c090.png"],
 [15,"Summer Ease Shorts","A relaxed fit for sunny days","shorts",1390,"https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/52a35cd0-f30f-40e5-9f27-68d12fd0c090.png"],
 [16,"Tailored Everyday Shorts","A neat, versatile summer staple","shorts",1590,"https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/52a35cd0-f30f-40e5-9f27-68d12fd0c090.png"]
 ].map(([id,name,desc,category,price,image])=>({id,name,desc,category,price,image}));

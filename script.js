@@ -31,7 +31,8 @@ function showToast(message){$("#toastMessage").textContent=message;toast.classLi
 $$(".nav-tab").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
 $$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.openView)));
 $$(".category-card").forEach(card=>card.addEventListener("click",e=>{e.preventDefault();const section=$("#collections");section.classList.add("has-selected-category");section.setAttribute("data-category-selected","true");$$(".category-card").forEach(item=>item.classList.toggle("is-selected",item===card));setFilter(card.dataset.category||"all");$("#typeBrowser").classList.add("is-visible");window.setTimeout(()=>$("#typeBrowser").scrollIntoView({behavior:"smooth",block:"nearest"}),160)}));
-filters.addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(b)setFilter(b.dataset.filter)});\ntypeChips.addEventListener("click",e=>{const b=e.target.closest("[data-type]");if(b)setType(b.dataset.type)});
+filters.addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(b)setFilter(b.dataset.filter)});
+typeChips.addEventListener("click",e=>{const b=e.target.closest("[data-type]");if(b)setType(b.dataset.type)});
 const viewAllButton=$("#viewAllProducts");if(viewAllButton)viewAllButton.addEventListener("click",()=>{const section=$("#collections");section.classList.add("has-selected-category");section.setAttribute("data-category-selected","true");$$(".category-card").forEach(item=>item.classList.remove("is-selected"));setFilter("all");$("#typeBrowser").classList.add("is-visible");window.setTimeout(()=>$("#shop").scrollIntoView({behavior:"smooth",block:"start"}),180)});
 const drawer=$("#cartDrawer"),overlay=$("#cartOverlay");
 function openCart(){drawer.classList.add("open");overlay.classList.add("open");drawer.setAttribute("aria-hidden","false")}

@@ -710,3 +710,13 @@ html,body{height:100%;overflow:hidden}body{height:100dvh;display:flex;flex-direc
 .no-products{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:130px;padding:25px;border:1px dashed #d8b9be;border-radius:14px;background:rgba(255,255,255,.6);text-align:center;color:#795d66}
 .no-products strong{font:500 19px "Playfair Display",serif}.no-products span{font:400 11px "DM Sans",sans-serif}
 @media(max-width:760px){.type-browser{margin:0 0 13px;padding:13px 11px;border-radius:12px}.type-browser-heading{align-items:flex-start;flex-direction:column;gap:4px;margin-bottom:10px}.type-chip-list{gap:6px}.type-chip{padding:8px 11px;font-size:9px}}
+
+/* Photo-led clothing type choices */
+.type-picture-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.type-picture-card{position:relative;display:block;overflow:hidden;min-width:0;padding:0!important;height:132px;border:1px solid #eadadd!important;border-radius:12px!important;background:#eadadd!important;text-align:left;box-shadow:0 5px 15px rgba(71,43,52,.07)}
+.type-picture-card img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease;filter:saturate(.88)}
+.type-picture-card span{position:absolute;left:0;right:0;bottom:0;padding:22px 8px 9px;background:linear-gradient(transparent,rgba(35,22,28,.72));color:#fff;font:600 11px "DM Sans",sans-serif;letter-spacing:.02em;text-align:left}
+.type-picture-card.active{outline:3px solid #b76b83;outline-offset:2px;border-color:#b76b83!important}
+.type-picture-card.active span{background:linear-gradient(transparent,rgba(94,42,61,.88))}
+.type-picture-card:active img{transform:scale(1.04)}
+@media(max-width:760px){.type-picture-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.type-picture-card{height:112px}.type-picture-card span{font-size:10px;padding:20px 7px 8px}}

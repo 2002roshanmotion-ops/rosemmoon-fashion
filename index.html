@@ -47,7 +47,9 @@
     <section class="collections section view-panel" id="collections" data-panel="collections">
             <div class="shop section" id="shop">
       <div class="section-heading"><div><p class="eyebrow">THE COLLECTION</p><h2>Find your <em>style.</em></h2></div></div>
-      <div class="category-heading"><p class="eyebrow">EXPLORE THE COLLECTION</p><h2>Shop by <em>category.</em></h2><p>Choose what you love and discover your style.</p></div>
+      <div class="category-layout">
+      <aside class="category-sidebar" aria-label="Shop categories">
+        <div class="category-heading"><p class="eyebrow">BROWSE</p><h2>Shop by <em>category.</em></h2><p>Choose a style to see its pieces and prices.</p></div>
       <div class="category-grid" id="categoryGrid" aria-label="Clothing categories">
         <button class="category-card active" type="button" data-category="dresses"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=700&q=85" alt=""><span>ELEGANT & EFFORTLESS</span><strong>Dresses</strong><b>EXPLORE ↗</b></button>
         <button class="category-card" type="button" data-category="tops"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=700&q=85" alt=""><span>EVERYDAY STYLE</span><strong>Tops</strong><b>EXPLORE ↗</b></button>
@@ -58,7 +60,12 @@
         <button class="category-card" type="button" data-category="sweaters"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=700&q=85" alt=""><span>SOFT & COSY</span><strong>Sweaters</strong><b>EXPLORE ↗</b></button>
         <button class="category-card" type="button" data-category="shorts"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=700&q=85" alt=""><span>EASY DAYS</span><strong>Shorts</strong><b>EXPLORE ↗</b></button>
       </div>
-      <div class="product-grid" id="productGrid"></div>
+      </div>
+      <div class="category-products">
+        <div class="category-products-heading"><p class="eyebrow">THE COLLECTION</p><h2 id="selectedCategoryTitle">Dresses</h2><p>Explore the pieces and find your favourite.</p></div>
+        <div class="product-grid" id="productGrid"></div>
+      </div>
+      </div>
       </div>
     </section>
 

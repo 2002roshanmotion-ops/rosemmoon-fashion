@@ -1159,7 +1159,7 @@ footer:before{left:8%;top:30px}footer:after{right:9%;top:72px;animation-delay:1.
 .collections .product-image{
   width:100%;
   height:auto;
-  aspect-ratio:2/3;
+  aspect-ratio:9/16;
   background:linear-gradient(160deg,#fff8fb,#f7e8ee);
   display:flex;
   align-items:center;

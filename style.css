@@ -815,3 +815,32 @@ footer>p{color:#f5c4d7!important}
 .clothing-types .type-chip{border:1px solid #efc2d2;background:#fffafd;color:#851b45;border-radius:999px;padding:8px 13px;font:600 9px "DM Sans",sans-serif;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
 .clothing-types .type-chip.active{background:linear-gradient(105deg,#9c1749,#e83f79);border-color:#9c1749;color:#fff;}
 @media(max-width:760px){.clothing-types{gap:6px;margin:-5px 0 13px}.clothing-types .type-chip{padding:7px 10px;font-size:8px}}
+
+
+/* Updated RoseMmoon category collection — replaces all older category layouts */
+.category-heading{margin:0 0 18px;text-align:center}
+.category-heading h2{font:500 clamp(30px,4vw,46px)/1.08 "Playfair Display",serif;margin:8px 0;color:#64152f}
+.category-heading h2 em{color:#d92f70}
+.category-heading>p:last-child{font:400 11px "DM Sans",sans-serif;color:#916274;margin:0}
+.collections .category-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important;height:auto!important;margin:0 0 26px!important}
+.collections .category-card{position:relative;display:block!important;min-width:0!important;height:clamp(190px,25vw,290px)!important;min-height:190px!important;overflow:hidden!important;padding:0!important;border:1px solid #f0cbd8!important;border-radius:13px!important;background:#f8dce7!important;text-align:left!important;cursor:pointer;box-shadow:0 8px 22px rgba(100,21,47,.08)!important;transition:transform .25s ease,box-shadow .25s ease,outline .25s ease!important}
+.collections .category-card img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;transition:transform .55s ease!important;filter:saturate(.88)}
+.collections .category-card:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(55,13,31,.78));pointer-events:none}
+.collections .category-card span,.collections .category-card strong,.collections .category-card b{position:absolute!important;z-index:1!important;left:14px!important;right:8px!important;color:#fff!important;text-shadow:0 1px 8px rgba(0,0,0,.16)}
+.collections .category-card span{bottom:61px!important;font:600 7px "DM Sans",sans-serif!important;letter-spacing:.13em!important}
+.collections .category-card strong{bottom:32px!important;font:500 clamp(17px,2vw,24px) "Playfair Display",serif!important}
+.collections .category-card b{bottom:13px!important;font:600 7px "DM Sans",sans-serif!important;letter-spacing:.14em!important}
+.collections .category-card:hover{transform:translateY(-4px)!important;box-shadow:0 14px 28px rgba(100,21,47,.15)!important}
+.collections .category-card:hover img{transform:scale(1.055)!important}
+.collections .category-card.active{outline:3px solid #e83f79!important;outline-offset:2px!important}
+.collections #shop .shop-filters,.collections .clothing-types,.collections .type-browser{display:none!important}
+@media(max-width:760px){
+ .category-heading{margin-bottom:13px}
+ .category-heading h2{font-size:29px}
+ .category-heading>p:last-child{font-size:9px}
+ .collections .category-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important;margin-bottom:20px!important}
+ .collections .category-card{height:clamp(170px,25vh,220px)!important;min-height:170px!important;border-radius:10px!important}
+ .collections .category-card span{left:9px!important;bottom:53px!important;font-size:6px!important}
+ .collections .category-card strong{left:9px!important;bottom:28px!important;font-size:17px!important}
+ .collections .category-card b{left:9px!important;bottom:11px!important;font-size:6px!important}
+}

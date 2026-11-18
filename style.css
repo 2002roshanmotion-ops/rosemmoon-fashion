@@ -64,3 +64,52 @@ html,body{height:100%;overflow:hidden}body{height:100dvh;display:flex;flex-direc
   }
   .site-header .bag-button{justify-self:end!important}
 }
+
+/* Refined RoseMmoon editorial shopping experience */
+:root{--rose:#98465f;--gold:#b99572;--blush:#fbf4f1;--ink:#2e2227}
+.site-header{box-shadow:0 5px 24px rgba(69,38,48,.035);background:rgba(255,253,250,.96)}
+.site-header .brand-logo{filter:drop-shadow(0 2px 4px rgba(70,35,48,.10))}
+.site-header nav .nav-tab{font-size:10px;letter-spacing:.15em;transition:color .2s}
+.site-header nav .nav-tab.active:after{height:2px;border-radius:2px}
+.hero.view-panel.active{position:relative;background:radial-gradient(ellipse at 18% 20%,#fffdfa 0%,#fbf4f1 58%,#f5e7e5 100%)}
+.hero-copy{animation:roseRise .65s both}.hero h1{letter-spacing:-.045em}.hero h1 em{font-style:italic}
+.hero-image{border-radius:2px;box-shadow:0 22px 55px rgba(67,39,47,.13)}
+.hero-image:after{content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.65);pointer-events:none}
+.hero-copy .button{border-radius:2px;transition:transform .2s,background .2s,box-shadow .2s}
+.hero-copy .button:hover{transform:translateY(-2px);box-shadow:0 9px 22px rgba(57,40,47,.16)}
+.view-panel.active{animation:panelIn .28s ease both}
+.collections.view-panel.active,.shop.view-panel.active{background:linear-gradient(135deg,#fffdfa 0%,#fbf3f0 100%)}
+.section-heading h2{letter-spacing:-.04em}
+.category-card{border-radius:3px;box-shadow:0 12px 28px rgba(57,35,43,.08)}
+.category-card:after{background:linear-gradient(transparent 28%,rgba(32,19,25,.78))}
+.category-card img{filter:saturate(.88);transition:transform .8s,filter .8s}
+.category-card:hover img{transform:scale(1.06);filter:saturate(1.06)}
+.category-card strong{letter-spacing:-.02em}
+.shop-filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 15px}
+.filter-chip{border:1px solid #e8d8d5;background:rgba(255,253,250,.75);color:var(--muted);padding:8px 15px;border-radius:30px;font:600 9px "DM Sans";letter-spacing:.09em;cursor:pointer;transition:.2s}
+.filter-chip:hover,.filter-chip.active{background:#39282f;color:#fff;border-color:#39282f}
+.product-card{min-width:0;background:rgba(255,255,255,.55);padding:7px 7px 0;border:1px solid rgba(234,219,216,.75);transition:transform .25s,box-shadow .25s}
+.product-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(57,35,43,.09)}
+.product-image{position:relative;border-radius:2px}
+.product-image img{transition:transform .55s}
+.product-tag{position:absolute;top:10px;left:10px;background:rgba(255,253,250,.92);color:#8b4b60;padding:6px 8px;font-size:7px;letter-spacing:.14em}
+.product-info{padding:12px 7px 13px}.product-info h3{font-size:18px}.price-request{font-size:9px;color:var(--muted)}
+.add-button{border-radius:2px;background:#fffdfa;transition:.2s}.add-button:hover{background:#39282f;color:#fff;border-color:#39282f}
+.story.view-panel.active{background:linear-gradient(120deg,#f8eeeb,#f2e2e2)}.story-image{overflow:hidden}.story-image img{filter:saturate(.84)}.story-copy{max-width:620px}.signature{font-size:24px}
+.bag-button{border:1px solid var(--line);padding:8px 12px;border-radius:30px;transition:.2s}.bag-button:hover{background:#f8eeee}
+.cart-drawer{box-shadow:-20px 0 60px rgba(36,20,28,.14)}.checkout-modal{border-radius:4px;box-shadow:0 28px 90px rgba(28,16,22,.3)}
+.order-method{transition:transform .2s,border-color .2s,background .2s}.order-method:hover{transform:translateX(3px)}
+@keyframes panelIn{from{opacity:.35;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@keyframes roseRise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:760px){
+.site-header{grid-template-columns:48px minmax(0,1fr) auto!important;padding:0 10px}
+.site-header nav{justify-self:center;gap:clamp(5px,1.4vw,10px)!important}
+.site-header nav .nav-tab{font-size:7px;letter-spacing:.03em}
+.site-header .brand{width:48px;min-width:48px;max-width:48px}.bag-button{padding:7px 8px}
+.hero.view-panel.active{grid-template-columns:minmax(0,1fr) minmax(0,1fr);padding:12px}.hero-image{height:min(62vh,500px);min-height:220px}
+.collections.view-panel.active,.shop.view-panel.active{padding:13px 12px}
+.shop-filters{gap:5px;margin-bottom:9px}.filter-chip{padding:7px 10px;font-size:7px}
+.product-grid{overflow-y:auto;overscroll-behavior:contain;padding:2px 2px 12px}
+.category-grid{overflow-y:auto;overscroll-behavior:contain;padding-bottom:8px}.story-copy{padding:10px}
+}
+@media(max-width:390px){.site-header nav{gap:4px!important}.site-header nav .nav-tab{font-size:6.5px}.bag-button{font-size:7px}.filter-chip{padding:6px 8px}}

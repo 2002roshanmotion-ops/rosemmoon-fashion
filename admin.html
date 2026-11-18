@@ -5,7 +5,7 @@
 <meta name="theme-color" content="#f8e9e9"><title>RoseMoon Fashion · Admin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="admin.css?v=20261119-homeimage01">
+<link rel="stylesheet" href="admin.css?v=20261119-categoryimages01">
 </head>
 <body>
 <header class="admin-top"><a class="brand" href="index.html"><span class="moon">☾</span><span>ROSEMOON</span><small>FASHION ADMIN</small></a><div class="top-actions"><a class="view-shop" href="index.html">View Website ↗</a></div></header>
@@ -19,10 +19,9 @@
 <div class="home-image-preview" id="homeImagePreview"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=85" alt="Current home page image"></div>
 <div class="home-image-actions"><label class="upload-label">Choose new image<input id="homeImageUpload" type="file" accept="image/*"></label><button class="save-button" id="saveHomeImage" type="button">Save home image</button><button class="reset-button" id="resetHomeImage" type="button">Restore original</button></div>
 <p class="home-image-status" id="homeImageStatus" aria-live="polite">Current homepage image</p>
-</section>
-<section id="productList" class="product-list" aria-live="polite"></section>
+<div class="image-position-controls" id="homePositionControls"><div class="position-title"><strong>Adjust home image position</strong><span>Move the image and zoom until the preview looks right.</span></div><label>Left / Right <input type="range" min="0" max="100" value="50" data-home-position="x"><output>50%</output></label><label>Up / Down <input type="range" min="0" max="100" value="30" data-home-position="y"><output>30%</output></label><label>Zoom <input type="range" min="100" max="180" value="100" data-home-position="zoom"><output>100%</output></label><div class="position-actions"><button class="save-button" id="saveHomePosition" type="button">Save position</button><button class="reset-button" id="resetHomePosition" type="button">Reset position</button></div></div></section><section class="category-image-manager"><div class="category-manager-heading"><p class="eyebrow">YOUR COLLECTION</p><h2>Category <em>images & positions</em></h2><p>Change each category picture and adjust its crop independently.</p></div><div id="categoryImageGrid" class="category-image-grid"></div></section><section id="productList" class="product-list" aria-live="polite"></section>
 <footer>ROSEMOON FASHION <span>·</span> LET YOUR BEAUTY SPEAK</footer>
 </section></main>
 <div class="toast" id="toast" role="status"></div>
-<script src="admin.js?v=20261119-homeimage01"></script>
+<script src="admin.js?v=20261119-categoryimages01"></script>
 </body></html>

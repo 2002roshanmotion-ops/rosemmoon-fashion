@@ -48,3 +48,16 @@ $("#checkoutButton").addEventListener("click",openCheckout);$("#closeCheckoutMod
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCheckout();closeCart()}});
 $$(".order-method").forEach(b=>b.addEventListener("click",()=>{$$(".order-method").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");$("#orderMethodMessage").textContent=b.dataset.channel+" selected. Your bag is ready to share with us.";showToast(b.dataset.channel+" selected")}));
 $("#newsletterForm").addEventListener("submit",e=>{e.preventDefault();$("#newsletterMessage").textContent="Thank you for your interest in RoseMmoon.";e.target.reset()});
+
+
+/* Gentle scroll reveals and staggered entrance motion */
+(function(){
+  const revealTargets=document.querySelectorAll(".section-heading,.category-sidebar,.category-products-heading,.product-card,.story-image,.story-copy,.newsletter,footer");
+  revealTargets.forEach((el,index)=>{el.classList.add("reveal-on-scroll");if(el.classList.contains("product-card"))el.style.transitionDelay=(index%4)*70+"ms"});
+  if(!("IntersectionObserver" in window)){revealTargets.forEach(el=>el.classList.add("is-visible"));return}
+  document.documentElement.classList.add("reveal-ready");
+  const revealObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("is-visible");revealObserver.unobserve(entry.target)}});
+  },{threshold:.12,rootMargin:"0px 0px -35px 0px"});
+  revealTargets.forEach(el=>revealObserver.observe(el));
+})();

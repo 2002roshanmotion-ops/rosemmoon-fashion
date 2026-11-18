@@ -661,3 +661,38 @@ html,body{height:100%;overflow:hidden}body{height:100dvh;display:flex;flex-direc
 .view-all-button{border:1px solid #d8b8bd;background:#fffdfa;color:#7f4658;border-radius:999px;padding:10px 15px;font:600 9px "DM Sans",sans-serif;letter-spacing:.08em;white-space:nowrap;cursor:pointer}
 .view-all-button:active{background:#39282f;color:white}
 @media(max-width:760px){.collections #shop .section-heading{align-items:center}.view-all-button{padding:9px 11px;font-size:8px}}
+
+
+/* Keep products and prices hidden until a shopper chooses a category */
+.collections #shop{
+  max-height:0!important;
+  opacity:0!important;
+  overflow:hidden!important;
+  visibility:hidden!important;
+  transform:translateY(18px);
+  pointer-events:none;
+  padding-top:0!important;
+  padding-bottom:0!important;
+  margin-top:0!important;
+  transition:max-height .75s ease,opacity .45s ease,transform .55s ease,padding .55s ease,margin .55s ease,visibility 0s linear .75s!important;
+}
+.collections.has-selected-category #shop{
+  max-height:6000px!important;
+  opacity:1!important;
+  visibility:visible!important;
+  transform:translateY(0);
+  pointer-events:auto;
+  padding-top:18px!important;
+  padding-bottom:24px!important;
+  margin-top:12px!important;
+  transition:max-height .85s ease,opacity .5s ease .12s,transform .55s ease .08s,padding .55s ease,margin .55s ease,visibility 0s!important;
+}
+.collections .category-card{cursor:pointer}
+.collections .category-card.is-selected{
+  outline:3px solid #b76b83;
+  outline-offset:3px;
+  box-shadow:0 14px 30px rgba(123,65,84,.22)!important;
+}
+@media(prefers-reduced-motion:reduce){
+ .collections #shop,.collections.has-selected-category #shop{transition:none!important}
+}

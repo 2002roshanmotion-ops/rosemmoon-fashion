@@ -528,3 +528,37 @@ html,body{height:100%;overflow:hidden}body{height:100dvh;display:flex;flex-direc
   .product-bottom{align-items:flex-start;flex-direction:column}
   .add-button{align-self:flex-start}
 }
+
+
+/* Reliable visible loading bar animation (runs even when reduced-motion is enabled) */
+.opening-screen .opening-progress{
+  display:block!important;
+  position:relative!important;
+  width:190px!important;
+  max-width:58vw!important;
+  height:5px!important;
+  min-height:5px!important;
+  margin:0 auto!important;
+  overflow:hidden!important;
+  border-radius:999px!important;
+  background:#ead9dc!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+.opening-screen .opening-progress span{
+  display:block!important;
+  position:absolute!important;
+  inset:0 auto 0 0!important;
+  width:100%!important;
+  height:100%!important;
+  border-radius:999px!important;
+  background:linear-gradient(90deg,#b76b83 0%,#98465f 58%,#c49a78 100%)!important;
+  transform:scaleX(0)!important;
+  transform-origin:left center!important;
+  animation:rosemmoonProgressVisible 5s linear 0s forwards!important;
+  will-change:transform;
+}
+@keyframes rosemmoonProgressVisible{
+  0%{transform:scaleX(0)!important}
+  100%{transform:scaleX(1)!important}
+}

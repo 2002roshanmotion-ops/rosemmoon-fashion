@@ -904,3 +904,12 @@ footer>p{color:#f5c4d7!important}
  .collections .category-products .product-card{min-width:0!important}
  .collections .category-products .product-image{aspect-ratio:4/5!important}
 }
+
+
+/* Category labels: no arrows and keep complete words readable */
+.collections .category-card .category-arrow{display:none!important}
+.collections .category-card strong{white-space:normal!important;word-break:normal!important;overflow-wrap:normal!important;hyphens:none!important;min-width:0!important}
+@media(max-width:620px){
+ .collections .category-card{gap:7px!important;padding:7px 5px!important}
+ .collections .category-card strong{flex:1 1 auto!important;font-size:10px!important;line-height:1.2!important;white-space:normal!important;word-break:normal!important;overflow-wrap:normal!important}
+}

@@ -136,3 +136,18 @@ $("#newsletterForm").addEventListener("submit",e=>{e.preventDefault();$("#newsle
     observer.observe(grid,{childList:true});
   }
 })();
+
+/* Always-visible RoseMoon twinkle particles */
+(function(){
+ const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ if(reduce||document.querySelector(".rm-glitter-layer"))return;
+ const layer=document.createElement("div");layer.className="rm-glitter-layer";layer.setAttribute("aria-hidden","true");
+ const symbols=["✦","✧","⋆","✧","✦","·"];
+ for(let i=0;i<24;i++){
+  const star=document.createElement("i");star.className="rm-glitter";star.textContent=symbols[i%symbols.length];
+  star.style.left=((i*37+11)%97)+"%";star.style.top=((i*53+7)%94)+"%";
+  star.style.fontSize=(9+(i%5)*4)+"px";star.style.setProperty("--delay",(-((i*0.73)%5))+"s");
+  star.style.setProperty("--blink",(1.5+(i%5)*.48)+"s");layer.appendChild(star);
+ }
+ document.body.appendChild(layer);
+})();

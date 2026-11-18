@@ -11,7 +11,19 @@ function showView(view){$$(".view-panel").forEach(p=>p.classList.toggle("active"
 renderProducts();
 const openingScreen=$("#openingScreen");
 function dismissOpeningScreen(){if(!openingScreen||openingScreen.dataset.dismissed==="true")return;openingScreen.dataset.dismissed="true";openingScreen.classList.add("is-leaving");window.setTimeout(()=>openingScreen.remove(),750)}
-// Keep the branded loading screen visible for about five seconds.
+// Show a visible loading percentage during the five-second opening screen.
+const loadingBar=$("#loadingBarFill"),loadingStatus=$("#loadingStatus"),loadingTrack=$(".opening-progress");
+const loadingStarted=Date.now(),loadingDuration=5000;
+if(loadingTrack)loadingTrack.setAttribute("aria-valuenow","0");
+function updateLoadingProgress(){
+  const percent=Math.min(100,Math.floor(((Date.now()-loadingStarted)/loadingDuration)*100));
+  if(loadingBar)loadingBar.style.setProperty("width",percent+"%","important");
+  if(loadingTrack)loadingTrack.setAttribute("aria-valuenow",String(percent));
+  if(loadingStatus)loadingStatus.textContent=percent>=100?"READY · WELCOME TO ROSEMMOON":"LOADING ROSEMMOON · "+percent+"%";
+  if(percent<100&&openingScreen&&openingScreen.isConnected)requestAnimationFrame(updateLoadingProgress);
+}
+requestAnimationFrame(updateLoadingProgress);
+// Keep the branded opening screen visible for five seconds.
 window.setTimeout(dismissOpeningScreen,5000);
 const toast=$("#actionToast");let toastTimer;
 function showToast(message){$("#toastMessage").textContent=message;toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),1900)}

@@ -14,9 +14,15 @@
 <section class="stats"><article><span>PRODUCTS</span><strong id="productCount">16</strong></article><article><span>CATEGORIES</span><strong>08</strong></article></section>
 <section class="toolbar"><div><p class="eyebrow">YOUR COLLECTION</p><h2>Product <em>manager</em></h2></div><div class="tools"><input id="searchProducts" type="search" placeholder="Search products…"><select id="filterCategory"><option value="all">All categories</option><option value="dresses">Dresses</option><option value="tops">Tops</option><option value="pants">Pants</option><option value="skirts">Skirts</option><option value="sets">Sets</option><option value="jackets">Jackets</option><option value="sweaters">Sweaters</option><option value="shorts">Shorts</option></select></div></section>
 <div class="notice"><span>✦</span><div><strong>Private browser storage</strong><p>Product details are saved in this browser. Uploaded photos are stored in this browser’s image storage and will not automatically appear on other devices.</p></div></div>
+<section class="home-image-manager">
+<div class="home-image-copy"><p class="eyebrow">YOUR HOMEPAGE</p><h2>Home page <em>image</em></h2><p>Change the large fashion image shown on the Home page.</p></div>
+<div class="home-image-preview" id="homeImagePreview"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=85" alt="Current home page image"></div>
+<div class="home-image-actions"><label class="upload-label">Choose new image<input id="homeImageUpload" type="file" accept="image/*"></label><button class="save-button" id="saveHomeImage" type="button">Save home image</button><button class="reset-button" id="resetHomeImage" type="button">Restore original</button></div>
+<p class="home-image-status" id="homeImageStatus" aria-live="polite">Current homepage image</p>
+</section>
 <section id="productList" class="product-list" aria-live="polite"></section>
 <footer>ROSEMOON FASHION <span>·</span> LET YOUR BEAUTY SPEAK</footer>
 </section></main>
 <div class="toast" id="toast" role="status"></div>
-<script src="admin.js?v=20261119-local01"></script>
+<script src="admin.js?v=20261119-homeimage01"></script>
 </body></html>

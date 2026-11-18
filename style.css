@@ -1237,3 +1237,25 @@ footer:before{left:8%;top:30px}footer:after{right:9%;top:72px;animation-delay:1.
 .collections .product-grid .product-info h3 {
   margin-top: 0 !important;
 }
+
+
+/* Product image cards follow each source image's natural dimensions — no fixed 9:16 frame */
+.collections .category-products .product-image,
+.collections .product-grid .product-image {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: auto !important;
+  display: block !important;
+  overflow: hidden !important;
+}
+.collections .category-products .product-image img,
+.collections .product-grid .product-image img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: none !important;
+  object-fit: initial !important;
+  object-position: center !important;
+  transform: none !important;
+}

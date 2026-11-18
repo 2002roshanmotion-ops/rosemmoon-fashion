@@ -323,3 +323,16 @@ html,body{height:100%;overflow:hidden}body{height:100dvh;display:flex;flex-direc
 @media(prefers-reduced-motion:reduce){
   .opening-screen .opening-progress span{animation:none!important;width:100%!important}
 }
+
+
+/* Keep the shopping Bag anchored at the far-right end of the header */
+.site-header>#openCart{
+  order:3!important;
+  margin-left:auto!important;
+  margin-right:0!important;
+  justify-self:end!important;
+  position:relative!important;
+  right:0!important;
+}
+.site-header>#mainNav{order:2!important}
+.site-header>.brand{order:1!important}

@@ -1,0 +1,21 @@
+const products=[
+{id:1,name:"The Rose Edit",desc:"A polished everyday look",price:0,image:"https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=85"},
+{id:2,name:"Moonlight Dress",desc:"An occasion-ready favourite",price:0,image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=700&q=85"},
+{id:3,name:"Soft Form",desc:"Effortless, modern essentials",price:0,image:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=700&q=85"},
+{id:4,name:"The Muse Look",desc:"A little statement, every day",price:0,image:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=85"}
+];
+const grid=document.getElementById("productGrid");
+grid.innerHTML=products.map(p=>`<article class="product-card"><div class="product-image"><img src="${p.image}" alt="${p.name}" loading="lazy"></div><div class="product-info"><h3>${p.name}</h3><p>${p.desc}</p><div class="product-bottom"><span>Price on request</span><button class="add-button" data-id="${p.id}">Add to bag +</button></div></div></article>`).join("");
+let cart=[];
+const drawer=document.getElementById("cartDrawer"),overlay=document.getElementById("cartOverlay");
+function openCart(){drawer.classList.add("open");overlay.classList.add("open");drawer.setAttribute("aria-hidden","false")}
+function closeCart(){drawer.classList.remove("open");overlay.classList.remove("open");drawer.setAttribute("aria-hidden","true")}
+document.getElementById("openCart").addEventListener("click",openCart);
+document.getElementById("closeCart").addEventListener("click",closeCart);
+overlay.addEventListener("click",closeCart);
+grid.addEventListener("click",e=>{const b=e.target.closest("[data-id]");if(!b)return;const p=products.find(x=>x.id===Number(b.dataset.id));const found=cart.find(x=>x.id===p.id);if(found)found.qty++;else cart.push({...p,qty:1});renderCart();openCart()});
+function renderCart(){document.getElementById("cartCount").textContent=cart.reduce((n,p)=>n+p.qty,0);document.getElementById("cartTotal").textContent="Price confirmed with store";document.getElementById("cartItems").innerHTML=cart.length?cart.map(p=>`<div class="cart-row"><img src="${p.image}" alt=""><div><strong>${p.name}</strong><small>Quantity: ${p.qty} · Price on request</small></div><button class="remove-item" data-remove="${p.id}" aria-label="Remove ${p.name}">Remove</button></div>`).join(""):'<p class="empty-cart">Your bag is waiting for something lovely.</p>'}
+document.getElementById("cartItems").addEventListener("click",e=>{const b=e.target.closest("[data-remove]");if(!b)return;cart=cart.filter(p=>p.id!==Number(b.dataset.remove));renderCart()});
+document.getElementById("checkoutButton").addEventListener("click",()=>{if(!cart.length){alert("Your bag is empty.");return}alert("Thanks for choosing RoseMmoon Fashion! Add your official WhatsApp number or ordering link to enable direct checkout. Your selected items are still in your bag.")});
+document.getElementById("newsletterForm").addEventListener("submit",e=>{e.preventDefault();document.getElementById("newsletterMessage").textContent="Thank you! Newsletter sign-up will be connected soon.";e.target.reset()});
+const toggle=document.getElementById("menuToggle"),nav=document.getElementById("mainNav");toggle.addEventListener("click",()=>{const open=nav.classList.toggle("open");toggle.setAttribute("aria-expanded",String(open))});nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>nav.classList.remove("open")));

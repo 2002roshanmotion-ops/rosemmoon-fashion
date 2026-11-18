@@ -788,7 +788,7 @@ footer>p{color:#f5c4d7!important}
 .method-icon{background:#ffe5ef!important;color:#c02762!important}
 .method-arrow{color:#c02762!important}
 .opening-screen .opening-progress{background:#f3cbd9!important}
-.opening-screen .opening-progress span#loadingBarFill{background:linear-gradient(90deg,#ff75a6 0%,#e83f79 58%,#c99a3d 100%)!important}
+.opening-screen .opening-progress span#loadingBarFill{background:#e83f79!important}
 .opening-screen #loadingStatus{color:#8b3153!important}
 .view-all-button{border-color:#e6aabd!important;background:#fffafd!important;color:#9c1749!important}
 .view-all-button:active{background:#9c1749!important;color:#fff!important}

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f8e9e9"><title>RoseMoon Fashion · Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css?v=20261119-admin01">
+</head>
+<body>
+<header class="admin-top"><a class="brand" href="index.html"><span class="moon">☾</span><span>ROSEMOON</span><small>FASHION ADMIN</small></a><a class="view-shop" href="index.html">View Website ↗</a></header>
+<main class="shell">
+<section class="welcome"><div><p class="eyebrow">YOUR LITTLE FASHION WORLD</p><h1>Good day, <em>beautiful.</em></h1><p>Manage your products and pictures in one lovely place.</p></div><div class="welcome-mark">RM</div></section>
+<section class="stats"><article><span>PRODUCTS</span><strong id="productCount">16</strong></article><article><span>CATEGORIES</span><strong>08</strong></article><article><span>IMAGE UPDATES</span><strong id="imageCount">0</strong></article></section>
+<section class="toolbar"><div><p class="eyebrow">YOUR COLLECTION</p><h2>Product <em>manager</em></h2></div><div class="tools"><input id="searchProducts" type="search" placeholder="Search products…"><select id="filterCategory"><option value="all">All categories</option><option value="dresses">Dresses</option><option value="tops">Tops</option><option value="pants">Pants</option><option value="skirts">Skirts</option><option value="sets">Sets</option><option value="jackets">Jackets</option><option value="sweaters">Sweaters</option><option value="shorts">Shorts</option></select></div></section>
+<div class="notice"><span>✦</span><div><strong>Easy image updates</strong><p>Choose a photo from your phone, preview it, then save. Your shop on this same browser will use the updated picture.</p></div></div>
+<section id="productList" class="product-list" aria-live="polite"></section>
+<footer>ROSEMOON FASHION <span>·</span> LET YOUR BEAUTY SPEAK</footer>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<script src="admin.js?v=20261119-admin01"></script>
+</body></html>

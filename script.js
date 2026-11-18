@@ -61,3 +61,67 @@ $("#newsletterForm").addEventListener("submit",e=>{e.preventDefault();$("#newsle
   },{threshold:.12,rootMargin:"0px 0px -35px 0px"});
   revealTargets.forEach(el=>revealObserver.observe(el));
 })();
+
+
+/* Interactive RoseMoon motion: floating petals, category crossfades and fly-to-bag */
+(function(){
+  const reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const hero=document.querySelector(".hero");
+  if(hero&&!reduceMotion&&!hero.querySelector(".hero-petals")){
+    const petals=document.createElement("div");petals.className="hero-petals";petals.setAttribute("aria-hidden","true");
+    for(let i=0;i<7;i++){
+      const petal=document.createElement("i");petal.className="hero-petal";
+      petal.style.setProperty("--left",(7+i*13)+"%");
+      petal.style.setProperty("--size",(9+(i%3)*5)+"px");
+      petal.style.setProperty("--duration",(13+(i%4)*3)+"s");
+      petal.style.setProperty("--delay",(-i*2.7)+"s");
+      petal.style.setProperty("--sway",((i%2?1:-1)*(25+(i%3)*13))+"px");
+      petals.appendChild(petal);
+    }
+    hero.appendChild(petals);
+  }
+  const heading=document.querySelector(".hero h1");
+  if(heading&&!heading.dataset.wordsWrapped){
+    heading.dataset.wordsWrapped="true";
+    heading.innerHTML=heading.innerHTML.replace("Let your beauty","<span class='word-reveal'><span>Let your beauty</span></span>").replace("<em>speak.</em>","<span class='word-reveal'><span><em>speak.</em></span></span>");
+  }
+  const grid=document.querySelector("#productGrid");
+  const categoryMenu=document.querySelector("#categoryGrid");
+  if(categoryMenu&&grid){
+    categoryMenu.addEventListener("click",event=>{
+      if(!event.target.closest("[data-category]"))return;
+      if(!reduceMotion){grid.classList.remove("category-changing");void grid.offsetWidth;grid.classList.add("category-changing");}
+    });
+  }
+  function flyToBag(button){
+    if(reduceMotion)return;
+    const card=button.closest(".product-card"),image=card&&card.querySelector(".product-image img"),bag=document.querySelector("#openCart");
+    if(!image||!bag||!image.getBoundingClientRect||!bag.getBoundingClientRect)return;
+    const from=image.getBoundingClientRect(),to=bag.getBoundingClientRect();
+    const flyer=document.createElement("img");flyer.className="fly-to-bag";flyer.src=image.currentSrc||image.src;flyer.alt="";
+    Object.assign(flyer.style,{left:from.left+"px",top:from.top+"px",width:from.width+"px",height:from.height+"px"});
+    document.body.appendChild(flyer);
+    const dx=to.left+to.width/2-(from.left+from.width/2),dy=to.top+to.height/2-(from.top+from.height/2);
+    if(flyer.animate){
+      const animation=flyer.animate([{transform:"translate(0,0) scale(1)",opacity:1,borderRadius:"12px"},{transform:"translate("+dx*.55+"px,"+(dy*.45-55)+"px) scale(.55)",opacity:.85,offset:.62},{transform:"translate("+dx+"px,"+dy+"px) scale(.08)",opacity:0,borderRadius:"50%"}],{duration:720,easing:"cubic-bezier(.2,.75,.25,1)"});
+      animation.onfinish=()=>flyer.remove();
+    }else flyer.remove();
+  }
+  document.addEventListener("click",event=>{
+    const add=event.target.closest(".add-button[data-id]");
+    if(!add)return;
+    flyToBag(add);
+    const bag=document.querySelector("#openCart");
+    if(bag&&!reduceMotion){bag.classList.remove("is-bouncing");void bag.offsetWidth;bag.classList.add("is-bouncing");}
+  });
+  if(grid&&"MutationObserver" in window){
+    const observer=new MutationObserver(()=>{
+      grid.querySelectorAll(".product-card").forEach((card,index)=>{
+        if(card.dataset.motionReady)return;
+        card.dataset.motionReady="true";
+        if(!reduceMotion){card.style.animation="riseIn .55s "+(index*85)+"ms both";}
+      });
+    });
+    observer.observe(grid,{childList:true});
+  }
+})();

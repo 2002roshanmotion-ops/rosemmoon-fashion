@@ -1178,3 +1178,33 @@ footer:before{left:8%;top:30px}footer:after{right:9%;top:72px;animation-delay:1.
   .collections .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .collections .product-image{height:auto;aspect-ratio:2/3}
 }
+
+/* Final product image override: show the complete outfit in a tall 9:16 frame */
+.collections .category-products .product-image,
+.collections .product-grid .product-image {
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:9/16!important;
+  overflow:hidden!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.collections .category-products .product-image img,
+.collections .product-grid .product-image img {
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  transform:none!important;
+}
+@media(max-width:760px){
+  .collections .category-products .product-image,
+  .collections .product-grid .product-image {
+    height:auto!important;
+    aspect-ratio:9/16!important;
+  }
+}

@@ -30,7 +30,8 @@ const toast=$("#actionToast");let toastTimer;
 function showToast(message){$("#toastMessage").textContent=message;toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),1900)}
 $$(".nav-tab").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
 $$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.openView)));
-filters.addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(b)setFilter(b.dataset.filter)});\nif(typeChips)typeChips.addEventListener("click",e=>{const b=e.target.closest("[data-type]");if(b)setType(b.dataset.type)});
+filters.addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(b)setFilter(b.dataset.filter)});
+if(typeChips)typeChips.addEventListener("click",e=>{const b=e.target.closest("[data-type]");if(b)setType(b.dataset.type)});
 
 const drawer=$("#cartDrawer"),overlay=$("#cartOverlay");
 function openCart(){drawer.classList.add("open");overlay.classList.add("open");drawer.setAttribute("aria-hidden","false")}

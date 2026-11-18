@@ -11,9 +11,8 @@ function showView(view){$$(".view-panel").forEach(p=>p.classList.toggle("active"
 renderProducts();
 const openingScreen=$("#openingScreen");
 function dismissOpeningScreen(){if(!openingScreen||openingScreen.dataset.dismissed==="true")return;openingScreen.dataset.dismissed="true";openingScreen.classList.add("is-leaving");window.setTimeout(()=>openingScreen.remove(),750)}
-if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",()=>window.setTimeout(dismissOpeningScreen,900),{once:true})}else{window.setTimeout(dismissOpeningScreen,900)}
-// Safety fallback: never leave the intro overlay covering the shop.
-window.setTimeout(dismissOpeningScreen,3000);
+// Keep the branded loading screen visible for about five seconds.
+window.setTimeout(dismissOpeningScreen,5000);
 const toast=$("#actionToast");let toastTimer;
 function showToast(message){$("#toastMessage").textContent=message;toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),1900)}
 $(".nav-tab").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));

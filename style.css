@@ -19,3 +19,48 @@ html,body{height:100%;overflow:hidden}body{height:100dvh;display:flex;flex-direc
 
 /* Keep the RoseMmoon logo anchored on the far left */
 .site-header{display:flex;align-items:center;justify-content:space-between}.site-header .brand{order:0!important;margin:0 auto 0 0!important;justify-content:flex-start!important;flex:0 0 70px!important}.site-header nav{order:1!important;margin-left:auto!important}.site-header .header-actions{order:2!important;margin-left:clamp(12px,2vw,28px)!important}@media(max-width:760px){.site-header .brand{flex:0 0 48px!important;margin-right:8px!important}.site-header nav{margin-left:auto!important}.site-header .header-actions{margin-left:8px!important}}
+
+
+/* Correct header layout: match the actual HTML elements */
+.site-header{
+  display:grid!important;
+  grid-template-columns:70px minmax(0,1fr) auto!important;
+  align-items:center!important;
+  column-gap:clamp(12px,2vw,28px)!important;
+}
+.site-header .brand{
+  grid-column:1!important;
+  justify-self:start!important;
+  margin:0!important;
+  width:70px!important;
+  min-width:70px!important;
+  max-width:70px!important;
+  flex:none!important;
+}
+.site-header nav{
+  grid-column:2!important;
+  justify-self:end!important;
+  margin:0!important;
+  min-width:0!important;
+}
+.site-header .bag-button{
+  grid-column:3!important;
+  justify-self:end!important;
+  margin:0!important;
+}
+@media(max-width:760px){
+  .site-header{
+    grid-template-columns:48px minmax(0,1fr) auto!important;
+    column-gap:8px!important;
+  }
+  .site-header .brand{
+    width:48px!important;
+    min-width:48px!important;
+    max-width:48px!important;
+  }
+  .site-header nav{
+    justify-self:end!important;
+    gap:clamp(5px,1.6vw,10px)!important;
+  }
+  .site-header .bag-button{justify-self:end!important}
+}

@@ -923,3 +923,44 @@ footer>p{color:#f5c4d7!important}
   align-self:stretch!important;
   transform:none;
 }
+
+/* Category sidebar: enforce identical row sizing for every category, including Shorts. */
+.collections .category-layout .category-sidebar .category-grid > .category-card{
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:66px!important;
+  min-height:66px!important;
+  max-height:66px!important;
+  flex:0 0 66px!important;
+  align-items:center!important;
+  overflow:hidden!important;
+}
+.collections .category-layout .category-sidebar .category-grid > .category-card .category-icon{
+  width:42px!important;
+  height:42px!important;
+  min-width:42px!important;
+  min-height:42px!important;
+  flex:0 0 42px!important;
+}
+.collections .category-layout .category-sidebar .category-grid > .category-card strong{
+  display:block!important;
+  min-width:0!important;
+  line-height:1.2!important;
+  white-space:nowrap!important;
+}
+@media(max-width:620px){
+  .collections .category-layout .category-sidebar .category-grid > .category-card{
+    height:42px!important;
+    min-height:42px!important;
+    max-height:42px!important;
+    flex:0 0 42px!important;
+    padding:5px!important;
+  }
+  .collections .category-layout .category-sidebar .category-grid > .category-card .category-icon{
+    width:27px!important;
+    height:27px!important;
+    min-width:27px!important;
+    min-height:27px!important;
+    flex:0 0 27px!important;
+  }
+}

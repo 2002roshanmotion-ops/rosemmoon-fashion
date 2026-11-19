@@ -1875,3 +1875,117 @@ button,.button{ -webkit-tap-highlight-color:transparent}
 .button-dark::after{animation:rmButtonShine 3.2s ease-in-out infinite!important}
 .hero-image{animation:rmHeroFloat 6s ease-in-out infinite!important}
 @keyframes rmHeroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
+
+/* ROSEMOON CINEMATIC LOADING INTRO — silk, orbiting light and logo reveal */
+.opening-screen{
+ isolation:isolate!important;overflow:hidden!important;
+ background:radial-gradient(ellipse at 50% 45%,#fffdfb 0%,#f9e9ed 42%,#efd8e1 76%,#e8cbd7 100%)!important;
+}
+.opening-screen::before{
+ content:"";position:absolute;inset:-35%;z-index:-2;pointer-events:none;
+ background:conic-gradient(from 0deg at 50% 50%,transparent 0 18%,rgba(255,255,255,.48) 24%,transparent 31% 48%,rgba(210,153,176,.17) 55%,transparent 62% 80%,rgba(255,255,255,.55) 87%,transparent 94%);
+ filter:blur(26px);animation:rmLoaderAura 12s linear infinite;
+}
+.opening-screen::after{
+ content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:radial-gradient(ellipse at 50% 50%,transparent 24%,rgba(137,71,97,.08) 100%);
+}
+.opening-silk{
+ position:absolute;inset:-45% -70%;z-index:0;pointer-events:none;opacity:.65;
+ background:linear-gradient(112deg,transparent 34%,rgba(255,255,255,.08) 40%,rgba(255,255,255,.72) 47%,rgba(231,180,199,.38) 51%,rgba(255,255,255,.12) 55%,transparent 62%);
+ filter:blur(9px);transform:translateX(-75%) rotate(-8deg);
+ animation:rmSilkPass 3.4s cubic-bezier(.35,0,.25,1) infinite;
+}
+.opening-orbit-ring{
+ position:absolute;left:50%;top:calc(50% - 70px);width:min(68vw,330px);height:min(68vw,330px);
+ border:1px solid rgba(177,119,145,.22);border-radius:50%;pointer-events:none;z-index:1;
+ transform:translate(-50%,-50%) rotate(-22deg);
+ box-shadow:0 0 32px rgba(198,137,164,.12),inset 0 0 25px rgba(255,255,255,.4);
+}
+.opening-orbit-ring::before,.opening-orbit-ring::after{
+ content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:#fff;
+ box-shadow:0 0 8px #fff,0 0 18px #d48ca9,0 0 28px #c49a78;
+}
+.opening-orbit-ring::before{top:12%;left:16%}
+.opening-orbit-ring::after{right:9%;bottom:23%;width:5px;height:5px}
+.orbit-one{animation:rmOrbitSpin 8s linear infinite}
+.orbit-two{width:min(78vw,390px);height:min(78vw,390px);border-style:dashed;border-color:rgba(195,151,119,.2);animation:rmOrbitSpin 16s linear infinite reverse}
+.opening-logo-frame{
+ position:relative!important;z-index:3!important;isolation:isolate;
+ animation:rmLogoStage 1.15s cubic-bezier(.16,.8,.25,1) both;
+}
+.opening-logo-frame::before{
+ content:"";position:absolute;inset:-24px;border-radius:50%;z-index:-1;
+ background:radial-gradient(circle,rgba(255,255,255,.94) 0%,rgba(255,255,255,.54) 36%,rgba(231,182,201,.23) 62%,transparent 73%);
+ filter:blur(8px);animation:rmHaloBreathe 2.6s ease-in-out infinite;
+}
+.opening-logo-frame::after{
+ content:"✦";position:absolute;right:3%;top:0%;z-index:4;color:#fff;font-size:23px;
+ text-shadow:0 0 7px #fff,0 0 17px #d68eac,0 0 28px #c39b79;
+ animation:rmLoaderStar 1.8s ease-in-out infinite;
+}
+.opening-logo{
+ position:relative;z-index:2;
+ animation:rmLogoFloat 3.1s ease-in-out .8s infinite!important;
+ filter:drop-shadow(0 13px 22px rgba(119,63,86,.2)) drop-shadow(0 0 12px rgba(255,255,255,.7))!important;
+}
+.opening-loader-stars{position:absolute;inset:0;z-index:2;pointer-events:none}
+.opening-loader-stars i{position:absolute;color:#fff;font-style:normal;font-size:clamp(13px,2.4vw,23px);
+ text-shadow:0 0 5px #fff,0 0 13px #d58eaa,0 0 22px #c49a78;
+ animation:rmLoaderStar 2s ease-in-out infinite}
+.opening-loader-stars i:nth-child(1){left:19%;top:24%;animation-delay:-.4s}
+.opening-loader-stars i:nth-child(2){left:76%;top:20%;animation-delay:-1.1s}
+.opening-loader-stars i:nth-child(3){left:14%;top:67%;animation-delay:-1.6s}
+.opening-loader-stars i:nth-child(4){left:83%;top:71%;animation-delay:-.8s}
+.opening-loader-stars i:nth-child(5){left:31%;top:80%;animation-delay:-1.3s}
+.opening-loader-stars i:nth-child(6){left:68%;top:83%;animation-delay:-.2s}
+.opening-loader-stars i:nth-child(7){left:9%;top:47%;animation-delay:-1.8s}
+.opening-loader-stars i:nth-child(8){left:91%;top:44%;animation-delay:-.6s}
+.opening-mantra{
+ position:relative;z-index:3;margin:0 0 17px!important;
+ color:#a77b83!important;font:600 8px "DM Sans",sans-serif!important;
+ letter-spacing:.42em!important;text-align:center;
+ animation:rmMantraReveal 1.2s .35s both;
+}
+.opening-screen .opening-progress{
+ position:relative!important;z-index:3;width:min(210px,58vw)!important;height:4px!important;
+ border:1px solid rgba(255,255,255,.75);background:rgba(171,111,137,.14)!important;
+ box-shadow:0 0 0 5px rgba(255,255,255,.23),0 0 24px rgba(190,125,153,.18)!important;
+}
+.opening-screen .opening-progress span#loadingBarFill{
+ background:linear-gradient(90deg,#c88ba4,#e7b9c9,#a95d7c,#d9b28e)!important;
+ box-shadow:0 0 9px #d78eaa,0 0 17px rgba(255,255,255,.8);
+}
+.opening-screen .opening-progress i{
+ position:absolute;top:50%;left:0;width:10px;height:10px;border-radius:50%;
+ transform:translate(-50%,-50%);background:#fff;
+ box-shadow:0 0 5px #fff,0 0 12px #d78eaa,0 0 22px #d78eaa;
+ animation:rmProgressGlimmer 5s linear forwards;
+}
+.opening-screen #loadingStatus{
+ position:relative;z-index:3;margin-top:17px!important;
+ color:#916b79!important;font-size:8px!important;letter-spacing:.2em!important;
+}
+.opening-screen.is-leaving .opening-logo-frame{animation:rmLogoExit .55s ease both}
+.opening-screen.is-leaving .opening-silk{opacity:1;animation:rmSilkExit .65s ease both}
+@keyframes rmLoaderAura{to{transform:rotate(360deg)}}
+@keyframes rmSilkPass{0%{transform:translateX(-75%) rotate(-8deg)}55%,100%{transform:translateX(75%) rotate(-8deg)}}
+@keyframes rmOrbitSpin{to{transform:translate(-50%,-50%) rotate(338deg)}}
+@keyframes rmHaloBreathe{0%,100%{transform:scale(.88);opacity:.55}50%{transform:scale(1.13);opacity:1}}
+@keyframes rmLoaderStar{0%,100%{transform:scale(.55) rotate(0);opacity:.25}45%{transform:scale(1.4) rotate(55deg);opacity:1}70%{transform:scale(.85) rotate(95deg);opacity:.75}}
+@keyframes rmLogoStage{from{opacity:0;transform:translateY(22px) scale(.84);filter:blur(8px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+@keyframes rmLogoFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-7px) scale(1.025)}}
+@keyframes rmMantraReveal{from{opacity:0;letter-spacing:.8em;transform:translateY(8px)}to{opacity:1;letter-spacing:.42em;transform:translateY(0)}}
+@keyframes rmProgressGlimmer{0%{left:0;opacity:0}5%{opacity:1}95%{opacity:1}100%{left:100%;opacity:0}}
+@keyframes rmLogoExit{to{transform:translateY(-15px) scale(1.08);opacity:0;filter:blur(5px)}}
+@keyframes rmSilkExit{to{transform:translateX(130%) rotate(-8deg);opacity:0}}
+@media(max-width:480px){
+ .opening-orbit-ring{top:calc(50% - 65px);width:84vw;height:84vw}
+ .orbit-two{width:94vw;height:94vw}
+ .opening-mantra{font-size:7px!important;letter-spacing:.3em!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .opening-screen::before,.opening-silk,.opening-orbit-ring,.opening-logo-frame::before,.opening-logo-frame::after,
+ .opening-logo,.opening-loader-stars i,.opening-mantra,.opening-screen .opening-progress i{animation:none!important}
+}

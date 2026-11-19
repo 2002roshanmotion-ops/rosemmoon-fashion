@@ -48,7 +48,10 @@ const roseMoonAudio=document.getElementById("roseMoonBackgroundMusic");
 const ROSEMOON_MUSIC_KEY="rosemmoonFashionMusicLinksV1";
 let roseMoonTracks=[],roseMoonTrackIndex=0;
 try{const stored=JSON.parse(localStorage.getItem(ROSEMOON_MUSIC_KEY)||"[]");if(Array.isArray(stored))roseMoonTracks=stored.filter(url=>typeof url==="string"&&url.startsWith("https://"));}catch(e){}
-function playRoseMoonMusic(){if(!roseMoonAudio||!roseMoonTracks.length)return;roseMoonAudio.src=roseMoonTracks[roseMoonTrackIndex%roseMoonTracks.length];roseMoonAudio.volume=.55;roseMoonAudio.play().catch(()=>{});}
+// Prepare the first music track while the 5-second opening screen is visible.
+// Browsers may block audible autoplay until the visitor taps the page.
+if(roseMoonAudio&&roseMoonTracks.length){roseMoonAudio.preload="auto";roseMoonAudio.src=roseMoonTracks[0];roseMoonAudio.load();}
+function playRoseMoonMusic(){if(!roseMoonAudio||!roseMoonTracks.length)return;const next=roseMoonTracks[roseMoonTrackIndex%roseMoonTracks.length];if(roseMoonAudio.src!==next)roseMoonAudio.src=next;roseMoonAudio.volume=.55;roseMoonAudio.play().catch(()=>{});}
 if(roseMoonAudio)roseMoonAudio.addEventListener("ended",()=>{if(!roseMoonTracks.length)return;roseMoonTrackIndex=(roseMoonTrackIndex+1)%roseMoonTracks.length;playRoseMoonMusic();});
 $("[data-open-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.openView)));
 $("[data-open-view]").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.openView==="collections")playRoseMoonMusic()}));

@@ -1856,3 +1856,22 @@ button,.button{ -webkit-tap-highlight-color:transparent}
 @keyframes rmHeroGlitterSweep{0%,12%{transform:translateX(-45%);opacity:0}28%{opacity:1}60%,100%{transform:translateX(45%);opacity:0}}
 @keyframes rmCardGlitterSweep{0%,40%{transform:translateX(-50%);opacity:0}52%{opacity:.9}76%,100%{transform:translateX(50%);opacity:0}}
 @media(prefers-reduced-motion:reduce){.rm-glitter,.hero-image::before,.hero-image::after,.category-card::before,.product-image::after{animation:none!important;opacity:.25}}
+
+
+/* ROSEMOON MOTION OVERRIDE — unmistakable continuous movement */
+.rm-glitter-layer{position:fixed!important;inset:0!important;z-index:999!important;overflow:hidden!important;pointer-events:none!important}
+.rm-glitter{opacity:.55!important;animation:rmStarTravel var(--drift,8s) ease-in-out var(--delay,0s) infinite alternate!important;will-change:transform,opacity}
+@keyframes rmStarTravel{
+ 0%{transform:translate3d(0,0,0) rotate(0deg) scale(.55);opacity:.22}
+ 25%{opacity:1}
+ 50%{transform:translate3d(var(--travel,24px),-30px,0) rotate(100deg) scale(1.45);opacity:.95}
+ 100%{transform:translate3d(calc(var(--travel,24px)*-1),24px,0) rotate(220deg) scale(.7);opacity:.35}
+}
+.hero-image::before{animation:rmHeroGlitterSweep 3.8s ease-in-out infinite!important}
+.hero-image::after{animation:rmGlitterBlink 1.35s ease-in-out infinite!important}
+.category-card::before{animation:rmCardGlitterSweep 4.8s ease-in-out infinite!important}
+.category-card:nth-child(even)::before{animation-delay:1.2s!important}
+.product-image::after{animation:rmGlitterBlink 1.6s ease-in-out infinite!important}
+.button-dark::after{animation:rmButtonShine 3.2s ease-in-out infinite!important}
+.hero-image{animation:rmHeroFloat 6s ease-in-out infinite!important}
+@keyframes rmHeroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}

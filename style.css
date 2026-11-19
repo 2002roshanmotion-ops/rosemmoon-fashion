@@ -1989,3 +1989,28 @@ button,.button{ -webkit-tap-highlight-color:transparent}
  .opening-screen::before,.opening-silk,.opening-orbit-ring,.opening-logo-frame::before,.opening-logo-frame::after,
  .opening-logo,.opening-loader-stars i,.opening-mantra,.opening-screen .opening-progress i{animation:none!important}
 }
+
+
+/* FIX: restore the loading-screen fade transition */
+.opening-screen{
+ opacity:1!important;
+ visibility:visible!important;
+ transition:opacity .9s ease,visibility .9s ease!important;
+}
+.opening-screen.is-leaving{
+ opacity:0!important;
+ visibility:hidden!important;
+ pointer-events:none!important;
+ transition:opacity .9s ease,visibility .9s ease!important;
+}
+.opening-screen.is-leaving .opening-logo-frame{
+ animation:rmLogoExit .65s ease both!important;
+}
+.opening-screen.is-leaving .opening-orbit-ring,
+.opening-screen.is-leaving .opening-loader-stars,
+.opening-screen.is-leaving .opening-mantra,
+.opening-screen.is-leaving .opening-progress,
+.opening-screen.is-leaving #loadingStatus{
+ opacity:0!important;
+ transition:opacity .55s ease!important;
+}

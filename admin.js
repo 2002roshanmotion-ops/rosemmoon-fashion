@@ -56,3 +56,9 @@ $("#productList").addEventListener("click",async e=>{const card=e.target.closest
 $("#searchProducts").addEventListener("input",render);$("#filterCategory").addEventListener("change",render);
 loadCatalog();render();loadHomeImage().then(setupHomePosition);renderCategoryImageCards();
 if(navigator.storage&&navigator.storage.persist){navigator.storage.persist().catch(()=>{});}
+
+const MUSIC_LINKS_KEY="rosemmoonFashionMusicLinksV1";
+function loadMusicLinks(){let links=[];try{links=JSON.parse(localStorage.getItem(MUSIC_LINKS_KEY)||"[]")}catch(e){}document.querySelectorAll("[data-music-track]").forEach(input=>{input.value=links[Number(input.dataset.musicTrack)]||""})}
+$("#saveMusicLinks").addEventListener("click",()=>{const links=[...document.querySelectorAll("[data-music-track]")].map(input=>input.value.trim());if(links.some(url=>url&&!url.startsWith("https://"))){$("#musicStatus").textContent="Please use public HTTPS audio links.";return}localStorage.setItem(MUSIC_LINKS_KEY,JSON.stringify(links));$("#musicStatus").textContent=links.filter(Boolean).length+" music link(s) saved in this browser. Test Start Shopping on this same browser.";toast("Music links saved.")});
+$("#clearMusicLinks").addEventListener("click",()=>{localStorage.removeItem(MUSIC_LINKS_KEY);document.querySelectorAll("[data-music-track]").forEach(input=>input.value="");$("#musicStatus").textContent="Music links cleared from this browser.";toast("Music links cleared.")});
+loadMusicLinks();

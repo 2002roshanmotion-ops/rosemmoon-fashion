@@ -43,7 +43,16 @@ requestAnimationFrame(updateLoadingProgress);window.setTimeout(dismissOpeningScr
 const toast=$("#actionToast");let toastTimer;
 function showToast(message){$("#toastMessage").textContent=message;toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),1900)}
 $$(".nav-tab").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
-$$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.openView)));
+
+const roseMoonAudio=document.getElementById("roseMoonBackgroundMusic");
+const ROSEMOON_MUSIC_KEY="rosemmoonFashionMusicLinksV1";
+let roseMoonTracks=[],roseMoonTrackIndex=0;
+try{const stored=JSON.parse(localStorage.getItem(ROSEMOON_MUSIC_KEY)||"[]");if(Array.isArray(stored))roseMoonTracks=stored.filter(url=>typeof url==="string"&&url.startsWith("https://"));}catch(e){}
+function playRoseMoonMusic(){if(!roseMoonAudio||!roseMoonTracks.length)return;roseMoonAudio.src=roseMoonTracks[roseMoonTrackIndex%roseMoonTracks.length];roseMoonAudio.volume=.55;roseMoonAudio.play().catch(()=>{});}
+if(roseMoonAudio)roseMoonAudio.addEventListener("ended",()=>{if(!roseMoonTracks.length)return;roseMoonTrackIndex=(roseMoonTrackIndex+1)%roseMoonTracks.length;playRoseMoonMusic();});
+$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.openView)));
+$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.openView==="collections")playRoseMoonMusic()}));
+
 categoryGrid.addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(b)setCategory(b.dataset.category)});
 const drawer=$("#cartDrawer"),overlay=$("#cartOverlay");
 function openCart(){drawer.classList.add("open");overlay.classList.add("open");drawer.setAttribute("aria-hidden","false")}

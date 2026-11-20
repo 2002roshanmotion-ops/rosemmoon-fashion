@@ -131,45 +131,7 @@ function closeImagePreview(){lightbox.classList.remove("open");lightbox.setAttri
 grid.addEventListener("click",e=>{const img=e.target.closest(".product-image img");if(!img)return;e.preventDefault();previewImage.src=img.currentSrc||img.src;previewImage.alt=img.alt||"RoseMoon fashion product";previewCaption.textContent=img.alt||"RoseMoon Fashion";lightbox.classList.add("open");lightbox.setAttribute("aria-hidden","false");document.body.classList.add("rm-preview-open")});
 $("#rmCloseImagePreview").addEventListener("click",closeImagePreview);
 
-/* RoseMoon live product search and premium search panel */
-(function(){
- const trigger=$("#rmSearchButton"),backdrop=$("#rmSearchBackdrop"),panel=$("#rmSearchPanel"),input=$("#rmSearchInput"),results=$("#rmSearchResults"),clear=$("#rmSearchClear"),close=$("#rmSearchClose"),label=$("#rmSearchResultLabel"),count=$("#rmSearchResultCount");
- if(!trigger||!backdrop||!panel||!input||!results)return;
- const escapeHTML=value=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
- function openSearch(){backdrop.classList.add("open");backdrop.setAttribute("aria-hidden","false");panel.setAttribute("aria-hidden","false");document.body.classList.add("rm-search-open");requestAnimationFrame(()=>input.focus())}
- function closeSearch(){backdrop.classList.remove("open");backdrop.setAttribute("aria-hidden","true");panel.setAttribute("aria-hidden","true");document.body.classList.remove("rm-search-open");trigger.focus()}
- function showResults(){
-  const term=input.value.trim().toLowerCase();clear.hidden=!term;
-  const matches=products.filter(product=>{
-   const searchable=[product.name,product.desc,product.category,product.tag].join(" ").toLowerCase();
-   return !term||searchable.includes(term);
-  });
-  label.textContent=term?"SEARCH RESULTS":"POPULAR IN ROSEMOON";
-  count.textContent=term?matches.length+" FOUND":matches.length+" STYLES";
-  if(!matches.length){results.innerHTML='<p class="rm-search-empty">No styles found. Try another search.</p>';return}
-  results.innerHTML=matches.slice(0,30).map(product=>'<button class="rm-search-result" type="button" data-search-product="'+Number(product.id)+'"><img src="'+escapeHTML(product.image)+'" alt="" loading="lazy"><span class="rm-search-result-copy"><strong>'+escapeHTML(product.name)+'</strong><small>'+escapeHTML(normalizeCategory(product.category))+'</small><b>Rs. '+Number(product.price||0).toLocaleString("en-IN")+'</b></span></button>').join("");
- }
- trigger.addEventListener("click",openSearch);
- close.addEventListener("click",closeSearch);
- input.addEventListener("input",showResults);
- clear.addEventListener("click",()=>{input.value="";showResults();input.focus()});
- backdrop.addEventListener("click",event=>{if(event.target===backdrop)closeSearch()});
- panel.addEventListener("click",event=>{
-  const chip=event.target.closest("[data-search-term]");
-  if(chip){input.value=chip.dataset.searchTerm;showResults();input.focus();return}
-  const result=event.target.closest("[data-search-product]");
-  if(!result)return;
-  const product=products.find(item=>item.id===Number(result.dataset.searchProduct));
-  if(!product)return;
-  closeSearch();
-  previewImage.src=product.image;
-  previewImage.alt=product.name;
-  previewCaption.textContent=product.name+" · Rs. "+Number(product.price||0).toLocaleString("en-IN");
-  lightbox.classList.add("open");lightbox.setAttribute("aria-hidden","false");document.body.classList.add("rm-preview-open");
- });
- document.addEventListener("keydown",event=>{if(event.key==="Escape"&&backdrop.classList.contains("open"))closeSearch()});
- showResults();
-})();
+
 lightbox.addEventListener("click",e=>{if(e.target===lightbox)closeImagePreview()});
 $("#newsletterForm").addEventListener("submit",e=>{e.preventDefault();$("#newsletterMessage").textContent="Thank you for your interest in RoseMoon.";e.target.reset()});
 

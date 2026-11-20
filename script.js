@@ -96,15 +96,32 @@ const drawer=$("#cartDrawer"),overlay=$("#cartOverlay");
 function openCart(){drawer.classList.add("open");overlay.classList.add("open");drawer.setAttribute("aria-hidden","false")}
 function closeCart(){drawer.classList.remove("open");overlay.classList.remove("open");drawer.setAttribute("aria-hidden","true")}
 $("#openCart").addEventListener("click",openCart);$("#closeCart").addEventListener("click",closeCart);overlay.addEventListener("click",closeCart);
-grid.addEventListener("click",e=>{const b=e.target.closest("[data-id]");if(!b)return;const p=products.find(x=>x.id===Number(b.dataset.id)),found=cart.find(x=>x.id===p.id);if(found)found.qty++;else cart.push({...p,qty:1});renderCart();showToast(p.name+" added to your bag");openCart()});
+grid.addEventListener("click",e=>{if(e.target.closest(".product-image img"))return;const b=e.target.closest("[data-id]");if(!b)return;const p=products.find(x=>x.id===Number(b.dataset.id)),found=cart.find(x=>x.id===p.id);if(found)found.qty++;else cart.push({...p,qty:1});renderCart();showToast(p.name+" added to your bag");openCart()});
 function renderCart(){$("#cartCount").textContent=cart.reduce((n,p)=>n+p.qty,0);$("#cartTotal").textContent="Rs. "+cart.reduce((n,p)=>n+p.price*p.qty,0).toLocaleString("en-IN");$("#cartItems").innerHTML=cart.length?cart.map(p=>`<div class="cart-row"><img src="${p.image}" alt=""><div class="cart-item-details"><strong>${p.name}</strong><small>Rs. ${p.price.toLocaleString("en-IN")} each</small><div class="quantity-control" aria-label="Quantity controls for ${p.name}"><button type="button" data-qty="-1" data-id="${p.id}" aria-label="Decrease ${p.name} quantity">−</button><span>${p.qty}</span><button type="button" data-qty="1" data-id="${p.id}" aria-label="Increase ${p.name} quantity">+</button></div></div><button class="remove-item" data-remove="${p.id}" aria-label="Remove ${p.name}">Remove</button></div>`).join(""):'<p class="empty-cart">Your bag is waiting for something lovely.</p>'}
 $("#cartItems").addEventListener("click",e=>{const qtyButton=e.target.closest("[data-qty]");if(qtyButton){const item=cart.find(p=>p.id===Number(qtyButton.dataset.id));if(item){item.qty+=Number(qtyButton.dataset.qty);if(item.qty<=0)cart=cart.filter(p=>p.id!==item.id);renderCart()}return}const removeButton=e.target.closest("[data-remove]");if(!removeButton)return;cart=cart.filter(p=>p.id!==Number(removeButton.dataset.remove));renderCart()});
 const modal=$("#checkoutModal"),backdrop=$("#checkoutModalBackdrop");
 function openCheckout(){if(!cart.length){$("#orderMethodMessage").textContent="Add an item to your bag first.";return}modal.classList.add("open");backdrop.classList.add("open");modal.setAttribute("aria-hidden","false");backdrop.setAttribute("aria-hidden","false")}
 function closeCheckout(){modal.classList.remove("open");backdrop.classList.remove("open");modal.setAttribute("aria-hidden","true");backdrop.setAttribute("aria-hidden","true")}
 $("#checkoutButton").addEventListener("click",openCheckout);$("#closeCheckoutModal").addEventListener("click",closeCheckout);backdrop.addEventListener("click",closeCheckout);
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCheckout();closeCart()}});
-$$(".order-method").forEach(b=>b.addEventListener("click",()=>{$$(".order-method").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");$("#orderMethodMessage").textContent=b.dataset.channel+" selected. Your bag is ready to share with us.";showToast(b.dataset.channel+" selected")}));
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCheckout();closeCart();closeImagePreview()}});
+const orderForm=$("#roseMoonOrderForm"),orderReady=$("#rmOrderReady"),orderMessage=$("#rmOrderMessage");
+orderForm.addEventListener("submit",e=>{
+ e.preventDefault();
+ if(!cart.length){$("#orderMethodMessage").textContent="Your bag is empty. Add an item before preparing an order.";return}
+ const data=new FormData(orderForm),items=cart.map(p=>"- "+p.name+" × "+p.qty+" — Rs. "+(p.price*p.qty).toLocaleString("en-IN")).join("\\n");
+ const total=cart.reduce((sum,p)=>sum+p.price*p.qty,0);
+ const message=["Hello RoseMoon! I'd like to place an order.","","Customer: "+data.get("customerName"),"Phone: "+data.get("customerPhone"),"Delivery address: "+data.get("deliveryAddress"),"","My items:",items,"","Total: Rs. "+total.toLocaleString("en-IN"),data.get("orderNote")?"Order note: "+data.get("orderNote"):"","Please confirm availability and delivery. Thank you!"].filter(Boolean).join("\\n");
+ orderMessage.value=message;orderReady.hidden=false;$("#orderMethodMessage").textContent="Order details prepared. Copy the message and send it to @smoon991 on TikTok.";
+});
+$("#rmCopyOrder").addEventListener("click",async()=>{
+ orderMessage.focus();orderMessage.select();orderMessage.setSelectionRange(0,orderMessage.value.length);
+ try{await navigator.clipboard.writeText(orderMessage.value);showToast("Order message copied")}catch(err){try{document.execCommand("copy");showToast("Order message copied")}catch(e){showToast("Select and copy your order message")}}
+});
+const lightbox=$("#rmImageLightbox"),previewImage=$("#rmPreviewImage"),previewCaption=$("#rmPreviewCaption");
+function closeImagePreview(){lightbox.classList.remove("open");lightbox.setAttribute("aria-hidden","true");document.body.classList.remove("rm-preview-open");previewImage.removeAttribute("src")}
+grid.addEventListener("click",e=>{const img=e.target.closest(".product-image img");if(!img)return;e.preventDefault();previewImage.src=img.currentSrc||img.src;previewImage.alt=img.alt||"RoseMoon fashion product";previewCaption.textContent=img.alt||"RoseMoon Fashion";lightbox.classList.add("open");lightbox.setAttribute("aria-hidden","false");document.body.classList.add("rm-preview-open")});
+$("#rmCloseImagePreview").addEventListener("click",closeImagePreview);
+lightbox.addEventListener("click",e=>{if(e.target===lightbox)closeImagePreview()});
 $("#newsletterForm").addEventListener("submit",e=>{e.preventDefault();$("#newsletterMessage").textContent="Thank you for your interest in RoseMoon.";e.target.reset()});
 
 

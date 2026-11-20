@@ -2063,3 +2063,7 @@ button,.button{ -webkit-tap-highlight-color:transparent}
 @keyframes crystalTwinkle{0%,100%{opacity:.25;transform:scale(.7) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(18deg)}}
 @keyframes crystalSheen{0%,65%,100%{transform:translateX(-110%)}82%{transform:translateX(110%)}}
 @media(prefers-reduced-motion:reduce){.crystal-player:before,.crystal-orbit,.crystal-gem,.crystal-spark{animation:none!important}}
+
+/* Keep the crystal player hidden until the visitor enters the shop. */
+.crystal-player{display:none}
+body.crystal-player-visible .crystal-player{display:grid}

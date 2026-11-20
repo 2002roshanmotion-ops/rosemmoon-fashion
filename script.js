@@ -46,8 +46,15 @@ $$(".nav-tab").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view
 
 const roseMoonAudio=document.getElementById("roseMoonBackgroundMusic");
 const ROSEMOON_MUSIC_KEY="rosemmoonFashionMusicLinksV1";
+const ROSEMOON_DEFAULT_TRACKS=[
+ "KATSEYE (캣츠아이) Gabriela (Audio) - Music Popers.mp3",
+ "aespa 에스파 'Black Mamba' MV - SMTOWN.mp3",
+ "aespa 에스파 'Next Level' MV - SMTOWN.mp3",
+ "LILI’s FILM [The Movie] - Lilifilm Official.mp3",
+ "Super Shy.mp3"
+].map(name=>encodeURI("https://raw.githubusercontent.com/2002roshanmotion-ops/rosemmoon-fashion/main/music/"+name));
 let roseMoonTracks=[],roseMoonTrackIndex=0;
-try{const stored=JSON.parse(localStorage.getItem(ROSEMOON_MUSIC_KEY)||"[]");if(Array.isArray(stored))roseMoonTracks=stored.filter(url=>typeof url==="string"&&url.startsWith("https://"));}catch(e){}
+try{const saved=localStorage.getItem(ROSEMOON_MUSIC_KEY);if(saved!==null){const stored=JSON.parse(saved);if(Array.isArray(stored))roseMoonTracks=stored.filter(url=>typeof url==="string"&&url.startsWith("https://"));}else{roseMoonTracks=ROSEMOON_DEFAULT_TRACKS;}}catch(e){roseMoonTracks=ROSEMOON_DEFAULT_TRACKS;}
 // Prepare the first music track while the 5-second opening screen is visible.
 // Browsers may block audible autoplay until the visitor taps the page.
 if(roseMoonAudio&&roseMoonTracks.length){roseMoonAudio.preload="auto";roseMoonAudio.src=roseMoonTracks[0];roseMoonAudio.load();}

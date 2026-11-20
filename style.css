@@ -2293,3 +2293,70 @@ body.rm-preview-open{overflow:hidden}
   .site-header .crystal-controls .crystal-play{width:24px!important;height:24px!important;flex-basis:24px}
   .site-header .crystal-track-info strong{font-size:9px!important}
 }
+
+
+/* RoseMoon header refresh: larger brand, roomier bag and complete music deck. */
+.site-header{min-height:104px!important;height:104px!important;padding:8px clamp(14px,4vw,54px)!important;grid-template-columns:78px minmax(0,520px) 82px!important;gap:clamp(10px,2vw,24px)!important}
+.site-header>.brand{width:78px!important;min-width:78px!important;max-width:78px!important;flex:0 0 78px!important}
+.site-header .brand-logo{width:74px!important;height:74px!important;max-width:74px!important;max-height:74px!important}
+.site-header>.crystal-player{width:100%!important;max-width:520px!important;min-height:88px!important;height:88px!important;grid-template-columns:58px minmax(0,1fr)!important;gap:10px!important;padding:8px 13px!important;border-radius:19px!important}
+.site-header .crystal-art{min-height:66px!important}
+.site-header .vinyl-disc{width:56px!important;height:56px!important}
+.site-header .vinyl-label{inset:17px!important}
+.site-header .vinyl-label i{font-size:13px}
+.site-header .crystal-main{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;grid-template-rows:auto auto auto!important;align-content:center;column-gap:10px!important;row-gap:4px!important}
+.site-header .crystal-topline{display:flex!important;grid-column:1/-1;grid-row:1;font-size:7px!important}
+.site-header .crystal-collapse{display:none!important}
+.site-header .crystal-track-info{grid-column:1/-1!important;grid-row:2!important;margin:0!important;min-width:0}
+.site-header .crystal-track-info strong{font-size:14px!important}
+.site-header .crystal-track-info span{display:block!important;font-size:6px!important}
+.site-header .crystal-progress-row{display:grid!important;grid-column:1/-1!important;grid-row:3!important;grid-template-columns:27px minmax(35px,1fr) 27px!important;gap:6px!important;font-size:8px!important;margin:1px 0 0!important}
+.site-header .crystal-progress-row input{display:block!important;min-width:35px;height:12px!important}
+.site-header .crystal-controls{grid-column:2;grid-row:2/4;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:7px!important;margin:0!important}
+.site-header .crystal-controls #crystalPrev,.site-header .crystal-controls #crystalNext{display:grid!important;place-items:center;width:29px;height:29px;border-radius:50%;border:1px solid #e8cad8;background:#fff9;color:#8d4d69}
+.site-header .crystal-controls #crystalPrev svg,.site-header .crystal-controls #crystalNext svg{width:14px;height:14px}
+.site-header .crystal-controls .crystal-play{width:34px!important;height:34px!important;flex:0 0 34px!important}
+.site-header .crystal-volume{display:flex!important;width:82px!important;min-width:82px!important;gap:4px!important;margin-left:2px!important}
+.site-header .crystal-volume input{display:block!important;width:56px!important;min-width:50px!important;height:14px!important}
+.site-header>.bag-button{min-width:78px;min-height:54px;padding:9px 10px!important;border:1px solid #ead3dc!important;border-radius:15px;background:linear-gradient(145deg,#fff,#fbf0f4)!important;box-shadow:0 5px 15px #8d52651a;font-size:12px!important;font-weight:700!important}
+.site-header .bag-button span{width:25px!important;height:25px!important;font-size:11px!important}
+.hero .button-dark{min-height:54px;padding:19px 28px!important;font-size:11px!important;gap:30px!important}
+@media(max-width:760px){
+.site-header{height:94px!important;min-height:94px!important;padding:6px 10px!important;grid-template-columns:62px minmax(0,1fr) 64px!important;gap:6px!important}
+.site-header>.brand{width:62px!important;min-width:62px!important;max-width:62px!important;flex-basis:62px!important}
+.site-header .brand-logo{width:60px!important;height:60px!important;max-width:60px!important;max-height:60px!important}
+.site-header>.crystal-player{height:82px!important;min-height:82px!important;padding:5px 6px!important;grid-template-columns:39px minmax(0,1fr)!important;gap:5px!important}
+.site-header .crystal-art{min-height:58px!important}
+.site-header .vinyl-disc{width:38px!important;height:38px!important}
+.site-header .vinyl-label{inset:12px!important}
+.site-header .crystal-main{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto auto!important;row-gap:2px!important;min-width:0}
+.site-header .crystal-topline{grid-column:1!important;grid-row:1!important;font-size:5px!important;letter-spacing:.1em!important}
+.site-header .crystal-track-info{grid-column:1!important;grid-row:2!important;gap:1px!important}
+.site-header .crystal-track-info strong{font-size:10px!important}
+.site-header .crystal-track-info span{font-size:5px!important}
+.site-header .crystal-progress-row{grid-column:1!important;grid-row:3!important;grid-template-columns:19px minmax(20px,1fr) 19px!important;gap:3px!important;font-size:6px!important}
+.site-header .crystal-progress-row input{min-width:20px!important;height:10px!important}
+.site-header .crystal-controls{grid-column:1!important;grid-row:4!important;justify-content:flex-start!important;gap:4px!important;margin-top:2px!important}
+.site-header .crystal-controls #crystalPrev,.site-header .crystal-controls #crystalNext{width:21px!important;height:21px!important;flex:0 0 21px!important}
+.site-header .crystal-controls #crystalPrev svg,.site-header .crystal-controls #crystalNext svg{width:11px;height:11px}
+.site-header .crystal-controls .crystal-play{width:24px!important;height:24px!important;flex-basis:24px!important}
+.site-header .crystal-controls .crystal-play svg{width:12px;height:12px}
+.site-header .crystal-volume{width:auto!important;min-width:0!important;gap:2px!important;margin-left:1px!important}
+.site-header .crystal-volume svg{width:10px!important;height:10px!important;flex:0 0 10px!important}
+.site-header .crystal-volume input{width:34px!important;min-width:28px!important;height:10px!important}
+.site-header>.bag-button{min-width:60px;min-height:48px;padding:5px!important;font-size:9px!important}
+.site-header .bag-button span{width:21px!important;height:21px!important;margin-left:3px!important}
+}
+@media(max-width:390px){
+.site-header{grid-template-columns:52px minmax(0,1fr) 56px!important;gap:4px!important;padding:5px 7px!important}
+.site-header>.brand{width:52px!important;min-width:52px!important;max-width:52px!important;flex-basis:52px!important}
+.site-header .brand-logo{width:51px!important;height:51px!important}
+.site-header>.crystal-player{height:80px!important;min-height:80px!important;padding:4px!important;grid-template-columns:32px minmax(0,1fr)!important;gap:3px!important}
+.site-header .vinyl-disc{width:31px!important;height:31px!important}
+.site-header .vinyl-label{inset:10px!important}
+.site-header .crystal-controls{gap:2px!important}
+.site-header .crystal-controls #crystalPrev,.site-header .crystal-controls #crystalNext{width:19px!important;height:19px!important;flex-basis:19px!important}
+.site-header .crystal-controls .crystal-play{width:22px!important;height:22px!important;flex-basis:22px!important}
+.site-header .crystal-volume input{width:25px!important;min-width:22px!important}
+.site-header>.bag-button{min-width:53px;font-size:8px!important}
+}

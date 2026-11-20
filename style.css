@@ -2572,3 +2572,10 @@ body.rm-preview-open{overflow:hidden}
 @media(max-width:760px){.crystal-player .crystal-art{width:62px!important;min-height:62px!important}.crystal-player .vinyl-disc{width:56px!important;height:56px!important}.crystal-player .vinyl-label{inset:18px!important}.crystal-player .vinyl-label i{font-size:12px!important}}
 @media(max-width:390px){.crystal-player .crystal-art{width:54px!important;min-height:54px!important}.crystal-player .vinyl-disc{width:48px!important;height:48px!important}.crystal-player .vinyl-label{inset:16px!important}.crystal-player .vinyl-label i{font-size:10px!important}}
 @media(prefers-reduced-motion:reduce){.crystal-player .vinyl-disc{animation:none!important}}
+
+/* RoseMoon add-to-bag flight and bag arrival */
+.bag-button.bag-arrival{animation:roseBagArrival .62s cubic-bezier(.2,.8,.2,1)}
+.bag-button.bag-arrival #cartCount{animation:roseCountPop .62s cubic-bezier(.2,.8,.2,1)}
+@keyframes roseBagArrival{0%,100%{filter:none}35%{filter:drop-shadow(0 0 12px rgba(255,105,165,.9));transform:scale(1)}55%{transform:scale(1.12)}75%{transform:scale(.97)}}
+@keyframes roseCountPop{0%,100%{transform:scale(1)}35%{transform:scale(1.45)}65%{transform:scale(.9)}}
+@media(prefers-reduced-motion:reduce){.bag-button.bag-arrival,.bag-button.bag-arrival #cartCount{animation:none!important}}

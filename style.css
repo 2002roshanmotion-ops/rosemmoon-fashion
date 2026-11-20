@@ -2868,3 +2868,52 @@ body.rm-preview-open{overflow:hidden}
  .rosem-search-hint{font-size:7px;letter-spacing:.12em}
  .rosem-search-status{margin-bottom:10px}
 }
+
+
+/* RoseMoon search belongs in the centre of the top bar — balanced between logo and bag. */
+.site-header{
+ display:grid!important;
+ grid-template-columns:minmax(70px,1fr) minmax(190px,min(38vw,460px)) minmax(94px,1fr)!important;
+ align-items:center!important;
+ column-gap:clamp(10px,2vw,28px)!important;
+}
+.site-header>.brand{grid-column:1!important;justify-self:start!important;margin:0!important;transform:none!important}
+.site-header>.header-search-area{
+ grid-column:2!important;justify-self:center!important;
+ width:100%!important;max-width:460px!important;min-width:0!important;
+ min-height:46px!important;height:46px!important;margin:0!important;
+ padding:0 14px!important;gap:10px!important;border-radius:999px!important;
+}
+.site-header>.header-search-area .rosem-search-icon,
+.site-header>.header-search-area .rosem-search-icon svg{width:19px!important;height:19px!important;flex-basis:19px!important}
+.site-header>.header-search-area input{height:42px!important;font-size:12px!important}
+.site-header>.header-search-area .rosem-search-hint{font-size:7px!important}
+.site-header>.bag-button{grid-column:3!important;justify-self:end!important;transform:translateY(-4px)!important;margin:0!important}
+.site-header>.rosem-search-status{
+ position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;
+ overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;
+}
+@media(max-width:760px){
+ .site-header{
+  grid-template-columns:34px minmax(0,1fr) 76px!important;
+  column-gap:8px!important;padding:0 9px!important;
+ }
+ .site-header>.brand{width:34px!important;min-width:34px!important;max-width:34px!important;flex-basis:34px!important}
+ .site-header>.brand .brand-logo{width:34px!important;height:34px!important;max-width:34px!important;max-height:34px!important}
+ .site-header>.header-search-area{
+  min-height:40px!important;height:40px!important;padding:0 10px!important;gap:7px!important;
+  border-radius:999px!important;max-width:none!important;
+ }
+ .site-header>.header-search-area .rosem-search-icon,
+ .site-header>.header-search-area .rosem-search-icon svg{width:16px!important;height:16px!important;flex-basis:16px!important}
+ .site-header>.header-search-area input{height:36px!important;font-size:10px!important}
+ .site-header>.header-search-area input::placeholder{font-size:9px!important}
+ .site-header>.header-search-area .rosem-search-hint{display:none!important}
+ .site-header>.bag-button{grid-column:3!important;justify-self:end!important;transform:translateY(-4px)!important;margin:0!important}
+}
+@media(max-width:380px){
+ .site-header{grid-template-columns:30px minmax(0,1fr) 72px!important;column-gap:6px!important;padding:0 6px!important}
+ .site-header>.brand,.site-header>.brand .brand-logo{width:30px!important;min-width:30px!important;max-width:30px!important;height:30px!important;max-height:30px!important;flex-basis:30px!important}
+ .site-header>.header-search-area{padding:0 8px!important;gap:5px!important}
+ .site-header>.header-search-area input{font-size:9px!important}
+}

@@ -3008,3 +3008,13 @@ body.crystal-player-visible .site-header>.header-search-area{display:flex!import
  .site-header>.header-search-area{height:40px!important;min-height:40px!important}
  .site-header>.header-search-area input{font-size:16px!important;height:36px!important}
 }
+
+
+/* Prevent iPhone/iOS Safari automatic page zoom when any text field receives focus. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),textarea,select,[contenteditable="true"]{
+ font-size:16px!important;
+}
+input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):focus,textarea:focus,select:focus,[contenteditable="true"]:focus{
+ font-size:16px!important;
+}

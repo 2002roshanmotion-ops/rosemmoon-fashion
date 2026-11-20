@@ -2912,3 +2912,15 @@ body.rm-preview-open{overflow:hidden}
 }
 @media(max-width:390px){.rm-search-trigger{width:39px!important;height:39px!important}.rm-search-panel-head h2{font-size:30px}.rm-search-popular{gap:6px}.rm-search-popular button{padding:7px 9px}}
 @media(prefers-reduced-motion:reduce){.rm-search-trigger,.rm-search-trigger:after,.rm-search-backdrop,.rm-search-panel,.rm-search-close,.rm-search-result,.rm-search-empty:before{transition:none!important;animation:none!important}}
+
+
+/* Search label appears beside the rose-gold lens only after Start Shopping. */
+.rm-search-label{display:none;font:600 10px/1 "DM Sans",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#895461;white-space:nowrap}
+body.crystal-player-visible .rm-search-trigger{width:auto!important;min-width:49px!important;height:43px!important;padding:0 14px!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:9px!important;border-radius:24px!important}
+body.crystal-player-visible .rm-search-label{display:inline-block}
+body.crystal-player-visible .rm-search-lens{width:23px;height:23px;flex:0 0 23px}
+@media(max-width:760px){
+ body.crystal-player-visible .rm-search-trigger{height:39px!important;padding:0 11px!important;gap:7px!important}
+ body.crystal-player-visible .rm-search-lens{width:21px;height:21px;flex-basis:21px}
+ body.crystal-player-visible .rm-search-label{font-size:9px;letter-spacing:.12em}
+}

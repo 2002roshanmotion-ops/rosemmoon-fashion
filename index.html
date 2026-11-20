@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/e5ee25d3-5140-4aec-96d9-c570362e35c7.png">
-  <link rel="stylesheet" href="style.css?v=20261121-search-fully-removed02">
+  <link rel="stylesheet" href="style.css?v=20261121-product-search01">
 </head>
 <body>
   <div class="opening-screen" id="openingScreen" aria-label="Loading RoseMoon Fashion">
@@ -66,6 +66,13 @@
       </aside>
       <div class="category-products">
         <div class="category-products-heading"><p class="eyebrow">THE COLLECTION</p><h2 id="selectedCategoryTitle">Dresses</h2><p>Explore the pieces and find your favourite.</p></div>
+        <div class="rosem-search-area" role="search" aria-label="Search RoseMoon products">
+          <span class="rosem-search-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.7"></circle><path d="m16 16 5 5"></path></svg></span>
+          <input id="productSearchInput" type="search" autocomplete="off" placeholder="Search dresses, tops, pants..." aria-label="Search all RoseMoon products">
+          <button id="clearProductSearch" type="button" aria-label="Clear search" hidden>×</button>
+          <span class="rosem-search-hint">SEARCH</span>
+        </div>
+        <p class="rosem-search-status" id="productSearchStatus" aria-live="polite"></p>
         <div class="product-grid" id="productGrid"></div>
       </div>
       </div>
@@ -114,6 +121,6 @@
     <figure class="rm-image-lightbox-figure"><img id="rmPreviewImage" alt=""><figcaption id="rmPreviewCaption"></figcaption></figure>
   </div>
   <div class="action-toast" id="actionToast" role="status" aria-live="polite"><span class="toast-check">✓</span><span id="toastMessage">Added to your bag</span></div>
-  <script src="script.js?v=20261121-search-fully-removed02"></script>
+  <script src="script.js?v=20261121-product-search01"></script>
 </body>
 </html>

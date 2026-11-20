@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/e5ee25d3-5140-4aec-96d9-c570362e35c7.png">
-  <link rel="stylesheet" href="style.css?v=20261121-categoryfix02">
+  <link rel="stylesheet" href="style.css?v=20261121-orderflow01">
 </head>
 <body>
   <div class="opening-screen" id="openingScreen" aria-label="Loading RoseMoon Fashion">
@@ -89,10 +89,27 @@
   <section class="checkout-modal" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle" aria-hidden="true">
     <button class="checkout-modal-close" id="closeCheckoutModal" aria-label="Close">×</button>
     <div class="modal-flourish">✦</div><p class="eyebrow">A LOVELY CHOICE</p><h2 id="checkoutTitle">How would you like<br><em>to order?</em></h2><p class="checkout-modal-note">Choose your favourite way to get in touch with RoseMoon.</p>
-    <div class="order-method-list"><button type="button" class="order-method" data-channel="WhatsApp"><span class="method-icon whatsapp">◉</span><span><strong>WhatsApp</strong><small>Chat with us on WhatsApp</small></span><span class="method-arrow">↗</span></button><button type="button" class="order-method" data-channel="Instagram DM"><span class="method-icon instagram">◎</span><span><strong>Instagram DM</strong><small>Send us a message on Instagram</small></span><span class="method-arrow">↗</span></button><button type="button" class="order-method" data-channel="TikTok DM"><span class="method-icon tiktok">♪</span><span><strong>TikTok DM</strong><small>Find us on TikTok</small></span><span class="method-arrow">↗</span></button></div>
-    <p id="orderMethodMessage" class="checkout-modal-message">Your selected items will stay in your bag.</p>
+    <form id="roseMoonOrderForm" class="rm-order-form">
+      <label>Your name<input name="customerName" type="text" autocomplete="name" placeholder="Enter your name" required></label>
+      <label>Phone number<input name="customerPhone" type="tel" autocomplete="tel" placeholder="98XXXXXXXX" required></label>
+      <label>Delivery address<textarea name="deliveryAddress" rows="2" autocomplete="street-address" placeholder="Your full delivery address" required></textarea></label>
+      <label>Order note <span>(optional)</span><textarea name="orderNote" rows="2" placeholder="Size, colour or any special request"></textarea></label>
+      <button class="button button-dark rm-prepare-order" type="submit">Prepare My Order ↗</button>
+    </form>
+    <div id="rmOrderReady" class="rm-order-ready" hidden>
+      <p class="checkout-modal-message">Your order message is ready. Copy it, then open TikTok and paste it into a message to RoseMoon.</p>
+      <textarea id="rmOrderMessage" rows="8" readonly aria-label="Your prepared order message"></textarea>
+      <button type="button" class="button button-dark" id="rmCopyOrder">Copy Order Message</button>
+      <a class="rm-tiktok-link" href="https://www.tiktok.com/@smoon991" target="_blank" rel="noopener">Open RoseMoon on TikTok ↗</a>
+    </div>
+    <p id="orderMethodMessage" class="checkout-modal-message">Your bag will stay saved while you contact us.</p>
   </section>
 
+
+  <div class="rm-image-lightbox" id="rmImageLightbox" aria-hidden="true">
+    <button class="rm-image-lightbox-close" id="rmCloseImagePreview" type="button" aria-label="Close image preview">×</button>
+    <figure class="rm-image-lightbox-figure"><img id="rmPreviewImage" alt=""><figcaption id="rmPreviewCaption"></figcaption></figure>
+  </div>
   <section class="crystal-player" id="crystalPlayer" aria-label="RoseMoon crystal music player" style="display:none!important">
     <div class="crystal-player-glow" aria-hidden="true"></div>
     <div class="crystal-art" aria-hidden="true">
@@ -126,6 +143,6 @@
     </div>
   </section>
   <div class="action-toast" id="actionToast" role="status" aria-live="polite"><span class="toast-check">✓</span><span id="toastMessage">Added to your bag</span></div>
-  <script src="script.js?v=20261121-startshoppingfix01"></script>
+  <script src="script.js?v=20261121-orderflow01"></script>
 </body>
 </html>

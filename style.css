@@ -2843,3 +2843,28 @@ body.rm-preview-open{overflow:hidden}
     transform:translate(-12px,-4px)!important;
   }
 }
+
+/* RoseMoon product search area — integrated above the product grid, away from the header and bag. */
+.rosem-search-area{
+ position:relative;display:flex;align-items:center;gap:13px;width:100%;max-width:620px;min-height:58px;
+ margin:24px 0 8px;padding:0 18px;border:1px solid rgba(181,138,98,.52);border-radius:16px;
+ background:linear-gradient(110deg,#fffdfa 0%,#fff6f3 52%,#f8e9e8 100%);
+ box-shadow:0 8px 24px rgba(83,48,54,.07),inset 0 1px 0 #fff;
+ transition:border-color .22s ease,box-shadow .22s ease;
+}
+.rosem-search-area:focus-within{border-color:#ad7180;box-shadow:0 9px 26px rgba(139,77,94,.13),0 0 0 3px rgba(190,139,137,.12),inset 0 1px 0 #fff}
+.rosem-search-icon{width:22px;height:22px;flex:0 0 22px;display:grid;place-items:center}
+.rosem-search-icon svg{width:22px;height:22px;fill:none;stroke:#a76d62;stroke-width:1.8;stroke-linecap:round}
+.rosem-search-area input{width:100%;min-width:0;height:54px;border:0;outline:0;background:transparent;color:#39282f;font:500 13px "DM Sans",sans-serif;letter-spacing:.02em}
+.rosem-search-area input::placeholder{color:#a78b8c}
+.rosem-search-area input::-webkit-search-cancel-button{display:none}
+#clearProductSearch{width:29px;height:29px;flex:0 0 29px;border:1px solid #ead4d1;border-radius:50%;background:#fff;color:#895461;font:22px/1 "DM Sans",sans-serif;cursor:pointer}
+#clearProductSearch[hidden]{display:none}
+.rosem-search-hint{flex:none;color:#a98472;font:600 8px "DM Sans",sans-serif;letter-spacing:.2em}
+.rosem-search-status{min-height:14px;margin:0 0 12px;color:#98777a;font:9px "DM Sans",sans-serif;letter-spacing:.08em}
+@media(max-width:760px){
+ .rosem-search-area{max-width:none;min-height:52px;margin:20px 0 8px;padding:0 13px;gap:10px;border-radius:14px}
+ .rosem-search-area input{height:49px;font-size:12px}
+ .rosem-search-hint{font-size:7px;letter-spacing:.12em}
+ .rosem-search-status{margin-bottom:10px}
+}

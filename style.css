@@ -3002,3 +3002,44 @@ body.crystal-player-visible .site-header>#rmSearchButton .rm-search-label{
  body.crystal-player-visible .site-header>#rmSearchButton{height:39px!important;padding:0 7px!important;gap:5px!important}
  body.crystal-player-visible .site-header>#rmSearchButton .rm-search-label{font-size:8px!important}
 }
+
+
+/* Centre the search control on the actual header/screen axis, not the space between logo and bag. */
+.site-header{position:sticky!important;isolation:isolate!important}
+body.crystal-player-visible .site-header>#rmSearchButton{
+ position:absolute!important;left:50%!important;right:auto!important;top:50%!important;bottom:auto!important;
+ transform:translate(-50%,-50%)!important;
+ width:min(460px,48vw)!important;max-width:460px!important;min-width:0!important;
+ margin:0!important;z-index:3!important;box-sizing:border-box!important;
+ display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+ height:46px!important;padding:0 20px!important;gap:12px!important;
+ align-items:center!important;justify-content:center!important;border-radius:28px!important;
+}
+body.crystal-player-visible .site-header>#rmSearchButton:hover,
+body.crystal-player-visible .site-header>#rmSearchButton:focus-visible{
+ transform:translate(-50%,-50%) scale(1.025)!important;
+}
+body.crystal-player-visible .site-header>#rmSearchButton .rm-search-lens{
+ width:23px!important;height:23px!important;flex:0 0 23px!important;
+}
+body.crystal-player-visible .site-header>#rmSearchButton .rm-search-label{
+ display:inline-block!important;font-size:11px!important;letter-spacing:.16em!important;
+}
+@media(max-width:760px){
+ body.crystal-player-visible .site-header>#rmSearchButton{
+  width:calc(100vw - 160px)!important;max-width:360px!important;min-width:130px!important;
+  height:42px!important;padding:0 10px!important;gap:7px!important;
+ }
+ body.crystal-player-visible .site-header>#rmSearchButton .rm-search-lens{
+  width:20px!important;height:20px!important;flex-basis:20px!important;
+ }
+ body.crystal-player-visible .site-header>#rmSearchButton .rm-search-label{
+  font-size:9px!important;letter-spacing:.1em!important;
+ }
+}
+@media(max-width:390px){
+ body.crystal-player-visible .site-header>#rmSearchButton{
+  width:calc(100vw - 145px)!important;min-width:118px!important;height:39px!important;padding:0 7px!important;gap:5px!important;
+ }
+ body.crystal-player-visible .site-header>#rmSearchButton .rm-search-label{font-size:8px!important}
+}

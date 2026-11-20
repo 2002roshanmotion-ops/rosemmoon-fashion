@@ -59,7 +59,35 @@ try{const saved=localStorage.getItem(ROSEMOON_MUSIC_KEY);if(saved!==null){const 
 // Browsers may block audible autoplay until the visitor taps the page.
 if(roseMoonAudio&&roseMoonTracks.length){roseMoonAudio.preload="auto";roseMoonAudio.src=roseMoonTracks[0];roseMoonAudio.load();}
 function playRoseMoonMusic(){if(!roseMoonAudio||!roseMoonTracks.length)return;const next=roseMoonTracks[roseMoonTrackIndex%roseMoonTracks.length];if(roseMoonAudio.src!==next)roseMoonAudio.src=next;roseMoonAudio.volume=.55;roseMoonAudio.play().catch(()=>{});}
+
 if(roseMoonAudio)roseMoonAudio.addEventListener("ended",()=>{if(!roseMoonTracks.length)return;roseMoonTrackIndex=(roseMoonTrackIndex+1)%roseMoonTracks.length;playRoseMoonMusic();});
+/* Crystal player controls */
+(function(){
+ const player=document.getElementById("crystalPlayer");
+ if(!player||!roseMoonAudio)return;
+ const byId=id=>document.getElementById(id);
+ const playButton=byId("crystalPlay"),seek=byId("crystalSeek"),volume=byId("crystalVolume");
+ const title=byId("crystalTrackName"),status=byId("crystalTrackStatus");
+ const current=byId("crystalCurrentTime"),duration=byId("crystalDuration");
+ const formatTime=value=>{if(!Number.isFinite(value)||value<0)return "0:00";const m=Math.floor(value/60),s=Math.floor(value%60);return m+":"+String(s).padStart(2,"0")};
+ const trackTitle=url=>{try{const file=decodeURIComponent(new URL(url).pathname.split("/").pop()).replace(/\.mp3$/i,"");return file.replace(/\s+-\s+[^-]+$/,"").replace(/\s+/g," ").trim()}catch(e){return "RoseMoon Playlist"}};
+ function updateTrack(){title.textContent=roseMoonTracks.length?trackTitle(roseMoonTracks[roseMoonTrackIndex%roseMoonTracks.length]):"No music available";status.textContent=roseMoonAudio.paused?"ROSEMOON PLAYLIST":"NOW PLAYING";player.classList.toggle("is-playing",!roseMoonAudio.paused)}
+ function updateProgress(){const total=roseMoonAudio.duration||0;current.textContent=formatTime(roseMoonAudio.currentTime);duration.textContent=formatTime(total);if(!seek.matches(":active"))seek.value=total?Math.round(roseMoonAudio.currentTime/total*1000):0}
+ function loadTrack(index,autoplay){if(!roseMoonTracks.length){status.textContent="NO TRACKS FOUND";return}roseMoonTrackIndex=(index+roseMoonTracks.length)%roseMoonTracks.length;roseMoonAudio.src=roseMoonTracks[roseMoonTrackIndex];roseMoonAudio.load();updateTrack();if(autoplay)roseMoonAudio.play().then(updateTrack).catch(()=>{status.textContent="TAP PLAY TO LISTEN"})}
+ playButton.addEventListener("click",()=>{if(!roseMoonTracks.length){status.textContent="NO TRACKS FOUND";return}if(roseMoonAudio.paused){if(!roseMoonAudio.src)loadTrack(roseMoonTrackIndex,false);roseMoonAudio.play().then(updateTrack).catch(()=>{status.textContent="TAP PLAY TO LISTEN"})}else{roseMoonAudio.pause();updateTrack()}});
+ byId("crystalPrev").addEventListener("click",()=>loadTrack(roseMoonTrackIndex-1,true));
+ byId("crystalNext").addEventListener("click",()=>loadTrack(roseMoonTrackIndex+1,true));
+ volume.addEventListener("input",()=>{roseMoonAudio.volume=Number(volume.value)});
+ seek.addEventListener("input",()=>{if(roseMoonAudio.duration)roseMoonAudio.currentTime=Number(seek.value)/1000*roseMoonAudio.duration});
+ byId("crystalCollapse").addEventListener("click",()=>{const minimized=player.classList.toggle("is-minimized");byId("crystalCollapse").textContent=minimized?"+":"−";byId("crystalCollapse").setAttribute("aria-label",minimized?"Expand music player":"Minimize music player")});
+ roseMoonAudio.addEventListener("play",updateTrack);roseMoonAudio.addEventListener("pause",updateTrack);
+ roseMoonAudio.addEventListener("loadedmetadata",updateProgress);roseMoonAudio.addEventListener("timeupdate",updateProgress);
+ roseMoonAudio.addEventListener("ended",()=>{if(roseMoonTracks.length){roseMoonTrackIndex=(roseMoonTrackIndex+1)%roseMoonTracks.length;loadTrack(roseMoonTrackIndex,true)}});
+ roseMoonAudio.addEventListener("error",()=>{status.textContent="TRACK UNAVAILABLE";});
+ if(roseMoonTracks.length){if(!roseMoonAudio.src)roseMoonAudio.src=roseMoonTracks[0];updateTrack()}else updateTrack();
+ volume.value=String(roseMoonAudio.volume||.55);
+ updateProgress();
+})();
 $$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.openView)));
 $$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.openView==="collections")playRoseMoonMusic()}));
 

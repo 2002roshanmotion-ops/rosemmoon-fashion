@@ -2463,3 +2463,24 @@ body.rm-preview-open{overflow:hidden}
  .site-header>.brand{width:52px!important;min-width:52px!important;max-width:52px!important;flex-basis:52px!important}
  .site-header>.brand .brand-logo{width:50px!important;height:50px!important;max-width:50px!important;max-height:50px!important}
 }
+
+
+/* Final header and overlay stacking correction */
+.crystal-player{z-index:19!important}
+.cart-overlay{z-index:100!important}
+.cart-drawer{z-index:101!important}
+@media(min-width:761px){
+ .site-header{height:96px!important;min-height:96px!important}
+ .site-header>.brand{width:88px!important;min-width:88px!important;max-width:88px!important;flex-basis:88px!important;height:88px!important}
+ .site-header>.brand .brand-logo{width:82px!important;height:82px!important;max-width:82px!important;max-height:82px!important}
+}
+@media(max-width:760px){
+ .site-header{height:78px!important;min-height:78px!important;padding:0 8px!important}
+ .site-header>.brand{width:64px!important;min-width:64px!important;max-width:64px!important;flex-basis:64px!important;height:72px!important}
+ .site-header>.brand .brand-logo{width:62px!important;height:62px!important;max-width:62px!important;max-height:62px!important}
+}
+@media(max-width:390px){
+ .site-header{height:74px!important;min-height:74px!important}
+ .site-header>.brand{width:60px!important;min-width:60px!important;max-width:60px!important;flex-basis:60px!important}
+ .site-header>.brand .brand-logo{width:58px!important;height:58px!important;max-width:58px!important;max-height:58px!important}
+}

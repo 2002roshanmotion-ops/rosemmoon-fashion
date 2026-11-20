@@ -2999,3 +2999,12 @@ body.crystal-player-visible .site-header>.header-search-area{display:flex!import
  input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
  textarea,select{font-size:16px!important}
 }
+
+/* Keep the search physically inside the top header bar; reveal it only in Start Shopping. */
+.site-header>.header-search-area{display:none!important;grid-column:2!important;position:relative!important;z-index:35!important;margin:0!important;width:100%!important;max-width:460px!important;min-width:0!important}
+body.crystal-player-visible .site-header>.header-search-area{display:flex!important}
+.site-header>.header-search-area input{font-size:16px!important;min-width:0!important}
+@media(max-width:760px){
+ .site-header>.header-search-area{height:40px!important;min-height:40px!important}
+ .site-header>.header-search-area input{font-size:16px!important;height:36px!important}
+}

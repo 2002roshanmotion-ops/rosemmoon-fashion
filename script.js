@@ -60,7 +60,7 @@ try{const saved=localStorage.getItem(ROSEMOON_MUSIC_KEY);if(saved!==null){const 
 if(roseMoonAudio&&roseMoonTracks.length){roseMoonAudio.preload="auto";roseMoonAudio.src=roseMoonTracks[0];roseMoonAudio.load();}
 function playRoseMoonMusic(){if(!roseMoonAudio||!roseMoonTracks.length)return;const next=roseMoonTracks[roseMoonTrackIndex%roseMoonTracks.length];if(roseMoonAudio.src!==next)roseMoonAudio.src=next;roseMoonAudio.volume=.55;roseMoonAudio.play().catch(()=>{});}
 
-if(roseMoonAudio)roseMoonAudio.addEventListener("ended",()=>{if(!roseMoonTracks.length)return;roseMoonTrackIndex=(roseMoonTrackIndex+1)%roseMoonTracks.length;playRoseMoonMusic();});
+if(roseMoonAudio)roseMoonAudio.addEventListener("ended",()=>{if(document.getElementById("crystalPlayer"))return;if(!roseMoonTracks.length)return;roseMoonTrackIndex=(roseMoonTrackIndex+1)%roseMoonTracks.length;playRoseMoonMusic();});
 /* Crystal player controls */
 (function(){
  const player=document.getElementById("crystalPlayer");

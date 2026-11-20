@@ -2797,53 +2797,6 @@ body.rm-preview-open{overflow:hidden}
 .add-button.rm-added-flash{animation:none!important;filter:none!important;box-shadow:none!important}
 
 
-/* Give the outlined shopping bag button the same breathing room from the header rule as the logo. */
-.site-header>#openCart{
-  align-self:center!important;
-  transform:translateY(-4px)!important;
-  margin-bottom:0!important;
-}
-
-
-/* Give the outlined Bag button a measured inset from the header's right edge. */
-.site-header>#openCart{
-  right:8px!important;
-}
-
-
-/* Final mobile header inset: keep the full Bag outline comfortably inside the bar. */
-@media(max-width:760px){
-  .site-header>#openCart{
-    right:0!important;
-    margin-right:10px!important;
-  }
-}
-
-
-/* Small left adjustment for the outlined Bag button; preserve its vertical alignment. */
-.site-header>#openCart{
-  margin-right:12px!important;
-}
-@media(max-width:760px){
-  .site-header>#openCart{
-    margin-right:14px!important;
-  }
-}
-
-
-/* Final position lock: shift the complete outlined Bag control left inside the header. */
-.site-header>#openCart{
-  position:relative!important;
-  right:auto!important;
-  margin-right:0!important;
-  transform:translate(-14px,-4px)!important;
-}
-@media(max-width:760px){
-  .site-header>#openCart{
-    transform:translate(-12px,-4px)!important;
-  }
-}
-
 /* RoseMoon product search area — integrated above the product grid, away from the header and bag. */
 .rosem-search-area{
  position:relative;display:flex;align-items:center;gap:13px;width:100%;max-width:620px;min-height:58px;
@@ -2870,50 +2823,112 @@ body.rm-preview-open{overflow:hidden}
 }
 
 
-/* RoseMoon search belongs in the centre of the top bar — balanced between logo and bag. */
+/* RoseMoon header: one responsive three-column layout.
+   Equal side tracks keep the search field on the true horizontal centre. */
 .site-header{
  display:grid!important;
- grid-template-columns:minmax(70px,1fr) minmax(190px,min(38vw,460px)) minmax(94px,1fr)!important;
+ grid-template-columns:minmax(0,1fr) minmax(0,min(460px,42vw)) minmax(0,1fr)!important;
  align-items:center!important;
- column-gap:clamp(10px,2vw,28px)!important;
+ column-gap:clamp(6px,1.5vw,22px)!important;
+ height:clamp(62px,8vw,86px)!important;
+ min-height:62px!important;
+ padding:0 clamp(8px,2.2vw,32px)!important;
 }
-.site-header>.brand{grid-column:1!important;justify-self:start!important;margin:0!important;transform:none!important}
+.site-header>.brand{
+ grid-column:1!important;justify-self:start!important;align-self:center!important;
+ display:flex!important;align-items:center!important;justify-content:flex-start!important;
+ width:auto!important;min-width:0!important;max-width:100%!important;flex:none!important;
+ margin:0!important;transform:none!important;
+}
+.site-header>.brand .brand-logo{
+ display:block!important;width:clamp(38px,6vw,58px)!important;
+ height:clamp(38px,6vw,58px)!important;max-width:100%!important;max-height:100%!important;
+ object-fit:contain!important;flex:none!important;
+}
 .site-header>.header-search-area{
- grid-column:2!important;justify-self:center!important;
+ grid-column:2!important;justify-self:center!important;align-self:center!important;
  width:100%!important;max-width:460px!important;min-width:0!important;
- min-height:46px!important;height:46px!important;margin:0!important;
- padding:0 14px!important;gap:10px!important;border-radius:999px!important;
+ min-height:clamp(38px,5vw,46px)!important;height:clamp(38px,5vw,46px)!important;
+ margin:0!important;padding:0 clamp(8px,1.1vw,14px)!important;
+ gap:clamp(5px,1vw,10px)!important;border-radius:999px!important;
 }
 .site-header>.header-search-area .rosem-search-icon,
-.site-header>.header-search-area .rosem-search-icon svg{width:19px!important;height:19px!important;flex-basis:19px!important}
-.site-header>.header-search-area input{height:42px!important;font-size:12px!important}
-.site-header>.header-search-area .rosem-search-hint{font-size:7px!important}
-.site-header>.bag-button{grid-column:3!important;justify-self:end!important;transform:translateY(-4px)!important;margin:0!important}
+.site-header>.header-search-area .rosem-search-icon svg{
+ width:clamp(15px,1.6vw,19px)!important;height:clamp(15px,1.6vw,19px)!important;
+ flex:0 0 clamp(15px,1.6vw,19px)!important;
+}
+.site-header>.header-search-area input{
+ min-width:0!important;width:100%!important;height:100%!important;
+ font-size:clamp(9px,.85vw,12px)!important;
+}
+.site-header>.header-search-area .rosem-search-hint{
+ flex:none!important;font-size:clamp(6px,.5vw,7px)!important;
+}
+.site-header>.bag-button{
+ grid-column:3!important;justify-self:end!important;align-self:center!important;
+ display:inline-flex!important;flex-direction:row!important;flex-wrap:nowrap!important;
+ align-items:center!important;justify-content:center!important;gap:clamp(3px,.45vw,6px)!important;
+ width:auto!important;min-width:0!important;max-width:100%!important;
+ margin:0!important;padding:6px clamp(5px,.8vw,12px)!important;
+ position:relative!important;right:auto!important;top:auto!important;
+ transform:none!important;white-space:nowrap!important;line-height:1!important;
+ font-size:clamp(8px,.8vw,11px)!important;letter-spacing:.08em!important;
+}
+.site-header>.bag-button svg{
+ display:block!important;width:clamp(15px,1.6vw,19px)!important;
+ height:clamp(15px,1.6vw,19px)!important;flex:0 0 auto!important;
+}
+.site-header>.bag-button .bag-label{
+ display:inline!important;width:auto!important;height:auto!important;
+ min-width:0!important;margin:0!important;padding:0!important;
+ border:0!important;border-radius:0!important;background:transparent!important;
+ font:inherit!important;line-height:1!important;
+}
+.site-header>.bag-button #cartCount{
+ display:inline-grid!important;place-items:center!important;
+ width:clamp(17px,1.8vw,22px)!important;height:clamp(17px,1.8vw,22px)!important;
+ min-width:clamp(17px,1.8vw,22px)!important;margin:0!important;padding:0!important;
+ border-radius:50%!important;background:var(--pink)!important;
+ font-size:clamp(8px,.8vw,10px)!important;line-height:1!important;letter-spacing:0!important;
+}
 .site-header>.rosem-search-status{
- position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;
- overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;
+ position:absolute!important;width:1px!important;height:1px!important;padding:0!important;
+ margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;
+ white-space:nowrap!important;border:0!important;
 }
 @media(max-width:760px){
  .site-header{
-  grid-template-columns:34px minmax(0,1fr) 76px!important;
-  column-gap:8px!important;padding:0 9px!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,min(42vw,460px)) minmax(0,1fr)!important;
+  column-gap:clamp(5px,1.5vw,10px)!important;padding:0 clamp(6px,2.5vw,16px)!important;
+  height:62px!important;min-height:62px!important;
  }
- .site-header>.brand{width:34px!important;min-width:34px!important;max-width:34px!important;flex-basis:34px!important}
- .site-header>.brand .brand-logo{width:34px!important;height:34px!important;max-width:34px!important;max-height:34px!important}
+ .site-header>.brand .brand-logo{
+  width:clamp(38px,11vw,48px)!important;height:clamp(38px,11vw,48px)!important;
+ }
  .site-header>.header-search-area{
-  min-height:40px!important;height:40px!important;padding:0 10px!important;gap:7px!important;
-  border-radius:999px!important;max-width:none!important;
+  min-height:40px!important;height:40px!important;padding:0 clamp(7px,2vw,10px)!important;
+  gap:clamp(4px,1.5vw,7px)!important;
  }
  .site-header>.header-search-area .rosem-search-icon,
- .site-header>.header-search-area .rosem-search-icon svg{width:16px!important;height:16px!important;flex-basis:16px!important}
- .site-header>.header-search-area input{height:36px!important;font-size:10px!important}
- .site-header>.header-search-area input::placeholder{font-size:9px!important}
+ .site-header>.header-search-area .rosem-search-icon svg{
+  width:16px!important;height:16px!important;flex-basis:16px!important;
+ }
+ .site-header>.header-search-area input{height:36px!important;font-size:clamp(9px,2.6vw,11px)!important}
+ .site-header>.header-search-area input::placeholder{font-size:clamp(8px,2.4vw,10px)!important}
  .site-header>.header-search-area .rosem-search-hint{display:none!important}
- .site-header>.bag-button{grid-column:3!important;justify-self:end!important;transform:translateY(-4px)!important;margin:0!important}
+ .site-header>.bag-button{
+  gap:4px!important;padding:6px 5px!important;font-size:9px!important;
+  letter-spacing:.04em!important;transform:none!important;
+ }
+ .site-header>.bag-button svg{width:16px!important;height:16px!important}
+ .site-header>.bag-button #cartCount{width:18px!important;height:18px!important;min-width:18px!important;font-size:9px!important}
 }
-@media(max-width:380px){
- .site-header{grid-template-columns:30px minmax(0,1fr) 72px!important;column-gap:6px!important;padding:0 6px!important}
- .site-header>.brand,.site-header>.brand .brand-logo{width:30px!important;min-width:30px!important;max-width:30px!important;height:30px!important;max-height:30px!important;flex-basis:30px!important}
- .site-header>.header-search-area{padding:0 8px!important;gap:5px!important}
+@media(max-width:360px){
+ .site-header{column-gap:5px!important;padding:0 6px!important}
+ .site-header>.brand .brand-logo{width:36px!important;height:36px!important}
+ .site-header>.header-search-area{padding:0 7px!important;gap:4px!important}
  .site-header>.header-search-area input{font-size:9px!important}
+ .site-header>.bag-button{gap:3px!important;padding:5px 4px!important;font-size:8px!important}
+ .site-header>.bag-button svg{width:15px!important;height:15px!important}
+ .site-header>.bag-button #cartCount{width:16px!important;height:16px!important;min-width:16px!important;font-size:8px!important}
 }

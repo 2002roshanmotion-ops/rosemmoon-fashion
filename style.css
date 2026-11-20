@@ -2397,3 +2397,53 @@ body.rm-preview-open{overflow:hidden}
   .site-header>.bag-button .bag-label{font-size:8px!important}
   .site-header>.bag-button #cartCount{width:18px!important;height:18px!important;min-width:18px!important;flex-basis:18px!important;font-size:8px!important}
 }
+
+/* Dock the music player near the bottom; cart overlay and drawer must cover it. */
+.site-header{grid-template-columns:78px minmax(0,1fr) 82px!important}
+.site-header>.brand{grid-column:1!important;grid-row:1!important}
+.site-header>.bag-button{grid-column:3!important;grid-row:1!important}
+.site-header>.crystal-player{
+  position:fixed!important;left:auto!important;top:auto!important;right:18px!important;bottom:18px!important;
+  z-index:19!important;width:min(410px,calc(100vw - 36px))!important;max-width:410px!important;
+  min-height:118px!important;height:auto!important;max-height:none!important;
+  grid-template-columns:68px minmax(0,1fr)!important;padding:10px 12px!important;
+  box-shadow:0 14px 42px rgba(91,42,68,.22),inset 0 1px 0 rgba(255,255,255,.95)!important;
+}
+.site-header>.crystal-player .crystal-art{min-height:70px!important}
+.site-header>.crystal-player .vinyl-disc{width:58px!important;height:58px!important}
+.site-header>.crystal-player .vinyl-label{inset:18px!important}
+.site-header>.crystal-player .crystal-main{grid-template-columns:minmax(0,1fr) auto!important;grid-template-rows:auto auto auto!important}
+.site-header>.crystal-player .crystal-controls{grid-column:2!important;grid-row:2/4!important;justify-content:flex-end!important}
+.site-header>.crystal-player .crystal-progress-row{grid-column:1!important;grid-row:3!important}
+.site-header>.crystal-player .crystal-track-info{grid-column:1!important;grid-row:2!important}
+.cart-overlay{z-index:100!important}
+.cart-drawer{z-index:101!important}
+@media(max-width:760px){
+ .site-header{grid-template-columns:62px minmax(0,1fr) 64px!important}
+ .site-header>.crystal-player{
+   right:10px!important;bottom:10px!important;left:auto!important;top:auto!important;
+   width:min(340px,calc(100vw - 20px))!important;max-width:340px!important;
+   min-height:100px!important;height:auto!important;padding:7px 9px!important;
+   grid-template-columns:48px minmax(0,1fr)!important;
+ }
+ .site-header>.crystal-player .crystal-art{min-height:58px!important}
+ .site-header>.crystal-player .vinyl-disc{width:43px!important;height:43px!important}
+ .site-header>.crystal-player .vinyl-label{inset:14px!important}
+ .site-header>.crystal-player .crystal-main{grid-template-columns:minmax(0,1fr) auto!important;grid-template-rows:auto auto auto!important;row-gap:2px!important}
+ .site-header>.crystal-player .crystal-topline{grid-column:1/-1!important;grid-row:1!important}
+ .site-header>.crystal-player .crystal-track-info{grid-column:1!important;grid-row:2!important}
+ .site-header>.crystal-player .crystal-progress-row{grid-column:1!important;grid-row:3!important}
+ .site-header>.crystal-player .crystal-controls{grid-column:2!important;grid-row:2/4!important;justify-content:flex-end!important;gap:4px!important}
+ .site-header>.crystal-player .crystal-controls #crystalPrev,.site-header>.crystal-player .crystal-controls #crystalNext{width:22px!important;height:22px!important;flex-basis:22px!important}
+ .site-header>.crystal-player .crystal-controls .crystal-play{width:25px!important;height:25px!important;flex-basis:25px!important}
+ .site-header>.crystal-player .crystal-volume{display:flex!important}
+}
+@media(max-width:390px){
+ .site-header>.crystal-player{right:8px!important;bottom:8px!important;width:min(320px,calc(100vw - 16px))!important;min-height:94px!important;grid-template-columns:40px minmax(0,1fr)!important;padding:6px!important}
+ .site-header>.crystal-player .vinyl-disc{width:36px!important;height:36px!important}
+ .site-header>.crystal-player .vinyl-label{inset:12px!important}
+ .site-header>.crystal-player .crystal-controls{gap:2px!important}
+ .site-header>.crystal-player .crystal-controls #crystalPrev,.site-header>.crystal-player .crystal-controls #crystalNext{width:19px!important;height:19px!important;flex-basis:19px!important}
+ .site-header>.crystal-player .crystal-controls .crystal-play{width:22px!important;height:22px!important;flex-basis:22px!important}
+ .site-header>.crystal-player .crystal-volume input{width:24px!important;min-width:20px!important}
+}

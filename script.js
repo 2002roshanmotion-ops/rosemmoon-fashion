@@ -60,8 +60,8 @@ try{const saved=localStorage.getItem(ROSEMOON_MUSIC_KEY);if(saved!==null){const 
 if(roseMoonAudio&&roseMoonTracks.length){roseMoonAudio.preload="auto";roseMoonAudio.src=roseMoonTracks[0];roseMoonAudio.load();}
 function playRoseMoonMusic(){if(!roseMoonAudio||!roseMoonTracks.length)return;const next=roseMoonTracks[roseMoonTrackIndex%roseMoonTracks.length];if(roseMoonAudio.src!==next)roseMoonAudio.src=next;roseMoonAudio.volume=.55;roseMoonAudio.play().catch(()=>{});}
 if(roseMoonAudio)roseMoonAudio.addEventListener("ended",()=>{if(!roseMoonTracks.length)return;roseMoonTrackIndex=(roseMoonTrackIndex+1)%roseMoonTracks.length;playRoseMoonMusic();});
-$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.openView)));
-$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.openView==="collections")playRoseMoonMusic()}));
+$$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.openView)));
+$$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.openView==="collections")playRoseMoonMusic()}));
 
 categoryGrid.addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(b)setCategory(b.dataset.category)});
 const drawer=$("#cartDrawer"),overlay=$("#cartOverlay");

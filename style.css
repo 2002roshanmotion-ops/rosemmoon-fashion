@@ -2983,3 +2983,19 @@ body.rm-preview-open{overflow:hidden}
 /* Keep product search hidden on the welcome screen; reveal it only in Start Shopping. */
 .site-header>.header-search-area{display:none!important}
 body.crystal-player-visible .site-header>.header-search-area{display:flex!important}
+
+
+/* Search belongs to the shop view, not the landing-page header. */
+.collections>.rosem-search-area{
+ width:min(620px,100%);max-width:620px;margin:0 auto 8px;
+}
+.collections>.rosem-search-status{
+ width:min(620px,100%);margin:0 auto 14px;
+}
+@media(max-width:760px){
+ .collections>.rosem-search-area{margin:0 auto 8px;min-height:54px}
+ .collections>.rosem-search-area input{font-size:16px!important;-webkit-text-size-adjust:100%}
+ /* iOS Safari zooms text fields smaller than 16px when they receive focus. */
+ input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+ textarea,select{font-size:16px!important}
+}

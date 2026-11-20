@@ -2087,3 +2087,27 @@ body.crystal-player-visible .crystal-player{display:grid}
 .collections .category-layout .category-sidebar #categoryGrid > button.category-card .category-icon::after{
   pointer-events:none!important;
 }
+
+
+/* RoseMoon image preview and customer checkout journey */
+.product-card .product-image img{cursor:zoom-in}
+.rm-image-lightbox{position:fixed;inset:0;z-index:12000;display:flex;align-items:center;justify-content:center;padding:clamp(14px,3vw,34px);background:rgba(24,12,19,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .24s ease,visibility .24s ease}
+.rm-image-lightbox.open{opacity:1;visibility:visible;pointer-events:auto}
+.rm-image-lightbox-figure{display:flex;flex-direction:column;align-items:center;gap:12px;max-width:96vw;max-height:94vh;margin:0}
+.rm-image-lightbox-figure img{display:block;max-width:94vw;max-height:84vh;width:auto;height:auto;object-fit:contain;border-radius:10px;box-shadow:0 24px 90px #0008}
+.rm-image-lightbox-figure figcaption{color:#fff;font:500 12px "DM Sans",sans-serif;letter-spacing:.08em;text-align:center}
+.rm-image-lightbox-close{position:absolute;top:16px;right:20px;width:44px;height:44px;border:1px solid #ffffff66;border-radius:50%;background:#ffffff18;color:white;font-size:30px;line-height:1;cursor:pointer}
+body.rm-preview-open{overflow:hidden}
+.rm-order-form{display:grid;gap:12px;margin:20px 0 12px;text-align:left}
+.rm-order-form label{display:grid;gap:6px;color:#704b5b;font:600 11px "DM Sans",sans-serif;letter-spacing:.04em}
+.rm-order-form label span{display:inline;color:#a88794;font-weight:400}
+.rm-order-form input,.rm-order-form textarea,.rm-order-ready textarea{box-sizing:border-box;width:100%;border:1px solid #ead5df;border-radius:10px;background:#fffdfd;padding:11px 12px;color:#4c2c3d;font:400 13px "DM Sans",sans-serif;outline:none}
+.rm-order-form input:focus,.rm-order-form textarea:focus,.rm-order-ready textarea:focus{border-color:#c77ca2;box-shadow:0 0 0 3px #c77ca21c}
+.rm-order-form textarea,.rm-order-ready textarea{resize:vertical}
+.rm-prepare-order{width:100%;margin-top:4px}
+.rm-order-ready{display:grid;gap:10px;margin:14px 0}
+.rm-order-ready[hidden]{display:none}
+.rm-order-ready textarea{background:#fff;line-height:1.5}
+.rm-order-ready .button{width:100%}
+.rm-tiktok-link{display:block;padding:12px;border:1px solid #e8cbd8;border-radius:10px;color:#8e4d6e;text-decoration:none;font:600 12px "DM Sans",sans-serif;text-align:center}
+.rm-tiktok-link:hover{background:#faedf2}

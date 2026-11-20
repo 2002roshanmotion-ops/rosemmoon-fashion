@@ -2809,3 +2809,12 @@ body.rm-preview-open{overflow:hidden}
 .site-header>#openCart{
   right:8px!important;
 }
+
+
+/* Final mobile header inset: keep the full Bag outline comfortably inside the bar. */
+@media(max-width:760px){
+  .site-header>#openCart{
+    right:0!important;
+    margin-right:10px!important;
+  }
+}

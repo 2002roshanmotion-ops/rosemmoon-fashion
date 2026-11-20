@@ -89,7 +89,7 @@ if(roseMoonAudio)roseMoonAudio.addEventListener("ended",()=>{if(document.getElem
  updateProgress();
 })();
 $$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.openView)));
-$$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.openView==="collections")playRoseMoonMusic()}));
+$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.openView==="collections"){document.body.classList.add("crystal-player-visible");playRoseMoonMusic()}}));
 
 categoryGrid.addEventListener("click",e=>{const b=e.target.closest("[data-category]");if(b)setCategory(b.dataset.category)});
 const drawer=$("#cartDrawer"),overlay=$("#cartOverlay");

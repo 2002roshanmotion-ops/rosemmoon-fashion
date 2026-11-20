@@ -2579,3 +2579,24 @@ body.rm-preview-open{overflow:hidden}
 @keyframes roseBagArrival{0%,100%{filter:none}35%{filter:drop-shadow(0 0 12px rgba(255,105,165,.9));transform:scale(1)}55%{transform:scale(1.12)}75%{transform:scale(.97)}}
 @keyframes roseCountPop{0%,100%{transform:scale(1)}35%{transform:scale(1.45)}65%{transform:scale(.9)}}
 @media(prefers-reduced-motion:reduce){.bag-button.bag-arrival,.bag-button.bag-arrival #cartCount{animation:none!important}}
+
+
+/* RoseMoon single, polished product-to-bag flight */
+.rm-bag-flight{
+ position:fixed;z-index:10050;pointer-events:none;overflow:visible;
+ border-radius:16px;isolation:isolate;
+ filter:drop-shadow(0 12px 24px rgba(132,55,86,.32));
+ will-change:transform,opacity;
+}
+.rm-bag-flight>img{
+ display:block;width:100%;height:100%;object-fit:cover;border-radius:16px;
+ border:2px solid rgba(255,248,251,.95);
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);
+}
+.rm-bag-flight-sparkle{
+ position:absolute;right:-12px;top:-15px;color:#fff3c9;font-size:25px;
+ text-shadow:0 0 7px #fff,0 0 17px #e89dbd,0 0 27px #d77a9e;
+ animation:rmFlightSparkle .55s ease-in-out infinite alternate;
+}
+@keyframes rmFlightSparkle{from{transform:scale(.7) rotate(0deg);opacity:.65}to{transform:scale(1.25) rotate(35deg);opacity:1}}
+@media(prefers-reduced-motion:reduce){.rm-bag-flight,.rm-bag-flight-sparkle{animation:none!important}}

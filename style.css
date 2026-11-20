@@ -3140,3 +3140,7 @@ body.crystal-player-visible .site-header>#rmSearchButton .rm-search-label{
  .site-header{gap:9px!important}
  .site-header>#rmSearchButton{margin-right:6px!important}
 }
+
+
+/* Search feature removed from the storefront header. */
+.site-header>#rmSearchButton,.rm-search-trigger,.rm-search-backdrop,.rm-search-panel{display:none!important}

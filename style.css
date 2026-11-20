@@ -2503,3 +2503,37 @@ body.rm-preview-open{overflow:hidden}
   width:min(390px,calc(100vw - 20px))!important;
  }
 }
+
+
+/* Final override: player is inside the sticky header, so target that selector too. */
+.site-header>.crystal-player{
+ position:fixed!important;
+ left:50%!important;
+ right:auto!important;
+ top:auto!important;
+ bottom:12px!important;
+ transform:translateX(-50%)!important;
+ z-index:19!important;
+ width:min(390px,calc(100vw - 24px))!important;
+ max-width:390px!important;
+}
+@media(max-width:760px){
+ .site-header>.crystal-player{
+  left:50%!important;
+  right:auto!important;
+  bottom:8px!important;
+  transform:translateX(-50%)!important;
+  width:min(390px,calc(100vw - 20px))!important;
+  max-width:390px!important;
+ }
+}
+@media(max-width:390px){
+ .site-header>.crystal-player{
+  left:50%!important;
+  right:auto!important;
+  bottom:8px!important;
+  transform:translateX(-50%)!important;
+  width:calc(100vw - 16px)!important;
+  max-width:374px!important;
+ }
+}

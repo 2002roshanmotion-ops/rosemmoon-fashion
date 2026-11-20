@@ -19,3 +19,12 @@
 .music-manager-actions{display:flex;gap:9px;margin-top:15px}#musicStatus{display:block;margin-top:11px;color:#806f73;font-size:11px;line-height:1.5}
 
 .music-track-row{min-width:0}.music-track-input{display:flex;gap:6px;min-width:0}.music-track-input input{flex:1;width:100%;min-width:0}.music-track-input button{width:36px;flex:0 0 36px;border:1px solid #ead8de;border-radius:9px;background:#fff;color:#a64f6c;font-size:21px;cursor:pointer}
+
+/* Clear section-by-section admin navigation and consistent panel rhythm */
+.admin-section-nav{position:sticky;top:78px;z-index:4;display:flex;gap:8px;align-items:center;overflow-x:auto;padding:12px 14px;margin:0 0 25px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.94);box-shadow:0 8px 24px rgba(80,42,55,.05);scrollbar-width:thin}
+.admin-section-nav a{flex:0 0 auto;padding:9px 13px;border:1px solid #f0dfe4;border-radius:999px;background:#fff8fa;color:var(--rose);font-size:10px;font-weight:700;letter-spacing:.04em;text-decoration:none;white-space:nowrap;transition:background .2s,color .2s,border-color .2s}
+.admin-section-nav a:hover,.admin-section-nav a:focus-visible{background:var(--rose);border-color:var(--rose);color:#fff;outline:none}
+#overviewSection,#productSection,#homeImageSection,#categoryImageSection,#musicManager{scroll-margin-top:155px}
+.stats{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-bottom:25px}
+.home-image-manager,.category-image-manager,.music-manager{scroll-margin-top:155px}
+@media(max-width:520px){.admin-section-nav{top:66px;margin:0 -2px 20px;padding:9px;gap:7px}.admin-section-nav a{padding:8px 11px;font-size:9px}#overviewSection,#productSection,#homeImageSection,#categoryImageSection,#musicManager{scroll-margin-top:125px}}

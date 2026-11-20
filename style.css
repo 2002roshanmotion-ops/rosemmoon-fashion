@@ -2067,3 +2067,23 @@ button,.button{ -webkit-tap-highlight-color:transparent}
 /* Keep the crystal player hidden until the visitor enters the shop. */
 .crystal-player{display:none}
 body.crystal-player-visible .crystal-player{display:grid}
+
+
+/* Reliable category tapping: the full row is the hit target on touch and desktop. */
+.collections .category-layout .category-sidebar #categoryGrid > button.category-card{
+  position:relative!important;
+  z-index:2!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:rgba(190,105,143,.16);
+  cursor:pointer!important;
+}
+.collections .category-layout .category-sidebar #categoryGrid > button.category-card > *{
+  pointer-events:none!important;
+}
+.collections .category-layout .category-sidebar #categoryGrid > button.category-card::before,
+.collections .category-layout .category-sidebar #categoryGrid > button.category-card::after,
+.collections .category-layout .category-sidebar #categoryGrid > button.category-card .category-icon::before,
+.collections .category-layout .category-sidebar #categoryGrid > button.category-card .category-icon::after{
+  pointer-events:none!important;
+}

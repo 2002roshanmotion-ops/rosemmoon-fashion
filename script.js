@@ -38,9 +38,9 @@ function collectSearchValues(value,key=""){
  return [];
 }
 function searchTextForProduct(product){
- return collectSearchValues(product).join(" ").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase();
+ return collectSearchValues(product).join(" ").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 }
-function searchTokens(value){return String(value||"").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().match(/[a-z0-9]+/g)||[]}
+function searchTokens(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().match(/[a-z0-9]+/g)||[]}
 function editDistance(a,b){
  if(Math.abs(a.length-b.length)>2)return 99;
  let row=Array.from({length:b.length+1},(_,i)=>i);

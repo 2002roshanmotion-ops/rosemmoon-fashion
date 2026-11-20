@@ -2818,3 +2818,14 @@ body.rm-preview-open{overflow:hidden}
     margin-right:10px!important;
   }
 }
+
+
+/* Small left adjustment for the outlined Bag button; preserve its vertical alignment. */
+.site-header>#openCart{
+  margin-right:12px!important;
+}
+@media(max-width:760px){
+  .site-header>#openCart{
+    margin-right:14px!important;
+  }
+}

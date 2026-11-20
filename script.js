@@ -26,33 +26,103 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const grid=$("#productGrid"),categoryGrid=$("#categoryGrid");let activeCategory="dresses",cart=[];
 function normalizeCategory(value){const key=String(value??"").trim().toLowerCase().replace(/[^a-z]/g,"");const aliases={dress:"dresses",top:"tops",pant:"pants",skirt:"skirts",set:"sets",jacket:"jackets",sweater:"sweaters",short:"shorts"};return aliases[key]||key}
 let productSearchQuery="";
-function renderProducts(){
- const query=productSearchQuery.trim().toLowerCase();
- const shown=products.filter(p=>{
-  const categoryMatch=query?true:normalizeCategory(p.category)===activeCategory;
-  const searchable=[p.name,p.desc,p.category,p.tag].join(" ").toLowerCase();
-  return categoryMatch&&(!query||searchable.includes(query));
- });
- grid.innerHTML=shown.length?shown.map(p=>`<article class="product-card"><div class="product-image"><img src="${p.image}" alt="${p.name}" loading="lazy"></div><div class="product-info"><h3>${p.name}</h3><p>${p.desc}</p><div class="product-bottom"><span class="price-request">Rs. ${p.price.toLocaleString("en-IN")}</span><button class="add-button" data-id="${p.id}">Add to bag <span>+</span></button></div></div></article>`).join(""):`<div class="no-products"><strong>${query?"No matching styles found.":"More styles are on the way."}</strong><span>${query?"Try another name or category.":"Check back soon for new arrivals."}</span></div>`;
- const status=$("#productSearchStatus");if(status)status.textContent=query?(shown.length+" result"+(shown.length===1?"":"s")+" across all categories"):"";
+let productSearchTimer=0;
+let productSearchMatches=[];
+let productSearchOpen=false;
+const SEARCH_STOP_KEYS=new Set(["id","image","price","stock","quantity","createdat","updatedat"]);
+function searchTextForProduct(product){
+ return Object.entries(product||{}).filter(([key,value])=>!SEARCH_STOP_KEYS.has(key.toLowerCase())&&(typeof value==="string"||typeof value==="number"||Array.isArray(value))).map(([key,value])=>key+" "+(Array.isArray(value)?value.join(" "):String(value))).join(" ").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase();
 }
+function searchTokens(value){return String(value||"").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().match(/[a-z0-9]+/g)||[]}
+function editDistance(a,b){
+ if(Math.abs(a.length-b.length)>2)return 99;
+ let row=Array.from({length:b.length+1},(_,i)=>i);
+ for(let i=1;i<=a.length;i++){const next=[i];for(let j=1;j<=b.length;j++)next[j]=Math.min(next[j-1]+1,row[j]+1,row[j-1]+(a[i-1]===b[j-1]?0:1));row=next;}
+ return row[b.length];
+}
+function productSearchScore(product,query){
+ const text=searchTextForProduct(product),tokens=searchTokens(text),terms=searchTokens(query);
+ if(!terms.length)return 0;
+ let score=0;
+ for(const term of terms){
+  if(text.includes(term)){score+=term.length>3?5:3;continue;}
+  let best=99;
+  for(const token of tokens){if(token.startsWith(term)||term.startsWith(token)){best=Math.min(best,1);continue;}if(term.length>=4)best=Math.min(best,editDistance(term,token));}
+  const allowed=term.length>=8?2:term.length>=4?1:0;
+  if(best>allowed)return 0;
+  score+=best===0?5:best===1?2:1;
+ }
+ return score;
+}
+function escapeSearchHTML(value){return String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]))}
+function highlightSearchText(value,query){
+ const safe=escapeSearchHTML(value),terms=searchTokens(query).sort((a,b)=>b.length-a.length);
+ if(!terms.length)return safe;
+ try{return safe.replace(new RegExp("("+terms.join("|")+")","ig"),"<mark>$1</mark>")}catch(error){return safe}
+}
+function closeProductSearch(){productSearchOpen=false;const dropdown=$("#productSearchDropdown");if(dropdown){dropdown.hidden=true;dropdown.innerHTML=""}if(productSearchInput)productSearchInput.setAttribute("aria-expanded","false")}
+function renderSearchSuggestions(query){
+ const dropdown=$("#productSearchDropdown");if(!dropdown)return;
+ const q=query.trim();
+ if(!q){productSearchMatches=[];closeProductSearch();return}
+ productSearchMatches=products.map(product=>({product,score:productSearchScore(product,q)})).filter(item=>item.score>0).sort((a,b)=>b.score-a.score||String(a.product.name).localeCompare(String(b.product.name))).slice(0,6);
+ dropdown.innerHTML=productSearchMatches.length?'<div class="search-dropdown-label">SUGGESTED PIECES</div>'+productSearchMatches.map(({product})=>'<button class="search-suggestion" type="button" data-search-product="'+escapeSearchHTML(product.id)+'"><span class="search-suggestion-image">'+(product.image?'<img src="'+escapeSearchHTML(product.image)+'" alt="" loading="lazy">':'<span class="search-image-fallback">RM</span>')+'</span><span class="search-suggestion-copy"><strong>'+highlightSearchText(product.name,q)+'</strong><small>'+escapeSearchHTML(String(product.category||"Fashion").replace(/^./,letter=>letter.toUpperCase()))+'</small></span><span class="search-suggestion-price">Rs. '+Number(product.price||0).toLocaleString("en-IN")+'</span></button>').join(""):'<div class="search-empty"><strong>No matching pieces yet</strong><span>Try a product name, category, colour or style</span></div>';
+ dropdown.hidden=false;productSearchOpen=true;if(productSearchInput)productSearchInput.setAttribute("aria-expanded","true");
+}
+function updateSearchResults(){
+ const query=productSearchQuery.trim();
+ const shown=query?products.map(product=>({product,score:productSearchScore(product,query)})).filter(item=>item.score>0).sort((a,b)=>b.score-a.score).map(item=>item.product):products.filter(product=>normalizeCategory(product.category)===activeCategory);
+ grid.innerHTML=shown.length?shown.map(p=>`<article class="product-card" data-product-card="${p.id}"><div class="product-image"><img src="${p.image||""}" alt="${escapeSearchHTML(p.name)}" loading="lazy"></div><div class="product-info"><h3>${escapeSearchHTML(p.name)}</h3><p>${escapeSearchHTML(p.desc||"")}</p><div class="product-bottom"><span class="price-request">Rs. ${Number(p.price||0).toLocaleString("en-IN")}</span><button class="add-button" data-id="${p.id}">Add to bag <span>+</span></button></div></div></article>`).join(""):`<div class="no-products"><strong>${query?"No products found.":"More styles are on the way."}</strong><span>${query?"Try another search.":"Check back soon for new arrivals."}</span>${query?'<button class="search-clear-results" type="button" id="clearSearchFromResults">Clear search</button>':""}</div>`;
+ const heading=$("#selectedCategoryTitle"),meta=$("#productSearchResultsMeta"),status=$("#productSearchStatus");
+ if(heading)heading.textContent=query?"Search Results":activeCategory.charAt(0).toUpperCase()+activeCategory.slice(1);
+ if(meta){meta.hidden=!query;meta.textContent=query?shown.length+" "+(shown.length===1?"piece":"pieces")+" found for “"+query+"”":""}
+ if(status)status.textContent=query?(shown.length+" search result"+(shown.length===1?"":"s")):"";
+}
+function renderProducts(){updateSearchResults()}
+function submitProductSearch(query){
+ productSearchQuery=String(query??"").trim();
+ if(productSearchInput){productSearchInput.value=productSearchQuery;productSearchInput.setAttribute("aria-expanded","false")}
+ if(clearProductSearch)clearProductSearch.hidden=!productSearchQuery;
+ closeProductSearch();updateSearchResults();
+}
+function openProductPreview(product){
+ const image=product&&product.image;if(!image)return;
+ previewImage.src=image;previewImage.alt=product.name||"RoseMoon fashion product";previewCaption.textContent=product.name||"RoseMoon Fashion";
+ lightbox.classList.add("open");lightbox.setAttribute("aria-hidden","false");document.body.classList.add("rm-preview-open");
+}
+
 function setCategory(category){const selected=normalizeCategory(category);const buttons=categoryGrid?Array.from(categoryGrid.querySelectorAll("button[data-category]")):[];if(!buttons.some(b=>normalizeCategory(b.dataset.category)===selected))return false;activeCategory=selected;buttons.forEach(b=>{const isSelected=normalizeCategory(b.dataset.category)===selected;b.classList.toggle("active",isSelected);b.classList.toggle("is-selected",isSelected);b.setAttribute("aria-pressed",String(isSelected))});renderProducts();const heading=$("#selectedCategoryTitle");if(heading)heading.textContent=selected.charAt(0).toUpperCase()+selected.slice(1);return true;}
 function showView(view){const safeView=String(view||"").replace(/[^a-z-]/gi,"");const validView=document.querySelector('.view-panel[data-panel="'+safeView+'"]');if(!validView)return false;document.querySelectorAll(".view-panel").forEach(panel=>{const active=panel===validView;panel.classList.toggle("active",active);panel.setAttribute("aria-hidden",String(!active))});document.querySelectorAll(".nav-tab").forEach(btn=>btn.classList.toggle("active",btn.dataset.view===safeView));const player=document.getElementById("crystalPlayer");const showPlayer=safeView==="collections";document.body.classList.toggle("crystal-player-visible",showPlayer);if(player){player.style.setProperty("display",showPlayer?"grid":"none","important");player.setAttribute("aria-hidden",String(!showPlayer));}if(showPlayer){try{if(typeof playRoseMoonMusic==="function")playRoseMoonMusic()}catch(error){console.warn("RoseMoon music could not start",error)}requestAnimationFrame(()=>{if(typeof grid!=="undefined"&&grid)grid.querySelectorAll(".product-card").forEach((card,i)=>{card.style.animationDelay=(i*65)+"ms"});validView.scrollTop=0;});}window.scrollTo({top:0,behavior:"smooth"});return true;}
-renderProducts();
 const productSearchInput=$("#productSearchInput"),clearProductSearch=$("#clearProductSearch");
+renderProducts();
 if(productSearchInput){
+ productSearchInput.setAttribute("aria-controls","productSearchDropdown");
+ productSearchInput.setAttribute("aria-expanded","false");
  productSearchInput.addEventListener("input",()=>{
-  productSearchQuery=productSearchInput.value;
-  if(clearProductSearch)clearProductSearch.hidden=!productSearchQuery;
-  renderProducts();
+  const value=productSearchInput.value;
+  if(clearProductSearch)clearProductSearch.hidden=!value;
+  window.clearTimeout(productSearchTimer);
+  productSearchTimer=window.setTimeout(()=>renderSearchSuggestions(value),110);
+ });
+ productSearchInput.addEventListener("keydown",event=>{
+  if(event.key==="Enter"){event.preventDefault();window.clearTimeout(productSearchTimer);submitProductSearch(productSearchInput.value);}
+  if(event.key==="Escape"){if(productSearchOpen)closeProductSearch();else if(productSearchInput.value){submitProductSearch("");productSearchInput.blur();}}
+  if(event.key==="ArrowDown"&&productSearchOpen){const first=$("#productSearchDropdown .search-suggestion");if(first){event.preventDefault();first.focus();}}
  });
 }
-if(clearProductSearch)clearProductSearch.addEventListener("click",()=>{
- productSearchQuery="";
- if(productSearchInput){productSearchInput.value="";productSearchInput.focus()}
- clearProductSearch.hidden=true;
- renderProducts();
+const searchDropdown=$("#productSearchDropdown");
+if(searchDropdown)searchDropdown.addEventListener("click",event=>{
+ const suggestion=event.target.closest("[data-search-product]");if(!suggestion)return;
+ const product=products.find(item=>String(item.id)===suggestion.dataset.searchProduct);if(!product)return;
+ submitProductSearch(product.name);
+ requestAnimationFrame(()=>{const card=grid.querySelector('[data-product-card="'+CSS.escape(String(product.id))+'"]');if(card)card.scrollIntoView({behavior:"smooth",block:"center"});openProductPreview(product);});
 });
+if(clearProductSearch)clearProductSearch.addEventListener("click",()=>{
+ window.clearTimeout(productSearchTimer);submitProductSearch("");if(productSearchInput)productSearchInput.focus();
+});
+document.addEventListener("click",event=>{if(!event.target.closest(".header-search-area"))closeProductSearch();});
+document.addEventListener("click",event=>{if(event.target&&event.target.id==="clearSearchFromResults"){submitProductSearch("");if(productSearchInput)productSearchInput.focus();}});
+
 // Load browser-only product edits and any uploaded images saved in IndexedDB.
 (async()=>{try{const request=indexedDB.open("RoseMoonFashionLocal",1);request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains("images"))request.result.createObjectStore("images")};const db=await new Promise((resolve,reject)=>{request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error)});const saved=JSON.parse(localStorage.getItem("rosemmoonFashionProductsV1")||"[]");if(Array.isArray(saved))saved.forEach(item=>{const p=products.find(x=>x.id===item.id);if(p)Object.assign(p,item)});for(const p of products){if(typeof p.image==="string"&&p.image.startsWith("idb://")){try{const tx=db.transaction("images","readonly"),req=tx.objectStore("images").get(Number(p.image.slice(6)));const blob=await new Promise((resolve,reject)=>{req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)});p.image=blob?URL.createObjectURL(blob):(DEFAULT_PRODUCT_IMAGES.get(p.id)||"")}catch(imageError){p.image=DEFAULT_PRODUCT_IMAGES.get(p.id)||""}}}renderProducts();db.close()}catch(err){console.warn("RoseMoon local image storage could not be loaded",err);products.forEach(p=>{if(typeof p.image==="string"&&p.image.startsWith("idb://"))p.image=DEFAULT_PRODUCT_IMAGES.get(p.id)||""});renderProducts()}})();
 const CATEGORY_DEFAULTS={"dresses":"https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/52a35cd0-f30f-40e5-9f27-68d12fd0c090.png","tops":"https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/88b1033a-4218-4e13-9ce6-c00350ece868.png","pants":"https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/e4466dcb-2268-4f7c-8e9c-d7c1366d177c.png","skirts":"https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/52a35cd0-f30f-40e5-9f27-68d12fd0c090.png","sets":"https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/52a35cd0-f30f-40e5-9f27-68d12fd0c090.png","jackets":"https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/52a35cd0-f30f-40e5-9f27-68d12fd0c090.png","sweaters":"https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/52a35cd0-f30f-40e5-9f27-68d12fd0c090.png","shorts":"https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/52a35cd0-f30f-40e5-9f27-68d12fd0c090.png"};const CATEGORY_POSITION_KEY="rosemmoonFashionCategoryPositionsV1";function applyCategoryPositions(){let positions={};try{positions=JSON.parse(localStorage.getItem(CATEGORY_POSITION_KEY)||"{}")}catch(e){}document.querySelectorAll("[data-category-photo]").forEach(img=>{const pos=positions[img.dataset.categoryPhoto]||{x:50,y:50,zoom:100};img.style.objectPosition=(pos.x??50)+"% "+(pos.y??50)+"%";img.style.transform="scale("+((pos.zoom??100)/100)+")";});}(async()=>{try{const request=indexedDB.open("RoseMoonFashionLocal",1);request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains("images"))request.result.createObjectStore("images")};const db=await new Promise((resolve,reject)=>{request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error)});for(const cat of Object.keys(CATEGORY_DEFAULTS)){const req=db.transaction("images","readonly").objectStore("images").get("category-"+cat);const blob=await new Promise((resolve,reject)=>{req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)});if(blob){const img=document.querySelector('[data-category-photo="'+cat+'"]');if(img)img.src=URL.createObjectURL(blob)}}db.close();applyCategoryPositions()}catch(err){console.warn("RoseMoon category images could not be loaded",err);applyCategoryPositions()}})();// Apply the Home page image saved from Admin on this same browser.

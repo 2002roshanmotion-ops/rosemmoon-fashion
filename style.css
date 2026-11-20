@@ -2788,3 +2788,10 @@ body.rm-preview-open{overflow:hidden}
  .site-header>#openCart>.bag-label{height:19px!important;font-size:8px!important}
  .site-header>#openCart>#cartCount{width:19px!important;height:19px!important;min-width:19px!important;font-size:8px!important}
 }
+
+
+/* Add-to-bag product flight removed: keep the action instant and clean. */
+.rm-bag-flight,.rm-bag-flight-show{display:none!important;animation:none!important;transition:none!important}
+.bag-button.bag-arrival,.bag-button.bag-arrival #cartCount{animation:none!important;filter:none!important;box-shadow:none!important}
+.bag-button.bag-arrival:after{display:none!important}
+.add-button.rm-added-flash{animation:none!important;filter:none!important;box-shadow:none!important}

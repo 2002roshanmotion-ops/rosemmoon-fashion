@@ -58,12 +58,54 @@ loadCatalog();render();loadHomeImage().then(setupHomePosition);renderCategoryIma
 if(navigator.storage&&navigator.storage.persist){navigator.storage.persist().catch(()=>{});}
 
 const MUSIC_LINKS_KEY="rosemmoonFashionMusicLinksV1";
+const DEFAULT_MUSIC_TRACKS=[
+ "KATSEYE (캣츠아이) Gabriela (Audio) - Music Popers.mp3",
+ "aespa 에스파 'Black Mamba' MV - SMTOWN.mp3",
+ "aespa 에스파 'Next Level' MV - SMTOWN.mp3",
+ "LILI’s FILM [The Movie] - Lilifilm Official.mp3",
+ "Super Shy.mp3"
+].map(name=>encodeURI("https://raw.githubusercontent.com/2002roshanmotion-ops/rosemmoon-fashion/main/music/"+name));
 let musicLinks=[];
-function renderMusicInputs(){const grid=$("#musicLinkGrid");grid.innerHTML=musicLinks.map((url,i)=>'<label class="music-track-row">Track '+(i+1)+'<div class="music-track-input"><input type="url" data-music-track="'+i+'" placeholder="Paste a public MP3 link" value="'+esc(url)+'"><button type="button" data-remove-track="'+i+'" aria-label="Remove track '+(i+1)+'">×</button></div></label>').join("");}
-function loadMusicLinks(){try{const saved=JSON.parse(localStorage.getItem(MUSIC_LINKS_KEY)||"[]");musicLinks=Array.isArray(saved)?saved.filter(x=>typeof x==="string"):[]}catch(e){musicLinks=[]}if(!musicLinks.length)musicLinks=[""];renderMusicInputs()}
-$("#addMusicTrack").addEventListener("click",()=>{musicLinks.push("");renderMusicInputs();$("#musicLinkGrid").lastElementChild?.querySelector("input")?.focus()});
-$("#musicLinkGrid").addEventListener("input",e=>{const input=e.target.closest("[data-music-track]");if(input)musicLinks[Number(input.dataset.musicTrack)]=input.value});
-$("#musicLinkGrid").addEventListener("click",e=>{const btn=e.target.closest("[data-remove-track]");if(!btn)return;musicLinks.splice(Number(btn.dataset.removeTrack),1);if(!musicLinks.length)musicLinks=[""];renderMusicInputs()});
-$("#saveMusicLinks").addEventListener("click",()=>{const links=musicLinks.map(url=>url.trim()).filter(Boolean);if(links.some(url=>!url.startsWith("https://"))){$("#musicStatus").textContent="Please use public HTTPS audio links.";return}localStorage.setItem(MUSIC_LINKS_KEY,JSON.stringify(links));$("#musicStatus").textContent=links.length+" music link(s) saved in this browser. Test Start Shopping on this same browser.";toast("Music links saved.")});
-$("#clearMusicLinks").addEventListener("click",()=>{localStorage.removeItem(MUSIC_LINKS_KEY);musicLinks=[""];renderMusicInputs();$("#musicStatus").textContent="Music links cleared from this browser.";toast("Music links cleared.")});
+let musicPreview=null;
+let musicPreviewIndex=-1;
+function musicTrackName(url,i){
+ try{const file=decodeURIComponent(new URL(url).pathname.split("/").pop()).replace(/\.(mp3|m4a|ogg|wav|aac|webm)$/i,"");return file.replace(/\s+/g," ").trim()||"Untitled track"}catch(e){return "Track "+(i+1)}
+}
+function renderMusicInputs(){
+ const grid=$("#musicLinkGrid");
+ grid.innerHTML=musicLinks.map((url,i)=>'<article class="music-track-card" data-track-card="'+i+'"><div class="music-track-top"><span class="music-track-number">'+String(i+1).padStart(2,"0")+'</span><strong>'+esc(url?musicTrackName(url,i):"New track")+'</strong><div class="music-track-order"><button type="button" data-move-track="-1" data-index="'+i+'" aria-label="Move track up" '+(i===0?"disabled":"")+'>&uarr;</button><button type="button" data-move-track="1" data-index="'+i+'" aria-label="Move track down" '+(i===musicLinks.length-1?"disabled":"")+'>&darr;</button></div></div><div class="music-track-input"><input type="url" data-music-track="'+i+'" placeholder="Paste a public HTTPS MP3 / audio link" value="'+esc(url)+'"><button type="button" data-preview-track="'+i+'" class="music-preview-button">'+(musicPreviewIndex===i&&musicPreview&&!musicPreview.paused?"Pause":"Preview")+'</button><button type="button" data-remove-track="'+i+'" class="music-remove-button" aria-label="Remove track '+(i+1)+'">×</button></div><small class="music-track-state" data-track-state="'+i+'">'+(url?"Ready to preview":"Paste an audio link to add this track")+'</small></article>').join("");
+ $("#musicTrackCount").textContent=musicLinks.filter(x=>x.trim()).length+" tracks in playlist";
+}
+function stopMusicPreview(){if(musicPreview){musicPreview.pause();musicPreview.removeAttribute("src");musicPreview.load()}musicPreview=null;musicPreviewIndex=-1}
+function loadMusicLinks(){
+ try{const saved=localStorage.getItem(MUSIC_LINKS_KEY);musicLinks=saved===null?DEFAULT_MUSIC_TRACKS.slice():JSON.parse(saved);if(!Array.isArray(musicLinks))musicLinks=DEFAULT_MUSIC_TRACKS.slice();musicLinks=musicLinks.filter(x=>typeof x==="string")}catch(e){musicLinks=DEFAULT_MUSIC_TRACKS.slice()}
+ if(!musicLinks.length)musicLinks=DEFAULT_MUSIC_TRACKS.slice();
+ renderMusicInputs();
+}
+$("#addMusicTrack").addEventListener("click",()=>{musicLinks.push("");renderMusicInputs();$("#musicLinkGrid").lastElementChild?.querySelector("input")?.focus();$("#musicStatus").textContent="New track added. Paste a public audio link, then save your playlist."});
+$("#musicLinkGrid").addEventListener("input",e=>{const input=e.target.closest("[data-music-track]");if(input){musicLinks[Number(input.dataset.musicTrack)]=input.value;const card=input.closest(".music-track-card");const title=card?.querySelector(".music-track-top>strong");if(title)title.textContent=input.value.trim()?musicTrackName(input.value.trim(),Number(input.dataset.musicTrack)):"New track";$("#musicTrackCount").textContent=musicLinks.filter(x=>x.trim()).length+" tracks in playlist"}});
+$("#musicLinkGrid").addEventListener("click",e=>{
+ const move=e.target.closest("[data-move-track]");
+ if(move){const i=Number(move.dataset.index),next=i+Number(move.dataset.moveTrack);if(next<0||next>=musicLinks.length)return;[musicLinks[i],musicLinks[next]]=[musicLinks[next],musicLinks[i]];stopMusicPreview();renderMusicInputs();return}
+ const remove=e.target.closest("[data-remove-track]");
+ if(remove){const i=Number(remove.dataset.removeTrack);if(musicPreviewIndex===i)stopMusicPreview();musicLinks.splice(i,1);renderMusicInputs();$("#musicStatus").textContent="Track removed from the editing list. Save playlist to publish the new order.";return}
+ const preview=e.target.closest("[data-preview-track]");
+ if(preview){const i=Number(preview.dataset.previewTrack),url=musicLinks[i]?.trim();if(!url){$("#musicStatus").textContent="Add an audio link to this track before previewing.";return}
+ if(musicPreviewIndex===i&&musicPreview&&!musicPreview.paused){stopMusicPreview();renderMusicInputs();return}
+ stopMusicPreview();musicPreview=new Audio(url);musicPreview.preload="metadata";musicPreview.volume=.65;musicPreviewIndex=i;const audio=musicPreview;renderMusicInputs();$("#musicStatus").textContent="Loading preview: "+musicTrackName(url,i);
+ audio.addEventListener("canplay",()=>{$("#musicStatus").textContent="Previewing: "+musicTrackName(url,i)}, {once:true});
+ audio.addEventListener("ended",()=>{if(musicPreview===audio){stopMusicPreview();renderMusicInputs()}}, {once:true});
+ audio.addEventListener("error",()=>{$("#musicStatus").textContent="This audio link could not be played. Check that it is a public direct audio-file link.";stopMusicPreview();renderMusicInputs()},{once:true});
+ audio.play().then(()=>renderMusicInputs()).catch(()=>{$("#musicStatus").textContent="Preview blocked or unavailable. Check the public audio link and try again.";stopMusicPreview();renderMusicInputs()});
+ }
+});
+$("#saveMusicLinks").addEventListener("click",()=>{
+ const links=musicLinks.map(url=>url.trim()).filter(Boolean);
+ if(!links.length){$("#musicStatus").textContent="Add at least one public audio link before saving.";return}
+ if(links.some(url=>{try{const u=new URL(url);return u.protocol!=="https:"}catch(e){return true}})){$("#musicStatus").textContent="Every track must use a valid public HTTPS audio link.";return}
+ stopMusicPreview();localStorage.setItem(MUSIC_LINKS_KEY,JSON.stringify(links));musicLinks=links;renderMusicInputs();$("#musicStatus").textContent=links.length+" tracks saved in playlist order on this browser. Refresh the shop to load the updated playlist.";toast("Music playlist saved.");
+});
+$("#clearMusicLinks").addEventListener("click",()=>{
+ stopMusicPreview();musicLinks=DEFAULT_MUSIC_TRACKS.slice();localStorage.removeItem(MUSIC_LINKS_KEY);renderMusicInputs();$("#musicStatus").textContent="Original RoseMoon playlist restored in this browser. Refresh the shop to use it.";toast("Default playlist restored.");
+});
 loadMusicLinks();

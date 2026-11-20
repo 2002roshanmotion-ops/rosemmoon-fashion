@@ -2829,3 +2829,17 @@ body.rm-preview-open{overflow:hidden}
     margin-right:14px!important;
   }
 }
+
+
+/* Final position lock: shift the complete outlined Bag control left inside the header. */
+.site-header>#openCart{
+  position:relative!important;
+  right:auto!important;
+  margin-right:0!important;
+  transform:translate(-14px,-4px)!important;
+}
+@media(max-width:760px){
+  .site-header>#openCart{
+    transform:translate(-12px,-4px)!important;
+  }
+}

@@ -2795,3 +2795,11 @@ body.rm-preview-open{overflow:hidden}
 .bag-button.bag-arrival,.bag-button.bag-arrival #cartCount{animation:none!important;filter:none!important;box-shadow:none!important}
 .bag-button.bag-arrival:after{display:none!important}
 .add-button.rm-added-flash{animation:none!important;filter:none!important;box-shadow:none!important}
+
+
+/* Give the outlined shopping bag button the same breathing room from the header rule as the logo. */
+.site-header>#openCart{
+  align-self:center!important;
+  transform:translateY(-4px)!important;
+  margin-bottom:0!important;
+}

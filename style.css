@@ -3006,9 +3006,5 @@ body.crystal-player-visible .site-header>.header-search-area{display:flex!import
 }
 
 
-/* Preserve the original small text size normally; enlarge only while typing to prevent iOS auto-zoom. */
+/* Prevent iOS Safari from changing the page scale when a small-text field receives focus. */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):focus,
-textarea:focus,select:focus,[contenteditable="true"]:focus{
- font-size:16px!important;
-}

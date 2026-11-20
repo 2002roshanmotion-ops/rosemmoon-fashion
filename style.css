@@ -2994,27 +2994,21 @@ body.crystal-player-visible .site-header>.header-search-area{display:flex!import
 }
 @media(max-width:760px){
  .collections>.rosem-search-area{margin:0 auto 8px;min-height:54px}
- .collections>.rosem-search-area input{font-size:16px!important;-webkit-text-size-adjust:100%}
- /* iOS Safari zooms text fields smaller than 16px when they receive focus. */
- input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
- textarea,select{font-size:16px!important}
 }
 
 /* Keep the search physically inside the top header bar; reveal it only in Start Shopping. */
 .site-header>.header-search-area{display:none!important;grid-column:2!important;position:relative!important;z-index:35!important;margin:0!important;width:100%!important;max-width:460px!important;min-width:0!important}
 body.crystal-player-visible .site-header>.header-search-area{display:flex!important}
-.site-header>.header-search-area input{font-size:16px!important;min-width:0!important}
+.site-header>.header-search-area input{min-width:0!important}
 @media(max-width:760px){
  .site-header>.header-search-area{height:40px!important;min-height:40px!important}
- .site-header>.header-search-area input{font-size:16px!important;height:36px!important}
+ .site-header>.header-search-area input{height:36px!important}
 }
 
 
-/* Prevent iPhone/iOS Safari automatic page zoom when any text field receives focus. */
+/* Preserve the original small text size normally; enlarge only while typing to prevent iOS auto-zoom. */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),textarea,select,[contenteditable="true"]{
- font-size:16px!important;
-}
-input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):focus,textarea:focus,select:focus,[contenteditable="true"]:focus{
+input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):focus,
+textarea:focus,select:focus,[contenteditable="true"]:focus{
  font-size:16px!important;
 }

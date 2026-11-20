@@ -30,8 +30,15 @@ let productSearchTimer=0;
 let productSearchMatches=[];
 let productSearchOpen=false;
 const SEARCH_STOP_KEYS=new Set(["id","image","price","stock","quantity","createdat","updatedat"]);
+function collectSearchValues(value,key=""){
+ if(SEARCH_STOP_KEYS.has(String(key).toLowerCase()))return [];
+ if(typeof value==="string"||typeof value==="number")return [String(value)];
+ if(Array.isArray(value))return value.flatMap(item=>collectSearchValues(item,key));
+ if(value&&typeof value==="object")return Object.entries(value).flatMap(([childKey,child])=>collectSearchValues(child,childKey));
+ return [];
+}
 function searchTextForProduct(product){
- return Object.entries(product||{}).filter(([key,value])=>!SEARCH_STOP_KEYS.has(key.toLowerCase())&&(typeof value==="string"||typeof value==="number"||Array.isArray(value))).map(([key,value])=>key+" "+(Array.isArray(value)?value.join(" "):String(value))).join(" ").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase();
+ return collectSearchValues(product).join(" ").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase();
 }
 function searchTokens(value){return String(value||"").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().match(/[a-z0-9]+/g)||[]}
 function editDistance(a,b){

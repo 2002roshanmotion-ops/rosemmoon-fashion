@@ -2484,3 +2484,22 @@ body.rm-preview-open{overflow:hidden}
  .site-header>.brand{width:60px!important;min-width:60px!important;max-width:60px!important;flex-basis:60px!important}
  .site-header>.brand .brand-logo{width:58px!important;height:58px!important;max-width:58px!important;max-height:58px!important}
 }
+
+
+/* Center the floating music player at the bottom of the screen */
+.crystal-player{
+ left:50%!important;
+ right:auto!important;
+ bottom:12px!important;
+ transform:translateX(-50%)!important;
+ z-index:19!important;
+}
+@media(max-width:760px){
+ .crystal-player{
+  left:50%!important;
+  right:auto!important;
+  bottom:8px!important;
+  transform:translateX(-50%)!important;
+  width:min(390px,calc(100vw - 20px))!important;
+ }
+}

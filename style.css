@@ -2154,3 +2154,58 @@ body.rm-preview-open{overflow:hidden}
   .site-header .bag-button{padding:3px 0;font-size:9px}
   .site-header .bag-button span{width:19px;height:19px;margin-left:3px}
 }
+
+
+/* RoseMoon header alignment: logo | centred vinyl player | shopping bag */
+.site-header{
+  display:grid!important;
+  grid-template-columns:minmax(64px,1fr) minmax(0,360px) minmax(64px,1fr);
+  align-items:center;gap:14px;
+}
+.site-header>.brand{grid-column:1;grid-row:1;justify-self:start;width:auto!important}
+.site-header>.crystal-player{grid-column:2;grid-row:1;justify-self:center;width:100%!important;max-width:360px;min-width:0}
+.site-header>.bag-button{grid-column:3;grid-row:1;justify-self:end;white-space:nowrap}
+.site-header .crystal-art{position:relative;display:grid;place-items:center;overflow:visible}
+.site-header .vinyl-disc{
+  position:relative;width:48px;height:48px;border-radius:50%;
+  background:repeating-radial-gradient(circle at center,#2c2029 0 2px,#47303d 2.5px 3.5px,#201820 4px 5px);
+  border:2px solid #f8dce8;box-shadow:0 0 0 3px #fff8,0 0 17px #c783a7aa;
+  animation:vinylIdle 3.8s ease-in-out infinite;
+}
+.site-header .vinyl-disc:before{
+  content:"";position:absolute;inset:5px;border:1px solid #e8b8ce88;border-radius:50%;
+}
+.site-header .vinyl-label{
+  position:absolute;inset:15px;border-radius:50%;
+  display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 28%,#fff4fa,#e7a8c4 48%,#9d5367 100%);
+  border:1px solid #fff8;box-shadow:0 0 7px #fff9;
+}
+.site-header .vinyl-label i{font:italic 11px "Playfair Display",serif;color:#74384f}
+.site-header .vinyl-hole{position:absolute;width:4px;height:4px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px #9d5367}
+.site-header .crystal-player.is-playing .vinyl-disc{animation:vinylSpin 2.4s linear infinite}
+.site-header .crystal-player.is-playing .crystal-art{filter:drop-shadow(0 0 8px #e9a9c7)}
+@keyframes vinylSpin{to{transform:rotate(360deg)}}
+@keyframes vinylIdle{0%,100%{transform:scale(.97)}50%{transform:scale(1.03)}}
+@media(max-width:760px){
+  .site-header{grid-template-columns:48px minmax(0,1fr) auto;gap:8px;padding:0 4%}
+  .site-header>.brand{grid-column:1}
+  .site-header>.crystal-player{grid-column:2;width:100%!important;max-width:300px;min-height:58px;height:58px}
+  .site-header>.bag-button{grid-column:3}
+  .site-header .vinyl-disc{width:39px;height:39px}
+  .site-header .vinyl-label{inset:12px}
+}
+@media(max-width:390px){
+  .site-header{grid-template-columns:42px minmax(0,1fr) auto;gap:5px;padding:0 3%}
+  .site-header .brand-logo{width:40px!important;height:40px!important}
+  .site-header>.crystal-player{min-height:54px;height:54px;padding:3px 4px;grid-template-columns:31px minmax(0,1fr)}
+  .site-header .vinyl-disc{width:34px;height:34px}
+  .site-header .vinyl-label{inset:10px}
+  .site-header .crystal-track-info strong{font-size:9px}
+  .site-header .crystal-track-info span{font-size:5px}
+  .site-header .crystal-controls .crystal-play{width:21px;height:21px}
+  .site-header>.bag-button{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){
+  .site-header .vinyl-disc,.site-header .crystal-player.is-playing .vinyl-disc{animation:none!important}
+}

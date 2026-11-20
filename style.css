@@ -2111,3 +2111,46 @@ body.rm-preview-open{overflow:hidden}
 .rm-order-ready .button{width:100%}
 .rm-tiktok-link{display:block;padding:12px;border:1px solid #e8cbd8;border-radius:10px;color:#8e4d6e;text-decoration:none;font:600 12px "DM Sans",sans-serif;text-align:center}
 .rm-tiktok-link:hover{background:#faedf2}
+
+
+/* Dock the music player inside the site header so it never covers checkout or order buttons. */
+.site-header{gap:clamp(8px,2vw,24px)}
+.site-header .crystal-player{
+  position:relative!important;inset:auto!important;right:auto!important;bottom:auto!important;
+  z-index:2!important;flex:0 1 360px;width:min(360px,42vw)!important;min-width:0;
+  min-height:66px;height:66px;grid-template-columns:48px minmax(0,1fr);
+  gap:8px;padding:6px 10px;border-radius:16px;
+  box-shadow:0 5px 18px rgba(91,42,68,.12),inset 0 1px 0 rgba(255,255,255,.95);
+}
+.site-header .crystal-art{min-height:50px}
+.site-header .crystal-gem{width:39px;height:47px}
+.site-header .crystal-orbit{width:51px;height:51px}
+.site-header .crystal-spark{font-size:11px}
+.site-header .crystal-track-info{margin:3px 0 4px}
+.site-header .crystal-track-info strong{font-size:13px}
+.site-header .crystal-topline{font-size:6px;letter-spacing:.14em}
+.site-header .crystal-progress-row{display:none}
+.site-header .crystal-controls{gap:5px;margin-top:2px}
+.site-header .crystal-controls #crystalPrev,.site-header .crystal-controls #crystalNext,
+.site-header .crystal-volume{display:none}
+.site-header .crystal-controls .crystal-play{width:25px;height:25px}
+.site-header .crystal-collapse{width:18px;height:18px;font-size:12px}
+.site-header .crystal-player.is-minimized{width:min(220px,36vw)!important;min-height:56px;height:56px;grid-template-columns:38px minmax(0,1fr);padding:4px 8px}
+.site-header .crystal-player.is-minimized .crystal-art{min-height:42px}
+.site-header .crystal-player.is-minimized .crystal-gem{width:32px;height:39px}
+.site-header .crystal-player.is-minimized .crystal-orbit{width:42px;height:42px}
+.site-header .crystal-player.is-minimized .crystal-track-info strong{font-size:11px}
+@media(max-width:480px){
+  .site-header{height:76px;padding:0 4%;gap:6px}
+  .site-header .brand-logo{width:48px!important;height:48px!important}
+  .site-header .crystal-player{flex:1 1 auto;width:auto!important;min-width:0;min-height:58px;height:58px;padding:4px 6px;grid-template-columns:34px minmax(0,1fr);gap:4px}
+  .site-header .crystal-art{min-height:42px}
+  .site-header .crystal-gem{width:30px;height:37px}
+  .site-header .crystal-orbit{width:39px;height:39px}
+  .site-header .crystal-track-info strong{font-size:10px}
+  .site-header .crystal-track-info span{font-size:6px}
+  .site-header .crystal-collapse{display:none}
+  .site-header .crystal-controls .crystal-play{width:23px;height:23px}
+  .site-header .bag-button{padding:3px 0;font-size:9px}
+  .site-header .bag-button span{width:19px;height:19px;margin-left:3px}
+}

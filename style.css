@@ -2924,3 +2924,20 @@ body.crystal-player-visible .rm-search-lens{width:23px;height:23px;flex:0 0 23px
  body.crystal-player-visible .rm-search-lens{width:21px;height:21px;flex-basis:21px}
  body.crystal-player-visible .rm-search-label{font-size:9px;letter-spacing:.12em}
 }
+
+
+/* Keep the search control visible in the header at all times; only its text waits for Start Shopping. */
+.site-header>.brand{order:0!important}
+.site-header>#rmSearchButton{
+ position:relative!important;left:auto!important;top:auto!important;right:auto!important;bottom:auto!important;
+ transform:none!important;order:1!important;display:grid!important;visibility:visible!important;opacity:1!important;
+ flex:0 0 49px!important;margin:0 12px 0 auto!important;
+}
+.site-header>#openCart{order:2!important;flex:0 0 auto!important}
+.site-header>#rmSearchButton:hover,.site-header>#rmSearchButton:focus-visible{transform:scale(1.06)!important}
+@media(max-width:760px){
+ .site-header>#rmSearchButton{width:42px!important;height:42px!important;flex-basis:42px!important;margin-right:7px!important}
+}
+@media(max-width:390px){
+ .site-header>#rmSearchButton{width:39px!important;height:39px!important;flex-basis:39px!important;margin-right:5px!important}
+}

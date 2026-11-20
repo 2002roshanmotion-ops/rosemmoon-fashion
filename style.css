@@ -2600,3 +2600,56 @@ body.rm-preview-open{overflow:hidden}
 }
 @keyframes rmFlightSparkle{from{transform:scale(.7) rotate(0deg);opacity:.65}to{transform:scale(1.25) rotate(35deg);opacity:1}}
 @media(prefers-reduced-motion:reduce){.rm-bag-flight,.rm-bag-flight-sparkle{animation:none!important}}
+
+
+/* ROSEMOON — cinematic, unmistakable add-to-bag moment */
+.rm-bag-flight{
+ position:fixed!important;z-index:10080!important;pointer-events:none!important;
+ overflow:visible!important;border-radius:19px!important;isolation:isolate!important;
+ transform-origin:center center!important;
+ filter:drop-shadow(0 24px 34px rgba(111,37,70,.48)) drop-shadow(0 0 22px rgba(255,173,207,.9))!important;
+ will-change:transform,opacity,filter!important;
+}
+.rm-bag-flight>img{
+ display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;
+ border:3px solid #fff8fc!important;border-radius:19px!important;
+ box-shadow:0 0 0 2px rgba(222,143,177,.75),inset 0 0 0 1px #fff!important;
+}
+.rm-bag-flight:before{
+ content:"";position:absolute;inset:-19px;border-radius:27px;z-index:-1;
+ background:radial-gradient(ellipse,rgba(255,218,236,.85),rgba(237,137,181,.28) 48%,transparent 72%);
+ filter:blur(9px);animation:rmFlightAura .48s ease-in-out infinite alternate;
+}
+.rm-bag-flight-shine{
+ position:absolute;inset:0;border-radius:19px;overflow:hidden;pointer-events:none;
+ background:linear-gradient(112deg,transparent 25%,rgba(255,255,255,.75) 48%,transparent 67%);
+ background-size:230% 100%;animation:rmFlightShine .72s ease-in-out infinite;
+}
+.rm-bag-flight-star{
+ position:absolute;z-index:3;left:calc(50% + (var(--star-index) - 2)*17px);top:calc(50% + (var(--star-index) - 2)*-23px);
+ color:#fff8df;font-style:normal;font-size:calc(17px + (var(--star-index)%3)*5px);
+ text-shadow:0 0 7px #fff,0 0 17px #f7a4c7,0 0 29px #d76e9b;
+ animation:rmFlightStar .55s ease-in-out infinite alternate;
+}
+.bag-button.bag-arrival{
+ animation:roseBagArrival 1s cubic-bezier(.18,.8,.2,1)!important;
+ filter:drop-shadow(0 0 15px rgba(255,105,165,.95))!important;
+}
+.bag-button.bag-arrival:after{
+ content:"";position:absolute;inset:-11px;border:2px solid rgba(225,143,177,.9);
+ border-radius:19px;pointer-events:none;animation:rmBagShockwave .85s ease-out both;
+}
+.bag-button.bag-arrival #cartCount{
+ animation:roseCountPop .85s cubic-bezier(.18,.8,.2,1)!important;
+ box-shadow:0 0 0 7px rgba(245,174,204,.35),0 0 22px rgba(255,119,176,.9)!important;
+}
+.add-button.rm-added-flash{
+ background:linear-gradient(110deg,#7f344d,#c66f91,#9d5367)!important;
+ color:#fff!important;box-shadow:0 0 0 3px rgba(228,158,187,.24),0 8px 25px rgba(157,83,103,.28)!important;
+}
+@keyframes rmFlightAura{from{opacity:.55;transform:scale(.84)}to{opacity:1;transform:scale(1.16)}}
+@keyframes rmFlightShine{from{background-position:150% 0}to{background-position:-80% 0}}
+@keyframes rmFlightStar{from{opacity:.45;transform:scale(.55) rotate(-20deg)}to{opacity:1;transform:scale(1.4) rotate(35deg)}}
+@keyframes rmBagShockwave{from{opacity:.95;transform:scale(.7)}to{opacity:0;transform:scale(1.55)}}
+@media(max-width:760px){.rm-bag-flight{filter:drop-shadow(0 16px 25px rgba(111,37,70,.5)) drop-shadow(0 0 17px rgba(255,173,207,.95))!important}}
+@media(prefers-reduced-motion:reduce){.rm-bag-flight,.rm-bag-flight:before,.rm-bag-flight-shine,.rm-bag-flight-star,.bag-button.bag-arrival,.bag-button.bag-arrival:after{animation:none!important}}

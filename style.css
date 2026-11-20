@@ -2014,3 +2014,52 @@ button,.button{ -webkit-tap-highlight-color:transparent}
  opacity:0!important;
  transition:opacity .55s ease!important;
 }
+
+
+/* RoseMoon hyper-realistic crystal music player */
+.crystal-player{position:fixed;right:26px;bottom:24px;z-index:35;width:min(410px,calc(100vw - 32px));min-height:148px;display:grid;grid-template-columns:112px 1fr;gap:13px;padding:15px 17px 14px 12px;overflow:hidden;border:1px solid rgba(255,255,255,.78);border-radius:22px;background:linear-gradient(135deg,rgba(255,255,255,.76),rgba(250,224,237,.42) 48%,rgba(255,255,255,.56));box-shadow:0 18px 55px rgba(91,42,68,.22),inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.45);backdrop-filter:blur(24px) saturate(1.55);-webkit-backdrop-filter:blur(24px) saturate(1.55);color:#472c3b;transition:transform .35s ease,opacity .35s ease,bottom .35s ease}
+.crystal-player:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 12%,rgba(255,255,255,.64) 24%,transparent 37%,transparent 72%,rgba(255,255,255,.28) 84%,transparent);transform:translateX(-100%);animation:crystalSheen 8s ease-in-out infinite}
+.crystal-player-glow{position:absolute;width:190px;height:190px;left:-40px;top:-60px;border-radius:50%;background:radial-gradient(circle,rgba(245,182,215,.48),transparent 68%);filter:blur(8px);pointer-events:none}
+.crystal-art{position:relative;display:grid;place-items:center;min-height:116px;isolation:isolate}
+.crystal-orbit{position:absolute;width:100px;height:100px;border:1px solid rgba(184,119,157,.38);border-radius:50%;transform:rotateX(68deg) rotate(-25deg);box-shadow:0 0 20px rgba(201,139,177,.2),inset 0 0 15px rgba(255,255,255,.7);animation:crystalOrbit 9s linear infinite}
+.crystal-orbit:after{content:"";position:absolute;inset:8px;border:1px solid rgba(255,255,255,.72);border-radius:50%}
+.crystal-gem{width:78px;height:94px;filter:drop-shadow(0 9px 10px rgba(133,72,110,.26));animation:crystalFloat 4.5s ease-in-out infinite}
+.crystal-spark{position:absolute;color:#fff;text-shadow:0 0 9px #fff,0 0 17px #d78ab5;font-size:17px;animation:crystalTwinkle 2.4s ease-in-out infinite}
+.spark-a{top:8px;right:11px}.spark-b{bottom:13px;left:8px;animation-delay:1.1s}
+.crystal-main{position:relative;z-index:1;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.crystal-topline{display:flex;align-items:center;gap:7px;font-size:8px;font-weight:700;letter-spacing:.2em;color:#98647f}
+.crystal-live-dot{width:6px;height:6px;border-radius:50%;background:#c77ca2;box-shadow:0 0 0 4px rgba(199,124,162,.13),0 0 10px #d98eb7}
+.crystal-collapse{margin-left:auto;width:22px;height:22px;border:1px solid rgba(174,119,151,.22);border-radius:50%;background:rgba(255,255,255,.48);color:#86546e;font-size:15px;line-height:1;cursor:pointer}
+.crystal-track-info{display:flex;flex-direction:column;gap:3px;margin:6px 0 7px;min-width:0}
+.crystal-track-info strong{font:600 16px/1.15 "Playfair Display",serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#4c2c3d}
+.crystal-track-info span{font-size:7px;letter-spacing:.17em;color:#a16f88;font-weight:700}
+.crystal-progress-row{display:grid;grid-template-columns:27px 1fr 27px;gap:6px;align-items:center;font-size:8px;color:#956c81;font-variant-numeric:tabular-nums}
+.crystal-progress-row input,.crystal-volume input{width:100%;height:3px;margin:0;appearance:none;-webkit-appearance:none;border-radius:9px;background:linear-gradient(90deg,#bd7e9e,#efd0df);outline:none;cursor:pointer}
+.crystal-progress-row input::-webkit-slider-thumb,.crystal-volume input::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:9px;height:9px;border-radius:50%;background:#fff;border:1px solid #bd7e9e;box-shadow:0 0 0 3px rgba(189,126,158,.15)}
+.crystal-progress-row input::-moz-range-thumb,.crystal-volume input::-moz-range-thumb{width:8px;height:8px;border-radius:50%;background:#fff;border:1px solid #bd7e9e;box-shadow:0 0 0 3px rgba(189,126,158,.15)}
+.crystal-controls{display:flex;align-items:center;gap:11px;margin-top:8px}
+.crystal-controls button{width:23px;height:23px;display:grid;place-items:center;border:0;background:transparent;color:#8c5b74;cursor:pointer;padding:2px}
+.crystal-controls button svg,.crystal-volume svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.crystal-controls .crystal-play{width:31px;height:31px;border-radius:50%;background:linear-gradient(145deg,#fff,#edc9dc);color:#8b4d6b;box-shadow:0 4px 12px rgba(142,78,111,.2),inset 0 1px 2px #fff;border:1px solid rgba(255,255,255,.9)}
+.crystal-play svg{width:14px;height:14px;fill:currentColor;stroke:none}
+.crystal-play .pause-icon{display:none}
+.crystal-player.is-playing .crystal-play .play-icon{display:none}
+.crystal-player.is-playing .crystal-play .pause-icon{display:block}
+.crystal-volume{margin-left:auto;display:flex;align-items:center;gap:5px;width:76px;color:#9b6d84}
+.crystal-volume svg{width:13px;height:13px;flex:none}
+.crystal-volume input{width:55px}
+.crystal-player.is-minimized{width:148px;min-height:76px;height:76px;grid-template-columns:56px 1fr;padding:8px 10px;gap:6px;border-radius:19px}
+.crystal-player.is-minimized .crystal-art{min-height:56px}
+.crystal-player.is-minimized .crystal-gem{width:40px;height:49px}
+.crystal-player.is-minimized .crystal-orbit{width:53px;height:53px}
+.crystal-player.is-minimized .crystal-spark,.crystal-player.is-minimized .crystal-progress-row,.crystal-player.is-minimized .crystal-volume,.crystal-player.is-minimized #crystalPrev,.crystal-player.is-minimized #crystalNext,.crystal-player.is-minimized .crystal-track-info span{display:none}
+.crystal-player.is-minimized .crystal-topline{font-size:6px;letter-spacing:.1em}
+.crystal-player.is-minimized .crystal-track-info{margin:4px 0}
+.crystal-player.is-minimized .crystal-track-info strong{font-size:12px}
+.crystal-player.is-minimized .crystal-controls{margin:0;gap:5px}
+.crystal-player.is-minimized .crystal-controls .crystal-play{width:25px;height:25px}
+@keyframes crystalFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-6px) rotate(2deg)}}
+@keyframes crystalOrbit{to{transform:rotateX(68deg) rotate(335deg)}}
+@keyframes crystalTwinkle{0%,100%{opacity:.25;transform:scale(.7) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(18deg)}}
+@keyframes crystalSheen{0%,65%,100%{transform:translateX(-110%)}82%{transform:translateX(110%)}}
+@media(prefers-reduced-motion:reduce){.crystal-player:before,.crystal-orbit,.crystal-gem,.crystal-spark{animation:none!important}}

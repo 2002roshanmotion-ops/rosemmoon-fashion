@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/e5ee25d3-5140-4aec-96d9-c570362e35c7.png">
-  <link rel="stylesheet" href="style.css?v=20261121-orderflow01">
+  <link rel="stylesheet" href="style.css?v=20261121-playerbar01">
 </head>
 <body>
   <div class="opening-screen" id="openingScreen" aria-label="Loading RoseMoon Fashion">
@@ -25,6 +25,38 @@
       <img class="brand-logo" style="width:58px;height:58px;max-width:58px;max-height:58px;object-fit:contain;display:block" src="https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/e5ee25d3-5140-4aec-96d9-c570362e35c7.png" alt="RoseMoon Fashion — Let Your Beauty Speak">
     </a>
     <button class="bag-button" id="openCart" aria-label="Open shopping bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span class="bag-label">Bag</span><span id="cartCount">0</span></button>
+      <section class="crystal-player" id="crystalPlayer" aria-label="RoseMoon crystal music player">
+        <div class="crystal-player-glow" aria-hidden="true"></div>
+        <div class="crystal-art" aria-hidden="true">
+          <div class="crystal-orbit"></div>
+          <svg class="crystal-gem" viewBox="0 0 100 116" role="presentation">
+            <defs>
+              <linearGradient id="gemFace" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".32" stop-color="#f8dce9"/><stop offset=".65" stop-color="#c58ba8"/><stop offset="1" stop-color="#fff0f7"/></linearGradient>
+              <linearGradient id="gemSide" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#a65c83" stop-opacity=".65"/></linearGradient>
+            </defs>
+            <path d="M50 3 89 30 78 91 50 112 22 91 11 30Z" fill="url(#gemFace)" stroke="#fff" stroke-width="2"/>
+            <path d="M50 3 50 112 22 91 11 30Z" fill="#fff" fill-opacity=".24"/>
+            <path d="M50 3 89 30 50 43Z" fill="#fff" fill-opacity=".72"/>
+            <path d="M11 30 50 43 22 91Z" fill="#d99bb8" fill-opacity=".42"/>
+            <path d="M89 30 50 43 78 91Z" fill="#fff" fill-opacity=".32"/>
+            <path d="M22 91 50 43 78 91 50 112Z" fill="url(#gemSide)" fill-opacity=".56"/>
+            <path d="M50 3 50 43 50 112M11 30 50 43 89 30M22 91 50 43 78 91" fill="none" stroke="#fff" stroke-opacity=".82" stroke-width="1.2"/>
+            <path d="m25 27 15-12M69 18l12 9" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".9"/>
+          </svg>
+          <span class="crystal-spark spark-a">✦</span><span class="crystal-spark spark-b">✧</span>
+        </div>
+        <div class="crystal-main">
+          <div class="crystal-topline"><span class="crystal-live-dot"></span><span>ROSEMOON SOUND</span><button class="crystal-collapse" id="crystalCollapse" type="button" aria-label="Minimize music player">−</button></div>
+          <div class="crystal-track-info"><strong id="crystalTrackName">RoseMoon Playlist</strong><span id="crystalTrackStatus">READY TO PLAY</span></div>
+          <div class="crystal-progress-row"><span id="crystalCurrentTime">0:00</span><input id="crystalSeek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek through track"><span id="crystalDuration">0:00</span></div>
+          <div class="crystal-controls">
+            <button id="crystalPrev" type="button" aria-label="Previous track"><svg viewBox="0 0 24 24"><path d="M6 5v14M19 6 8 12l11 6V6Z"/></svg></button>
+            <button id="crystalPlay" class="crystal-play" type="button" aria-label="Play music"><svg class="play-icon" viewBox="0 0 24 24"><path d="m8 5 12 7-12 7V5Z"/></svg><svg class="pause-icon" viewBox="0 0 24 24"><path d="M7 5h4v14H7zM15 5h4v14h-4z"/></svg></button>
+            <button id="crystalNext" type="button" aria-label="Next track"><svg viewBox="0 0 24 24"><path d="M18 5v14M5 6l11 6-11 6V6Z"/></svg></button>
+            <div class="crystal-volume"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16 9a5 5 0 0 1 0 6M18.5 6.5a9 9 0 0 1 0 11"/></svg><input id="crystalVolume" type="range" min="0" max="1" value="0.55" step="0.01" aria-label="Volume"></div>
+          </div>
+        </div>
+      </section>
   </header>
 
   <main>
@@ -110,38 +142,6 @@
     <button class="rm-image-lightbox-close" id="rmCloseImagePreview" type="button" aria-label="Close image preview">×</button>
     <figure class="rm-image-lightbox-figure"><img id="rmPreviewImage" alt=""><figcaption id="rmPreviewCaption"></figcaption></figure>
   </div>
-  <section class="crystal-player" id="crystalPlayer" aria-label="RoseMoon crystal music player" style="display:none!important">
-    <div class="crystal-player-glow" aria-hidden="true"></div>
-    <div class="crystal-art" aria-hidden="true">
-      <div class="crystal-orbit"></div>
-      <svg class="crystal-gem" viewBox="0 0 100 116" role="presentation">
-        <defs>
-          <linearGradient id="gemFace" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".32" stop-color="#f8dce9"/><stop offset=".65" stop-color="#c58ba8"/><stop offset="1" stop-color="#fff0f7"/></linearGradient>
-          <linearGradient id="gemSide" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#a65c83" stop-opacity=".65"/></linearGradient>
-        </defs>
-        <path d="M50 3 89 30 78 91 50 112 22 91 11 30Z" fill="url(#gemFace)" stroke="#fff" stroke-width="2"/>
-        <path d="M50 3 50 112 22 91 11 30Z" fill="#fff" fill-opacity=".24"/>
-        <path d="M50 3 89 30 50 43Z" fill="#fff" fill-opacity=".72"/>
-        <path d="M11 30 50 43 22 91Z" fill="#d99bb8" fill-opacity=".42"/>
-        <path d="M89 30 50 43 78 91Z" fill="#fff" fill-opacity=".32"/>
-        <path d="M22 91 50 43 78 91 50 112Z" fill="url(#gemSide)" fill-opacity=".56"/>
-        <path d="M50 3 50 43 50 112M11 30 50 43 89 30M22 91 50 43 78 91" fill="none" stroke="#fff" stroke-opacity=".82" stroke-width="1.2"/>
-        <path d="m25 27 15-12M69 18l12 9" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".9"/>
-      </svg>
-      <span class="crystal-spark spark-a">✦</span><span class="crystal-spark spark-b">✧</span>
-    </div>
-    <div class="crystal-main">
-      <div class="crystal-topline"><span class="crystal-live-dot"></span><span>ROSEMOON SOUND</span><button class="crystal-collapse" id="crystalCollapse" type="button" aria-label="Minimize music player">−</button></div>
-      <div class="crystal-track-info"><strong id="crystalTrackName">RoseMoon Playlist</strong><span id="crystalTrackStatus">READY TO PLAY</span></div>
-      <div class="crystal-progress-row"><span id="crystalCurrentTime">0:00</span><input id="crystalSeek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek through track"><span id="crystalDuration">0:00</span></div>
-      <div class="crystal-controls">
-        <button id="crystalPrev" type="button" aria-label="Previous track"><svg viewBox="0 0 24 24"><path d="M6 5v14M19 6 8 12l11 6V6Z"/></svg></button>
-        <button id="crystalPlay" class="crystal-play" type="button" aria-label="Play music"><svg class="play-icon" viewBox="0 0 24 24"><path d="m8 5 12 7-12 7V5Z"/></svg><svg class="pause-icon" viewBox="0 0 24 24"><path d="M7 5h4v14H7zM15 5h4v14h-4z"/></svg></button>
-        <button id="crystalNext" type="button" aria-label="Next track"><svg viewBox="0 0 24 24"><path d="M18 5v14M5 6l11 6-11 6V6Z"/></svg></button>
-        <div class="crystal-volume"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16 9a5 5 0 0 1 0 6M18.5 6.5a9 9 0 0 1 0 11"/></svg><input id="crystalVolume" type="range" min="0" max="1" value="0.55" step="0.01" aria-label="Volume"></div>
-      </div>
-    </div>
-  </section>
   <div class="action-toast" id="actionToast" role="status" aria-live="polite"><span class="toast-check">✓</span><span id="toastMessage">Added to your bag</span></div>
   <script src="script.js?v=20261121-orderflow01"></script>
 </body>

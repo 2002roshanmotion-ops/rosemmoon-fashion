@@ -89,7 +89,7 @@ if(roseMoonAudio)roseMoonAudio.addEventListener("ended",()=>{if(document.getElem
  volume.value=String(roseMoonAudio.volume||.55);
  updateProgress();
 })();
-$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.openView)));
+$$("[data-open-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.openView)));
 
 if(categoryGrid){categoryGrid.querySelectorAll("button[data-category]").forEach(button=>button.setAttribute("aria-pressed",String(normalizeCategory(button.dataset.category)===activeCategory)));const activateCategory=event=>{const button=event.target&&event.target.closest?event.target.closest("#categoryGrid button[data-category]"):null;if(!button||!categoryGrid.contains(button))return;if(event.type==="click")event.preventDefault();setCategory(button.dataset.category);};categoryGrid.addEventListener("click",activateCategory,true);categoryGrid.addEventListener("pointerup",event=>{if(event.pointerType==="touch"||event.pointerType==="pen")activateCategory(event)},true);}
 const drawer=$("#cartDrawer"),overlay=$("#cartOverlay");

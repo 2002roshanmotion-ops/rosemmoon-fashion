@@ -96,45 +96,16 @@ const drawer=$("#cartDrawer"),overlay=$("#cartOverlay");
 function openCart(){drawer.classList.add("open");overlay.classList.add("open");document.body.classList.add("cart-open");drawer.setAttribute("aria-hidden","false");overlay.setAttribute("aria-hidden","false")}
 function closeCart(){drawer.classList.remove("open");overlay.classList.remove("open");document.body.classList.remove("cart-open");drawer.setAttribute("aria-hidden","true");overlay.setAttribute("aria-hidden","true")}
 $("#openCart").addEventListener("click",openCart);$("#closeCart").addEventListener("click",closeCart);overlay.addEventListener("click",closeCart);
-function flyProductToBag(card,button){
- const image=card&&card.querySelector(".product-image img"),bag=document.getElementById("openCart");
- const reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
- if(!image||!bag||reduced||typeof document.createElement("div").animate!=="function")return Promise.resolve();
- const from=image.getBoundingClientRect(),to=bag.getBoundingClientRect();
- if(!from.width||!from.height||!to.width||!to.height)return Promise.resolve();
- const mobile=window.matchMedia("(max-width:760px)").matches;
- const width=Math.min(from.width,mobile?154:224),height=Math.min(from.height,mobile?218:310);
- const startX=from.left+from.width/2-width/2,startY=from.top+from.height/2-height/2;
- const flyer=document.createElement("div");flyer.className="rm-bag-flight rm-bag-flight-show";flyer.setAttribute("aria-hidden","true");
- Object.assign(flyer.style,{left:startX+"px",top:startY+"px",width:width+"px",height:height+"px"});
- const clone=image.cloneNode();clone.removeAttribute("loading");clone.alt="";flyer.appendChild(clone);
- const shine=document.createElement("span");shine.className="rm-bag-flight-shine";flyer.appendChild(shine);
- for(let i=0;i<5;i++){const star=document.createElement("i");star.className="rm-bag-flight-star";star.textContent=i%2?"✧":"✦";star.style.setProperty("--star-index",i);flyer.appendChild(star)}
- document.body.appendChild(flyer);
- const dx=to.left+to.width/2-(from.left+from.width/2),dy=to.top+to.height/2-(from.top+from.height/2);
- bag.classList.remove("bag-arrival");void bag.offsetWidth;bag.classList.add("bag-arrival");
- const animation=flyer.animate([
-  {transform:"translate3d(0,18px,0) scale(.32) rotate(-5deg)",opacity:0,filter:"brightness(1.35)"},
-  {transform:"translate3d(0,0,0) scale(1) rotate(0deg)",opacity:1,filter:"brightness(1.08)",offset:.18},
-  {transform:"translate3d("+dx*.48+"px,"+(dy*.48-145)+"px,0) scale(.82) rotate(10deg)",opacity:1,filter:"brightness(1.16)",offset:.68},
-  {transform:"translate3d("+dx+"px,"+dy+"px,0) scale(.055) rotate(22deg)",opacity:0,filter:"brightness(1.8)",offset:1}
- ],{duration:1450,easing:"cubic-bezier(.18,.72,.18,1)",fill:"forwards"});
- return animation.finished.catch(()=>{}).then(()=>{flyer.remove();bag.classList.remove("bag-arrival")});
-}
 grid.addEventListener("click",e=>{
  const b=e.target.closest(".add-button[data-id]");
- if(!b||!grid.contains(b)||b.dataset.adding==="true")return;
+ if(!b||!grid.contains(b))return;
  e.preventDefault();
  const p=products.find(x=>x.id===Number(b.dataset.id));if(!p)return;
- const card=b.closest(".product-card"),found=cart.find(x=>x.id===p.id);
- b.dataset.adding="true";b.classList.add("rm-added-flash");
- const originalLabel=b.textContent.trim();b.textContent="✦ ADDED TO BAG";
+ const found=cart.find(x=>x.id===p.id);
  if(found)found.qty++;else cart.push({...p,qty:1});
- renderCart();showToast(p.name+" added to your bag");
- flyProductToBag(card,b).then(()=>{
-   openCart();
-   window.setTimeout(()=>{b.textContent=originalLabel;b.classList.remove("rm-added-flash");delete b.dataset.adding},900);
- });
+ renderCart();
+ showToast(p.name+" added to your bag");
+ openCart();
 });function renderCart(){$("#cartCount").textContent=cart.reduce((n,p)=>n+p.qty,0);$("#cartTotal").textContent="Rs. "+cart.reduce((n,p)=>n+p.price*p.qty,0).toLocaleString("en-IN");$("#cartItems").innerHTML=cart.length?cart.map(p=>`<div class="cart-row"><img src="${p.image}" alt=""><div class="cart-item-details"><strong>${p.name}</strong><small>Rs. ${p.price.toLocaleString("en-IN")} each</small><div class="quantity-control" aria-label="Quantity controls for ${p.name}"><button type="button" data-qty="-1" data-id="${p.id}" aria-label="Decrease ${p.name} quantity">−</button><span>${p.qty}</span><button type="button" data-qty="1" data-id="${p.id}" aria-label="Increase ${p.name} quantity">+</button></div></div><button class="remove-item" data-remove="${p.id}" aria-label="Remove ${p.name}">Remove</button></div>`).join(""):'<p class="empty-cart">Your bag is waiting for something lovely.</p>'}
 $("#cartItems").addEventListener("click",e=>{const qtyButton=e.target.closest("[data-qty]");if(qtyButton){const item=cart.find(p=>p.id===Number(qtyButton.dataset.id));if(item){item.qty+=Number(qtyButton.dataset.qty);if(item.qty<=0)cart=cart.filter(p=>p.id!==item.id);renderCart()}return}const removeButton=e.target.closest("[data-remove]");if(!removeButton)return;cart=cart.filter(p=>p.id!==Number(removeButton.dataset.remove));renderCart()});
 const modal=$("#checkoutModal"),backdrop=$("#checkoutModalBackdrop");

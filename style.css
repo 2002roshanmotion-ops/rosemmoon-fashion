@@ -2209,3 +2209,87 @@ body.rm-preview-open{overflow:hidden}
 @media(prefers-reduced-motion:reduce){
   .site-header .vinyl-disc,.site-header .crystal-player.is-playing .vinyl-disc{animation:none!important}
 }
+
+
+/* Make the header music controls clearly visible and easy to tap. */
+.site-header .crystal-player{
+  grid-template-columns:48px minmax(0,1fr)!important;
+  min-width:0!important;overflow:visible;
+}
+.site-header .crystal-main{
+  display:grid!important;grid-template-columns:minmax(0,1fr) auto;
+  grid-template-rows:auto auto;align-items:center;column-gap:9px;
+  min-width:0;width:100%;
+}
+.site-header .crystal-topline{display:none!important}
+.site-header .crystal-track-info{
+  grid-column:1;grid-row:1;min-width:0;margin:0 0 3px!important;
+  overflow:hidden;
+}
+.site-header .crystal-track-info strong{
+  display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;font-size:12px!important;line-height:1.2;
+}
+.site-header .crystal-track-info span{display:none!important}
+.site-header .crystal-controls{
+  grid-column:1 / -1;grid-row:2;display:flex!important;
+  align-items:center;justify-content:flex-start;gap:8px!important;
+  margin:0!important;min-width:0;
+}
+.site-header .crystal-controls #crystalPrev,
+.site-header .crystal-controls #crystalNext{
+  display:grid!important;place-items:center;width:27px;height:27px;
+  border-radius:50%;border:1px solid #e8cad8;background:#fff8;
+  color:#8d4d69;cursor:pointer;
+}
+.site-header .crystal-controls #crystalPrev svg,
+.site-header .crystal-controls #crystalNext svg{width:13px;height:13px}
+.site-header .crystal-controls .crystal-play{
+  display:grid!important;place-items:center;width:31px!important;height:31px!important;
+  flex:0 0 31px;border-radius:50%;background:linear-gradient(145deg,#a75e7c,#71364f);
+  color:#fff;box-shadow:0 3px 9px #8c456344;cursor:pointer;
+}
+.site-header .crystal-controls .crystal-play svg{width:15px;height:15px}
+.site-header .crystal-volume{display:flex!important;align-items:center;gap:4px;margin-left:4px;min-width:0}
+.site-header .crystal-volume svg{width:14px;height:14px;flex:0 0 14px}
+.site-header .crystal-volume input{width:54px;min-width:40px;height:16px;accent-color:#a75e7c}
+.site-header .crystal-progress-row{display:none!important}
+.site-header .crystal-collapse{display:none!important}
+.site-header .crystal-art{grid-column:1;grid-row:1;min-height:48px}
+.site-header .crystal-player.is-minimized{width:100%!important;height:66px;min-height:66px;grid-template-columns:48px minmax(0,1fr);padding:6px 10px}
+@media(max-width:760px){
+  .site-header .crystal-player{
+    grid-template-columns:36px minmax(0,1fr)!important;
+    height:60px!important;min-height:60px!important;padding:4px 6px!important;
+    gap:5px!important;
+  }
+  .site-header .crystal-art{min-height:42px}
+  .site-header .vinyl-disc{width:35px;height:35px}
+  .site-header .vinyl-label{inset:11px}
+  .site-header .crystal-main{
+    grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;
+    row-gap:3px;align-content:center;
+  }
+  .site-header .crystal-track-info{grid-column:1;grid-row:1;margin:0!important}
+  .site-header .crystal-track-info strong{font-size:10px!important}
+  .site-header .crystal-controls{grid-column:1;grid-row:2;gap:5px!important}
+  .site-header .crystal-controls #crystalPrev,
+  .site-header .crystal-controls #crystalNext{width:23px;height:23px}
+  .site-header .crystal-controls .crystal-play{width:26px!important;height:26px!important;flex-basis:26px}
+  .site-header .crystal-volume{display:none!important}
+}
+@media(max-width:390px){
+  .site-header{grid-template-columns:40px minmax(0,1fr) auto!important;gap:5px!important}
+  .site-header .crystal-player{
+    grid-template-columns:31px minmax(0,1fr)!important;
+    height:56px!important;min-height:56px!important;padding:3px 4px!important;
+  }
+  .site-header .crystal-art{min-height:36px}
+  .site-header .vinyl-disc{width:31px;height:31px}
+  .site-header .vinyl-label{inset:10px}
+  .site-header .crystal-controls{gap:3px!important}
+  .site-header .crystal-controls #crystalPrev,
+  .site-header .crystal-controls #crystalNext{width:21px;height:21px}
+  .site-header .crystal-controls .crystal-play{width:24px!important;height:24px!important;flex-basis:24px}
+  .site-header .crystal-track-info strong{font-size:9px!important}
+}

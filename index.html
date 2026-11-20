@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/e5ee25d3-5140-4aec-96d9-c570362e35c7.png">
-  <link rel="stylesheet" href="style.css?v=20261121-search-in-shop03">
+  <link rel="stylesheet" href="style.css?v=20261121-search-inside-bar04">
 </head>
 <body>
   <div class="opening-screen" id="openingScreen" aria-label="Loading RoseMoon Fashion">
@@ -24,7 +24,14 @@
     <a class="brand" href="#" aria-label="RoseMoon Fashion home">
       <img class="brand-logo" style="width:58px;height:58px;max-width:58px;max-height:58px;object-fit:contain;display:block" src="https://d2ol7oe51mr4n9.cloudfront.net/user_3JYbYCHyy3naSeG6RhPtSZPxh49/e5ee25d3-5140-4aec-96d9-c570362e35c7.png" alt="RoseMoon Fashion — Let Your Beauty Speak">
     </a>
-    <button class="bag-button" id="openCart" aria-label="Open shopping bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span class="bag-label">Bag</span><span id="cartCount">0</span></button></header>
+    <div class="rosem-search-area header-search-area" role="search" aria-label="Search RoseMoon products">
+      <span class="rosem-search-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.7"></circle><path d="m16 16 5 5"></path></svg></span>
+      <input id="productSearchInput" type="search" autocomplete="off" placeholder="Search dresses, tops, pants..." aria-label="Search all RoseMoon products">
+      <button id="clearProductSearch" type="button" aria-label="Clear search" hidden>×</button>
+      <span class="rosem-search-hint">SEARCH</span>
+      <div class="rosem-search-dropdown" id="productSearchDropdown" role="listbox" aria-label="Product suggestions" hidden></div>
+    </div>
+        <button class="bag-button" id="openCart" aria-label="Open shopping bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span class="bag-label">Bag</span><span id="cartCount">0</span></button></header>
 
 <section class="crystal-player" id="crystalPlayer" aria-label="RoseMoon crystal music player">
         <div class="crystal-player-glow" aria-hidden="true"></div><div class="crystal-art" aria-hidden="true"><div class="vinyl-disc" aria-hidden="true"><span class="vinyl-groove"></span><span class="vinyl-label"></span><span class="vinyl-hole"></span></div><span class="crystal-spark spark-a">✦</span><span class="crystal-spark spark-b">✧</span></div>
@@ -48,14 +55,7 @@
     <section class="intro-strip" aria-hidden="true"><span>MODERN FEMININITY</span><i>✳</i><span>EFFORTLESS ELEGANCE</span><i>✳</i><span>MADE TO BE YOU</span></section>
 
     <section class="collections section view-panel" id="collections" data-panel="collections">
-    <div class="rosem-search-area header-search-area" role="search" aria-label="Search RoseMoon products">
-      <span class="rosem-search-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.7"></circle><path d="m16 16 5 5"></path></svg></span>
-      <input id="productSearchInput" type="search" autocomplete="off" placeholder="Search dresses, tops, pants..." aria-label="Search all RoseMoon products">
-      <button id="clearProductSearch" type="button" aria-label="Clear search" hidden>×</button>
-      <span class="rosem-search-hint">SEARCH</span>
-      <div class="rosem-search-dropdown" id="productSearchDropdown" role="listbox" aria-label="Product suggestions" hidden></div>
-    </div>
-    <p class="rosem-search-status" id="productSearchStatus" aria-live="polite"></p>
+<p class="rosem-search-status" id="productSearchStatus" aria-live="polite"></p>
             <div class="shop section" id="shop">
       <div class="section-heading"><div><p class="eyebrow">THE COLLECTION</p><h2>Find your <em>style.</em></h2></div></div>
       <div class="category-layout">

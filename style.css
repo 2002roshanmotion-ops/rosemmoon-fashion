@@ -2941,3 +2941,24 @@ body.crystal-player-visible .rm-search-lens{width:23px;height:23px;flex:0 0 23px
 @media(max-width:390px){
  .site-header>#rmSearchButton{width:39px!important;height:39px!important;flex-basis:39px!important;margin-right:5px!important}
 }
+
+
+/* Search stays completely hidden until the customer enters the shop. */
+.site-header>#rmSearchButton{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+body.crystal-player-visible .site-header>#rmSearchButton{
+ display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+ position:relative!important;left:auto!important;top:auto!important;right:auto!important;bottom:auto!important;
+ transform:none!important;order:1!important;flex:0 0 auto!important;
+ width:auto!important;min-width:49px!important;height:43px!important;padding:0 14px!important;
+ flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:9px!important;
+ border-radius:24px!important;margin:0 12px 0 auto!important;
+}
+body.crystal-player-visible .site-header>#rmSearchButton .rm-search-label{display:inline-block!important}
+@media(max-width:760px){
+ body.crystal-player-visible .site-header>#rmSearchButton{height:39px!important;padding:0 11px!important;gap:7px!important;margin-right:7px!important}
+ body.crystal-player-visible .site-header>#rmSearchButton .rm-search-lens{width:21px;height:21px;flex-basis:21px}
+ body.crystal-player-visible .site-header>#rmSearchButton .rm-search-label{font-size:9px;letter-spacing:.12em}
+}
+@media(max-width:390px){
+ body.crystal-player-visible .site-header>#rmSearchButton{min-width:0!important;margin-right:5px!important}
+}

@@ -28,3 +28,24 @@
 .stats{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-bottom:25px}
 .home-image-manager,.category-image-manager,.music-manager{scroll-margin-top:155px}
 @media(max-width:520px){.admin-section-nav{top:66px;margin:0 -2px 20px;padding:9px;gap:7px}.admin-section-nav a{padding:8px 11px;font-size:9px}#overviewSection,#productSection,#homeImageSection,#categoryImageSection,#musicManager{scroll-margin-top:125px}}
+
+
+/* Functional playlist arranger */
+.music-playlist-summary{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0 17px;padding:12px 14px;border:1px solid #efdae1;border-radius:12px;background:#fff}
+.music-playlist-summary strong{font:600 12px "DM Sans";color:#98465f}
+.music-playlist-summary span{font-size:10px;color:#8a747d}
+.music-link-grid{grid-template-columns:1fr;gap:10px}
+.music-track-card{min-width:0;padding:13px;border:1px solid #eedde1;border-radius:13px;background:rgba(255,255,255,.88);box-shadow:0 4px 14px rgba(80,42,55,.035)}
+.music-track-top{display:flex;align-items:center;gap:10px;margin-bottom:9px;min-width:0}
+.music-track-top>strong{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:500 14px "Playfair Display",serif;color:#392832}
+.music-track-number{display:grid;place-items:center;width:32px;height:32px;flex:0 0 32px;border-radius:50%;background:#f8e8ec;color:#98465f;font:700 10px "DM Sans"}
+.music-track-order{display:flex;gap:5px}
+.music-track-order button,.music-preview-button,.music-remove-button{height:34px;min-width:36px;border:1px solid #ead8de;border-radius:8px;background:#fff;color:#98465f;cursor:pointer;font:700 11px "DM Sans"}
+.music-track-order button:disabled{opacity:.3;cursor:not-allowed}
+.music-track-input{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:7px}
+.music-track-input input{height:38px}
+.music-preview-button{padding:0 13px;background:#98465f;color:#fff;border-color:#98465f}
+.music-remove-button{font-size:19px;line-height:1}
+.music-track-state{display:block;margin-top:7px;color:#8a747d;font:10px "DM Sans"}
+.music-manager-actions{flex-wrap:wrap}
+@media(max-width:520px){.music-manager{padding:16px}.music-track-card{padding:10px}.music-track-top>strong{font-size:12px}.music-track-input{grid-template-columns:minmax(0,1fr) auto auto;gap:5px}.music-preview-button{padding:0 9px;font-size:10px}.music-track-order button,.music-preview-button,.music-remove-button{min-width:32px;height:32px}}

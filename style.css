@@ -2978,3 +2978,8 @@ body.rm-preview-open{overflow:hidden}
  .search-suggestion-price{font-size:9px}
 }
 @media(prefers-reduced-motion:reduce){.rosem-search-dropdown{animation:none!important}.search-suggestion{transition:none!important}}
+
+
+/* Keep product search hidden on the welcome screen; reveal it only in Start Shopping. */
+.site-header>.header-search-area{display:none!important}
+body.crystal-player-visible .site-header>.header-search-area{display:flex!important}

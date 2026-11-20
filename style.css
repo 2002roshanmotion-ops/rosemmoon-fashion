@@ -2447,3 +2447,19 @@ body.rm-preview-open{overflow:hidden}
  .site-header>.crystal-player .crystal-controls .crystal-play{width:22px!important;height:22px!important;flex-basis:22px!important}
  .site-header>.crystal-player .crystal-volume input{width:24px!important;min-width:20px!important}
 }
+
+
+/* Make the RoseMoon mark clearly visible without crowding the header. */
+.site-header{min-height:92px!important;height:92px!important;padding-left:clamp(12px,3vw,42px)!important;padding-right:clamp(12px,3vw,42px)!important}
+.site-header>.brand{width:82px!important;min-width:82px!important;max-width:82px!important;flex:0 0 82px!important;height:82px!important;display:flex!important;align-items:center!important;justify-content:center!important}
+.site-header>.brand .brand-logo{width:76px!important;height:76px!important;max-width:76px!important;max-height:76px!important;object-fit:contain!important;display:block!important}
+@media(max-width:760px){
+ .site-header{height:72px!important;min-height:72px!important;padding:0 8px!important;gap:5px!important}
+ .site-header>.brand{width:58px!important;min-width:58px!important;max-width:58px!important;flex:0 0 58px!important;height:66px!important}
+ .site-header>.brand .brand-logo{width:56px!important;height:56px!important;max-width:56px!important;max-height:56px!important}
+}
+@media(max-width:390px){
+ .site-header{height:68px!important;min-height:68px!important}
+ .site-header>.brand{width:52px!important;min-width:52px!important;max-width:52px!important;flex-basis:52px!important}
+ .site-header>.brand .brand-logo{width:50px!important;height:50px!important;max-width:50px!important;max-height:50px!important}
+}

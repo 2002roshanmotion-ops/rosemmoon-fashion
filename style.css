@@ -3013,7 +3013,4 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .checkout-modal-backdrop{z-index:13000!important}
 .checkout-modal{z-index:13001!important}
 
-/* Fade the fixed music player away in place while search is focused; never move it or reflow the page. */
-body.search-input-active .crystal-player{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:translateY(0)!important;transition:opacity .18s ease,visibility 0s linear .18s!important}
-body.crystal-player-visible:not(.search-input-active) .crystal-player{opacity:1;visibility:visible;transform:translateY(0);transition:opacity .18s ease,visibility 0s!important}
-@media(prefers-reduced-motion:reduce){body.search-input-active .crystal-player,body.crystal-player-visible .crystal-player{transition:none!important}}
+}

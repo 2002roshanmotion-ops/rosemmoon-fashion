@@ -3015,8 +3015,9 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
 }
 
-/* Keep the music dock underneath the iOS keyboard without moving or stopping playback. */
-html.rm-keyboard-open .crystal-player{
-  visibility:hidden!important;
-  pointer-events:none!important;
+/* Anchor the dock at its pre-keyboard screen coordinate while the iOS keyboard overlays the page. */
+.crystal-player.rm-keyboard-anchored{
+  top:var(--rm-keyboard-player-top)!important;
+  bottom:auto!important;
+  transition-property:transform,opacity!important;
 }

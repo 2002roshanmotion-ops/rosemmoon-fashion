@@ -3012,3 +3012,6 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 /* Checkout must sit above the open bag, music player and decorative layers. */
 .checkout-modal-backdrop{z-index:13000!important}
 .checkout-modal{z-index:13001!important}
+
+/* Keep the music player out of the keyboard area while the search field is active. */
+body.search-input-active .crystal-player{display:none!important;visibility:hidden!important;pointer-events:none!important}

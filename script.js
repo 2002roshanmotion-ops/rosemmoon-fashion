@@ -99,7 +99,7 @@ function openProductPreview(product){
 }
 
 function setCategory(category){const selected=normalizeCategory(category);const buttons=categoryGrid?Array.from(categoryGrid.querySelectorAll("button[data-category]")):[];if(!buttons.some(b=>normalizeCategory(b.dataset.category)===selected))return false;activeCategory=selected;buttons.forEach(b=>{const isSelected=normalizeCategory(b.dataset.category)===selected;b.classList.toggle("active",isSelected);b.classList.toggle("is-selected",isSelected);b.setAttribute("aria-pressed",String(isSelected))});renderProducts();const heading=$("#selectedCategoryTitle");if(heading)heading.textContent=selected.charAt(0).toUpperCase()+selected.slice(1);return true;}
-function showView(view){const safeView=String(view||"").replace(/[^a-z-]/gi,"");const validView=document.querySelector('.view-panel[data-panel="'+safeView+'"]');if(!validView)return false;document.querySelectorAll(".view-panel").forEach(panel=>{const active=panel===validView;panel.classList.toggle("active",active);panel.setAttribute("aria-hidden",String(!active))});document.querySelectorAll(".nav-tab").forEach(btn=>btn.classList.toggle("active",btn.dataset.view===safeView));const player=document.getElementById("crystalPlayer");const showPlayer=safeView==="collections";document.body.classList.toggle("crystal-player-visible",showPlayer);if(player){player.style.setProperty("display",showPlayer?"grid":"none","important");player.setAttribute("aria-hidden",String(!showPlayer));}if(showPlayer){try{if(typeof playRoseMoonMusic==="function")playRoseMoonMusic()}catch(error){console.warn("RoseMoon music could not start",error)}requestAnimationFrame(()=>{if(typeof grid!=="undefined"&&grid)grid.querySelectorAll(".product-card").forEach((card,i)=>{card.style.animationDelay=(i*65)+"ms"});validView.scrollTop=0;});}window.scrollTo({top:0,behavior:"smooth"});return true;}
+function showView(view){const safeView=String(view||"").replace(/[^a-z-]/gi,"");const validView=document.querySelector('.view-panel[data-panel="'+safeView+'"]');if(!validView)return false;document.querySelectorAll(".view-panel").forEach(panel=>{const active=panel===validView;panel.classList.toggle("active",active);panel.setAttribute("aria-hidden",String(!active))});document.querySelectorAll(".nav-tab").forEach(btn=>btn.classList.toggle("active",btn.dataset.view===safeView));const player=document.getElementById("crystalPlayer");const showPlayer=safeView==="collections";document.body.classList.toggle("crystal-player-visible",showPlayer);if(player){player.style.setProperty("display",showPlayer&&!document.body.classList.contains("rm-keyboard-entry-active")?"grid":"none","important");player.setAttribute("aria-hidden",String(!showPlayer));}if(showPlayer){try{if(typeof playRoseMoonMusic==="function")playRoseMoonMusic()}catch(error){console.warn("RoseMoon music could not start",error)}requestAnimationFrame(()=>{if(typeof grid!=="undefined"&&grid)grid.querySelectorAll(".product-card").forEach((card,i)=>{card.style.animationDelay=(i*65)+"ms"});validView.scrollTop=0;});}window.scrollTo({top:0,behavior:"smooth"});return true;}
 const productSearchInput=$("#productSearchInput"),clearProductSearch=$("#clearProductSearch");
 renderProducts();
 if(productSearchInput){
@@ -312,99 +312,86 @@ $("#newsletterForm").addEventListener("submit",e=>{e.preventDefault();$("#newsle
 })();
 
 
-/* One controller owns the music player's visibility during text entry. */
+/* Keep the music player completely out of view while a text-entry keyboard is requested. */
 (function(){
  const player=document.getElementById("crystalPlayer");
  if(!player)return;
- const excludedTypes=new Set(["button","submit","reset","checkbox","radio","range","color","file","image","hidden"]);
- const isEditable=el=>{
+ const excluded=new Set(["button","submit","reset","checkbox","radio","range","color","file","image","hidden"]);
+ const editable=el=>{
   if(!el)return false;
   if(el.tagName==="TEXTAREA"||el.tagName==="SELECT"||el.isContentEditable)return true;
-  if(el.tagName!=="INPUT")return false;
-  return !excludedTypes.has(String(el.type||"text").toLowerCase());
+  return el.tagName==="INPUT"&&!excluded.has(String(el.type||"text").toLowerCase());
  };
  const viewport=window.visualViewport||null;
- let normalHeight=viewport?viewport.height:window.innerHeight;
- let keyboardOpen=false;
- let restoreTimer=0;
- let blurFrame=0;
- let tapTimer=0;
- const height=()=>viewport?viewport.height:window.innerHeight;
- const setHidden=hidden=>{
-  player.classList.toggle("rm-keyboard-hidden",hidden);
+ let baseline=viewport?viewport.height:window.innerHeight;
+ let keyboardWasOpen=false;
+ let timer=0,frame=0;
+ const vh=()=>viewport?viewport.height:window.innerHeight;
+ function applyHidden(hidden){
   document.body.classList.toggle("rm-keyboard-entry-active",hidden);
- };
- const hideForTap=event=>{
-  const target=event.target&&event.target.closest
-   ?event.target.closest("input,textarea,select,[contenteditable]")
-   :null;
-  if(!target||!isEditable(target))return;
-  window.clearTimeout(restoreTimer);
-  window.clearTimeout(tapTimer);
-  setHidden(true);
-  tapTimer=window.setTimeout(()=>{
-   if(!isEditable(document.activeElement)&&!keyboardOpen)setHidden(false);
-  },1200);
- };
- const syncFocus=()=>{
-  if(isEditable(document.activeElement)){
-   window.clearTimeout(restoreTimer);
-   window.clearTimeout(tapTimer);
-   setHidden(true);
+  player.classList.toggle("rm-keyboard-hidden",hidden);
+  if(hidden){
+   player.style.setProperty("display","none","important");
+   player.style.setProperty("visibility","hidden","important");
+   player.style.setProperty("pointer-events","none","important");
   }else{
-   window.clearTimeout(restoreTimer);
-   window.clearTimeout(tapTimer);
-   keyboardOpen=false;
-   normalHeight=height();
-   setHidden(false);
+   player.style.setProperty("display",document.body.classList.contains("crystal-player-visible")?"grid":"none","important");
+   player.style.setProperty("visibility","visible","important");
+   player.style.setProperty("pointer-events","auto","important");
   }
- };
- const onViewportResize=()=>{
-  if(!isEditable(document.activeElement)){
-   keyboardOpen=false;
-   normalHeight=height();
-   setHidden(false);
+ }
+ function onTap(e){
+  const field=e.target&&e.target.closest?e.target.closest("input,textarea,select,[contenteditable]"):null;
+  if(field&&editable(field)){
+   clearTimeout(timer);
+   applyHidden(true);
+  }
+ }
+ function sync(){
+  if(editable(document.activeElement)){
+   clearTimeout(timer);
+   applyHidden(true);
+  }else{
+   clearTimeout(timer);
+   keyboardWasOpen=false;
+   baseline=vh();
+   applyHidden(false);
+  }
+ }
+ function viewportChange(){
+  if(!editable(document.activeElement)){
+   sync();
    return;
   }
-  if(normalHeight-height()>110){
-   keyboardOpen=true;
-   window.clearTimeout(restoreTimer);
-   setHidden(true);
-  }else if(keyboardOpen){
-   window.clearTimeout(restoreTimer);
-   restoreTimer=window.setTimeout(()=>{
-    if(isEditable(document.activeElement)&&normalHeight-height()<=110){
-     keyboardOpen=false;
-     normalHeight=height();
-     setHidden(false);
-    }else if(!isEditable(document.activeElement)){
-     syncFocus();
-    }
-   },180);
+  if(baseline-vh()>90){
+   keyboardWasOpen=true;
+   clearTimeout(timer);
+   applyHidden(true);
+  }else if(keyboardWasOpen){
+   clearTimeout(timer);
+   timer=setTimeout(()=>{
+    if(editable(document.activeElement)&&baseline-vh()<=90){
+     keyboardWasOpen=false;
+     baseline=vh();
+     applyHidden(false);
+    }else if(!editable(document.activeElement))sync();
+   },220);
   }
- };
- document.addEventListener("pointerdown",hideForTap,true);
- document.addEventListener("touchstart",hideForTap,{capture:true,passive:true});
- document.addEventListener("mousedown",hideForTap,true);
- document.addEventListener("focusin",()=>{
-  window.clearTimeout(tapTimer);
-  window.clearTimeout(restoreTimer);
-  setHidden(isEditable(document.activeElement));
+ }
+ document.addEventListener("pointerdown",onTap,true);
+ document.addEventListener("touchstart",onTap,{capture:true,passive:true});
+ document.addEventListener("mousedown",onTap,true);
+ document.addEventListener("focusin",e=>{
+  clearTimeout(timer);
+  if(editable(e.target)||editable(document.activeElement))applyHidden(true);
  },true);
  document.addEventListener("focusout",()=>{
-  if(blurFrame)cancelAnimationFrame(blurFrame);
-  blurFrame=requestAnimationFrame(()=>{
-   blurFrame=0;
-   syncFocus();
-  });
+  if(frame)cancelAnimationFrame(frame);
+  frame=requestAnimationFrame(()=>{frame=0;sync()});
  },true);
- if(viewport)viewport.addEventListener("resize",onViewportResize,{passive:true});
- window.addEventListener("resize",onViewportResize,{passive:true});
- window.addEventListener("orientationchange",()=>window.setTimeout(onViewportResize,220),{passive:true});
- window.addEventListener("pageshow",()=>{
-  normalHeight=height();
-  keyboardOpen=false;
-  syncFocus();
- },{passive:true});
- syncFocus();
+ if(viewport)viewport.addEventListener("resize",viewportChange,{passive:true});
+ window.addEventListener("resize",viewportChange,{passive:true});
+ window.addEventListener("orientationchange",()=>setTimeout(viewportChange,250),{passive:true});
+ window.addEventListener("pageshow",()=>{baseline=vh();keyboardWasOpen=false;sync()},{passive:true});
+ sync();
 })();

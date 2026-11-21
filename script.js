@@ -312,20 +312,32 @@ $("#newsletterForm").addEventListener("submit",e=>{e.preventDefault();$("#newsle
 })();
 
 
-/* Let the iOS keyboard cover the music dock. The dock's animation and audio keep running. */
+/* Preserve the music dock's exact pre-keyboard top coordinate on iOS.
+   Keep it rendered and playing; the native keyboard naturally overlays web content. */
 (function(){
  const viewport=window.visualViewport;
- if(!viewport)return;
+ const player=document.getElementById("crystalPlayer");
+ if(!viewport||!player)return;
  const root=document.documentElement;
- const initialHeight=Math.max(document.documentElement.clientHeight,window.innerHeight);
- const isTextEntry=()=>{const el=document.activeElement;return !!el&&(/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)||el.isContentEditable)};
- function syncKeyboardLayer(){
-  const keyboardOpen=isTextEntry() && viewport.height < initialHeight-120;
-  root.classList.toggle("rm-keyboard-open",keyboardOpen);
+ const isTextEntry=el=>!!el&&(/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)||el.isContentEditable);
+ let anchored=false;
+ function anchorPlayer(){
+  if(anchored||!isTextEntry(document.activeElement))return;
+  const rect=player.getBoundingClientRect();
+  if(!Number.isFinite(rect.top)||rect.height===0)return;
+  player.style.setProperty("--rm-keyboard-player-top",Math.round(rect.top)+"px");
+  player.classList.add("rm-keyboard-anchored");
+  anchored=true;
  }
- viewport.addEventListener("resize",syncKeyboardLayer,{passive:true});
- viewport.addEventListener("scroll",syncKeyboardLayer,{passive:true});
- document.addEventListener("focusin",syncKeyboardLayer);
- document.addEventListener("focusout",()=>requestAnimationFrame(syncKeyboardLayer));
- syncKeyboardLayer();
+ function releasePlayer(){
+  if(isTextEntry(document.activeElement))return;
+  player.classList.remove("rm-keyboard-anchored");
+  player.style.removeProperty("--rm-keyboard-player-top");
+  anchored=false;
+ }
+ document.addEventListener("focusin",anchorPlayer,true);
+ document.addEventListener("focusout",()=>requestAnimationFrame(releasePlayer),true);
+ viewport.addEventListener("resize",()=>{
+  if(!isTextEntry(document.activeElement))releasePlayer();
+ },{passive:true});
 })();

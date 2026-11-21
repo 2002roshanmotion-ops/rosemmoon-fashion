@@ -3015,9 +3015,8 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
 }
 
-/* Keep the player out of view while the iOS keyboard is active.
-   Visibility preserves layout, playback, and the vinyl animation. */
+/* Hide every player layer without changing layout, playback or animations. */
 .crystal-player.rm-keyboard-hidden{
-  visibility:hidden!important;
-  pointer-events:none!important;
+ visibility:hidden!important;
+ pointer-events:none!important;
 }

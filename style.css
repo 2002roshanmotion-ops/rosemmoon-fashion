@@ -3015,8 +3015,9 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
 }
 
-/* Hide every player layer without changing layout, playback or animations. */
-.crystal-player.rm-keyboard-hidden{
+/* The body and player classes both guard visibility; neither alters layout or playback. */
+.crystal-player.rm-keyboard-hidden,
+body.rm-keyboard-entry-active #crystalPlayer{
  visibility:hidden!important;
  pointer-events:none!important;
 }

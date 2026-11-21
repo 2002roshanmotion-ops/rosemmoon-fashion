@@ -3015,9 +3015,6 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
 }
 
-/* The body and player classes both guard visibility; neither alters layout or playback. */
-.crystal-player.rm-keyboard-hidden,
-body.rm-keyboard-entry-active #crystalPlayer{
- visibility:hidden!important;
- pointer-events:none!important;
-}
+/* Hard-hide the complete player while a text field is active. */
+body.rm-keyboard-entry-active #crystalPlayer,
+#crystalPlayer.rm-keyboard-hidden{display:none!important;visibility:hidden!important;pointer-events:none!important}

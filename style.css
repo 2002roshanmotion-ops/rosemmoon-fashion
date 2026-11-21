@@ -3015,9 +3015,8 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
 }
 
-/* Keep the floating music dock anchored to the layout viewport while the iOS keyboard opens.
-   The keyboard covers it naturally; no player animation or playback state is changed. */
-.crystal-player{
-  bottom:calc(12px - var(--rm-keyboard-offset, 0px))!important;
-  transition-property:transform,opacity!important;
+/* Keep the music dock underneath the iOS keyboard without moving or stopping playback. */
+html.rm-keyboard-open .crystal-player{
+  visibility:hidden!important;
+  pointer-events:none!important;
 }

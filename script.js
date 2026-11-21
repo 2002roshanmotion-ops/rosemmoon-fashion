@@ -312,16 +312,18 @@ $("#newsletterForm").addEventListener("submit",e=>{e.preventDefault();$("#newsle
 })();
 
 
-/* iOS keyboard compensation: hold the music dock at its normal screen position.
-   This only adjusts its bottom anchor; it never pauses, hides, or animates the player. */
+/* Keep the music dock at its pre-keyboard screen coordinate on iOS.
+   Measure against the original layout height (not the shrinking innerHeight).
+   No player classes, audio state, or animation styles are changed. */
 (function(){
  const viewport=window.visualViewport;
  if(!viewport)return;
  const root=document.documentElement;
- const search=document.getElementById("productSearchInput");
- const isTextEntry=()=>{const el=document.activeElement;return !!el&&(el===search||/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)||el.isContentEditable)};
+ const layoutHeight=Math.max(document.documentElement.clientHeight,window.innerHeight);
+ const isTextEntry=()=>{const el=document.activeElement;return !!el&&(/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)||el.isContentEditable)};
  function syncKeyboardOffset(){
-  const offset=isTextEntry()?Math.max(0,window.innerHeight-viewport.height-viewport.offsetTop):0;
+  const focused=isTextEntry();
+  const offset=focused?Math.max(0,layoutHeight-viewport.height-viewport.offsetTop):0;
   root.style.setProperty("--rm-keyboard-offset",Math.round(offset)+"px");
  }
  viewport.addEventListener("resize",syncKeyboardOffset,{passive:true});

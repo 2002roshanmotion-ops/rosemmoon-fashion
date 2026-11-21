@@ -312,84 +312,84 @@ $("#newsletterForm").addEventListener("submit",e=>{e.preventDefault();$("#newsle
 })();
 
 
-/* Single controller: hide on the tap before iOS opens its keyboard,
-   then keep hidden through focus and restore after blur or keyboard dismissal. */
+/* One controller owns the music player's visibility during text entry. */
 (function(){
  const player=document.getElementById("crystalPlayer");
  if(!player)return;
- const excludedInputTypes=new Set(["button","submit","reset","checkbox","radio","range","color","file","image","hidden"]);
- const isTextEntry=el=>{
+ const excludedTypes=new Set(["button","submit","reset","checkbox","radio","range","color","file","image","hidden"]);
+ const isEditable=el=>{
   if(!el)return false;
   if(el.tagName==="TEXTAREA"||el.tagName==="SELECT"||el.isContentEditable)return true;
   if(el.tagName!=="INPUT")return false;
-  return !excludedInputTypes.has(String(el.type||"text").toLowerCase());
+  return !excludedTypes.has(String(el.type||"text").toLowerCase());
  };
  const viewport=window.visualViewport||null;
- let baseHeight=viewport?viewport.height:window.innerHeight;
- let keyboardDetected=false;
+ let normalHeight=viewport?viewport.height:window.innerHeight;
+ let keyboardOpen=false;
  let restoreTimer=0;
  let blurFrame=0;
- const currentHeight=()=>viewport?viewport.height:window.innerHeight;
- const keyboardOpen=()=>baseHeight-currentHeight()>110;
-
- function setPlayerHidden(hidden){
-  player.classList.toggle("rm-keyboard-hidden",!!hidden);
-  player.style.setProperty("visibility",hidden?"hidden":"visible","important");
-  player.style.setProperty("pointer-events",hidden?"none":"auto","important");
- }
- function handleTapBeforeFocus(event){
+ let tapTimer=0;
+ const height=()=>viewport?viewport.height:window.innerHeight;
+ const setHidden=hidden=>{
+  player.classList.toggle("rm-keyboard-hidden",hidden);
+  document.body.classList.toggle("rm-keyboard-entry-active",hidden);
+ };
+ const hideForTap=event=>{
   const target=event.target&&event.target.closest
-   ?event.target.closest('input,textarea,select,[contenteditable=""],[contenteditable="true"],[contenteditable="plaintext-only"]')
+   ?event.target.closest("input,textarea,select,[contenteditable]")
    :null;
-  if(target&&isTextEntry(target)){
+  if(!target||!isEditable(target))return;
+  window.clearTimeout(restoreTimer);
+  window.clearTimeout(tapTimer);
+  setHidden(true);
+  tapTimer=window.setTimeout(()=>{
+   if(!isEditable(document.activeElement)&&!keyboardOpen)setHidden(false);
+  },1200);
+ };
+ const syncFocus=()=>{
+  if(isEditable(document.activeElement)){
    window.clearTimeout(restoreTimer);
-   setPlayerHidden(true);
-  }
- }
- function syncFocus(){
-  const active=document.activeElement;
-  if(isTextEntry(active)){
-   window.clearTimeout(restoreTimer);
-   setPlayerHidden(true);
+   window.clearTimeout(tapTimer);
+   setHidden(true);
   }else{
    window.clearTimeout(restoreTimer);
-   keyboardDetected=false;
-   baseHeight=currentHeight();
-   setPlayerHidden(false);
+   window.clearTimeout(tapTimer);
+   keyboardOpen=false;
+   normalHeight=height();
+   setHidden(false);
   }
- }
- function handleViewportChange(){
-  if(!isTextEntry(document.activeElement)){
-   keyboardDetected=false;
-   baseHeight=currentHeight();
-   setPlayerHidden(false);
+ };
+ const onViewportResize=()=>{
+  if(!isEditable(document.activeElement)){
+   keyboardOpen=false;
+   normalHeight=height();
+   setHidden(false);
    return;
   }
-  if(keyboardOpen()){
-   keyboardDetected=true;
+  if(normalHeight-height()>110){
+   keyboardOpen=true;
    window.clearTimeout(restoreTimer);
-   setPlayerHidden(true);
-   return;
-  }
-  if(keyboardDetected){
+   setHidden(true);
+  }else if(keyboardOpen){
    window.clearTimeout(restoreTimer);
    restoreTimer=window.setTimeout(()=>{
-    if(isTextEntry(document.activeElement)&&!keyboardOpen()){
-     keyboardDetected=false;
-     baseHeight=currentHeight();
-     setPlayerHidden(false);
-    }else if(!isTextEntry(document.activeElement)){
+    if(isEditable(document.activeElement)&&normalHeight-height()<=110){
+     keyboardOpen=false;
+     normalHeight=height();
+     setHidden(false);
+    }else if(!isEditable(document.activeElement)){
      syncFocus();
     }
-   },160);
+   },180);
   }
- }
- document.addEventListener("pointerdown",handleTapBeforeFocus,true);
- document.addEventListener("touchstart",handleTapBeforeFocus,{capture:true,passive:true});
- document.addEventListener("mousedown",handleTapBeforeFocus,true);
+ };
+ document.addEventListener("pointerdown",hideForTap,true);
+ document.addEventListener("touchstart",hideForTap,{capture:true,passive:true});
+ document.addEventListener("mousedown",hideForTap,true);
  document.addEventListener("focusin",()=>{
+  window.clearTimeout(tapTimer);
   window.clearTimeout(restoreTimer);
-  setPlayerHidden(isTextEntry(document.activeElement));
+  setHidden(isEditable(document.activeElement));
  },true);
  document.addEventListener("focusout",()=>{
   if(blurFrame)cancelAnimationFrame(blurFrame);
@@ -398,12 +398,12 @@ $("#newsletterForm").addEventListener("submit",e=>{e.preventDefault();$("#newsle
    syncFocus();
   });
  },true);
- if(viewport)viewport.addEventListener("resize",handleViewportChange,{passive:true});
- window.addEventListener("resize",handleViewportChange,{passive:true});
- window.addEventListener("orientationchange",()=>window.setTimeout(handleViewportChange,220),{passive:true});
+ if(viewport)viewport.addEventListener("resize",onViewportResize,{passive:true});
+ window.addEventListener("resize",onViewportResize,{passive:true});
+ window.addEventListener("orientationchange",()=>window.setTimeout(onViewportResize,220),{passive:true});
  window.addEventListener("pageshow",()=>{
-  baseHeight=currentHeight();
-  keyboardDetected=false;
+  normalHeight=height();
+  keyboardOpen=false;
   syncFocus();
  },{passive:true});
  syncFocus();

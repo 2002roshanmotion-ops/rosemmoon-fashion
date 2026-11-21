@@ -3015,9 +3015,9 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
 }
 
-/* Anchor the dock at its pre-keyboard screen coordinate while the iOS keyboard overlays the page. */
-.crystal-player.rm-keyboard-anchored{
-  top:var(--rm-keyboard-player-top)!important;
-  bottom:auto!important;
-  transition-property:transform,opacity!important;
+/* Keep the player out of view while the iOS keyboard is active.
+   Visibility preserves layout, playback, and the vinyl animation. */
+.crystal-player.rm-keyboard-hidden{
+  visibility:hidden!important;
+  pointer-events:none!important;
 }

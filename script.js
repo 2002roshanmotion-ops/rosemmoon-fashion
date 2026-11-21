@@ -312,23 +312,20 @@ $("#newsletterForm").addEventListener("submit",e=>{e.preventDefault();$("#newsle
 })();
 
 
-/* Keep the music dock at its pre-keyboard screen coordinate on iOS.
-   Measure against the original layout height (not the shrinking innerHeight).
-   No player classes, audio state, or animation styles are changed. */
+/* Let the iOS keyboard cover the music dock. The dock's animation and audio keep running. */
 (function(){
  const viewport=window.visualViewport;
  if(!viewport)return;
  const root=document.documentElement;
- const layoutHeight=Math.max(document.documentElement.clientHeight,window.innerHeight);
+ const initialHeight=Math.max(document.documentElement.clientHeight,window.innerHeight);
  const isTextEntry=()=>{const el=document.activeElement;return !!el&&(/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)||el.isContentEditable)};
- function syncKeyboardOffset(){
-  const focused=isTextEntry();
-  const offset=focused?Math.max(0,layoutHeight-viewport.height-viewport.offsetTop):0;
-  root.style.setProperty("--rm-keyboard-offset",Math.round(offset)+"px");
+ function syncKeyboardLayer(){
+  const keyboardOpen=isTextEntry() && viewport.height < initialHeight-120;
+  root.classList.toggle("rm-keyboard-open",keyboardOpen);
  }
- viewport.addEventListener("resize",syncKeyboardOffset,{passive:true});
- viewport.addEventListener("scroll",syncKeyboardOffset,{passive:true});
- document.addEventListener("focusin",syncKeyboardOffset);
- document.addEventListener("focusout",()=>requestAnimationFrame(syncKeyboardOffset));
- syncKeyboardOffset();
+ viewport.addEventListener("resize",syncKeyboardLayer,{passive:true});
+ viewport.addEventListener("scroll",syncKeyboardLayer,{passive:true});
+ document.addEventListener("focusin",syncKeyboardLayer);
+ document.addEventListener("focusout",()=>requestAnimationFrame(syncKeyboardLayer));
+ syncKeyboardLayer();
 })();

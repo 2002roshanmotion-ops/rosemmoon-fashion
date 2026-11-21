@@ -312,32 +312,16 @@ $("#newsletterForm").addEventListener("submit",e=>{e.preventDefault();$("#newsle
 })();
 
 
-/* Preserve the music dock's exact pre-keyboard top coordinate on iOS.
-   Keep it rendered and playing; the native keyboard naturally overlays web content. */
+/* Hide the music player while a text field is active.
+   This changes visibility only: audio and vinyl animation keep running. */
 (function(){
- const viewport=window.visualViewport;
  const player=document.getElementById("crystalPlayer");
- if(!viewport||!player)return;
- const root=document.documentElement;
+ if(!player)return;
  const isTextEntry=el=>!!el&&(/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)||el.isContentEditable);
- let anchored=false;
- function anchorPlayer(){
-  if(anchored||!isTextEntry(document.activeElement))return;
-  const rect=player.getBoundingClientRect();
-  if(!Number.isFinite(rect.top)||rect.height===0)return;
-  player.style.setProperty("--rm-keyboard-player-top",Math.round(rect.top)+"px");
-  player.classList.add("rm-keyboard-anchored");
-  anchored=true;
+ function syncPlayerVisibility(){
+  player.classList.toggle("rm-keyboard-hidden",isTextEntry(document.activeElement));
  }
- function releasePlayer(){
-  if(isTextEntry(document.activeElement))return;
-  player.classList.remove("rm-keyboard-anchored");
-  player.style.removeProperty("--rm-keyboard-player-top");
-  anchored=false;
- }
- document.addEventListener("focusin",anchorPlayer,true);
- document.addEventListener("focusout",()=>requestAnimationFrame(releasePlayer),true);
- viewport.addEventListener("resize",()=>{
-  if(!isTextEntry(document.activeElement))releasePlayer();
- },{passive:true});
+ document.addEventListener("focusin",syncPlayerVisibility,true);
+ document.addEventListener("focusout",()=>requestAnimationFrame(syncPlayerVisibility),true);
+ syncPlayerVisibility();
 })();

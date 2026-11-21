@@ -310,3 +310,23 @@ $("#newsletterForm").addEventListener("submit",e=>{e.preventDefault();$("#newsle
  }
  document.body.appendChild(layer);
 })();
+
+
+/* iOS keyboard compensation: hold the music dock at its normal screen position.
+   This only adjusts its bottom anchor; it never pauses, hides, or animates the player. */
+(function(){
+ const viewport=window.visualViewport;
+ if(!viewport)return;
+ const root=document.documentElement;
+ const search=document.getElementById("productSearchInput");
+ const isTextEntry=()=>{const el=document.activeElement;return !!el&&(el===search||/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)||el.isContentEditable)};
+ function syncKeyboardOffset(){
+  const offset=isTextEntry()?Math.max(0,window.innerHeight-viewport.height-viewport.offsetTop):0;
+  root.style.setProperty("--rm-keyboard-offset",Math.round(offset)+"px");
+ }
+ viewport.addEventListener("resize",syncKeyboardOffset,{passive:true});
+ viewport.addEventListener("scroll",syncKeyboardOffset,{passive:true});
+ document.addEventListener("focusin",syncKeyboardOffset);
+ document.addEventListener("focusout",()=>requestAnimationFrame(syncKeyboardOffset));
+ syncKeyboardOffset();
+})();

@@ -3008,3 +3008,7 @@ body.crystal-player-visible .site-header>.header-search-area{display:flex!import
 
 /* Prevent iOS Safari from changing the page scale when a small-text field receives focus. */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+
+/* Checkout must sit above the open bag, music player and decorative layers. */
+.checkout-modal-backdrop{z-index:13000!important}
+.checkout-modal{z-index:13001!important}

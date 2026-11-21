@@ -103,6 +103,8 @@ function showView(view){const safeView=String(view||"").replace(/[^a-z-]/gi,"");
 const productSearchInput=$("#productSearchInput"),clearProductSearch=$("#clearProductSearch");
 renderProducts();
 if(productSearchInput){
+ productSearchInput.addEventListener("focus",()=>document.body.classList.add("search-input-active"));
+ productSearchInput.addEventListener("blur",()=>document.body.classList.remove("search-input-active"));
  productSearchInput.setAttribute("aria-controls","productSearchDropdown");
  productSearchInput.setAttribute("aria-expanded","false");
  productSearchInput.addEventListener("input",()=>{
